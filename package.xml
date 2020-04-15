@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="dev.tkirch.wsc.faq" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/package.xsd">
+	<packageinformation>
+		<packagename>FAQ</packagename>
+		<packagename language="de">FAQ</packagename>
+		<packagedescription>Add a FAQ page to your WSC.</packagedescription>
+		<packagedescription language="de">Fügt eine FAQ-Seite in deinem WSC hinzu.</packagedescription>
+		<version>0.1.0 Alpha 4</version>
+		<date>2020-04-14</date>
+	</packageinformation>
+
+	<authorinformation>
+		<author>Titus Kirch</author>
+		<authorurl>https://tkirch.dev</authorurl>
+	</authorinformation>
+
+	<requiredpackages>
+		<requiredpackage minversion="5.2.0">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+
+	<excludedpackages>
+		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+	</excludedpackages>
+
+	<instructions type="install">
+		<!-- files -->
+		<instruction type="file"/>
+		
+		<!-- xml-->
+		<instruction type="userGroupOption"/>
+		<instruction type="acpMenu"/>
+		<instruction type="objectType"/>
+		<instruction type="script" run="standalone">acp/install_dev.tkirch.wsc.faq_0.1.0.php</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.1">
+		<instruction type="file"/>
+	</instructions>
+
+	<!-- alpha -->
+	<instructions type="update" fromversion="0.1.0 Alpha *">
+		<instruction type="file"/>
+		<instruction type="userGroupOption"/>
+		<instruction type="acpMenu"/>
+		<instruction type="objectType"/>
+		<instruction type="script" run="standalone">acp/install_dev.tkirch.wsc.faq_0.1.0.php</instruction>
+	</instructions>
+</package>
