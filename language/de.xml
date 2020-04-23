@@ -6,4 +6,33 @@
 		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
 	</category>
 
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
+		<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.menu.link.faq.questions.list"><![CDATA[Fragen]]></item>
+		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Frage hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Frage bearbeiten]]></item>
+	</category>
+
+	<category name="wcf.acp.faq">
+		<item name="wcf.acp.faq.question.question"><![CDATA[Frage]]></item>
+		<item name="wcf.acp.faq.category"><![CDATA[Kategorie]]></item>
+		<item name="wcf.acp.faq.question.general"><![CDATA[Allgemein]]></item>
+		<item name="wcf.acp.faq.question.answer"><![CDATA[Antwort]]></item>
+	</category>
+
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
+		<item name="wcf.acp.group.option.user.faq.canViewFAQ"><![CDATA[Kann FAQ sehen]]></item>
+		<item name="wcf.acp.group.option.category.admin.faq"><![CDATA[FAQ]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canViewCategory"><![CDATA[Kann Kategorien sehen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canAddCategory"><![CDATA[Kann Kategorien hinzufügen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canDeleteCategory"><![CDATA[Kann Kategorien löschen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canEditCategory"><![CDATA[Kann Kategorien bearbeiten]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canViewQuestion"><![CDATA[Kann Fragen sehen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canAddQuestion"><![CDATA[Kann Fragen hinzufügen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canDeleteQuestion"><![CDATA[Kann Fragen löschen]]></item>
+		<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Kann Fragen bearbeiten]]></item>
+	</category>
+
 </language>

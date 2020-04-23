@@ -26,7 +26,7 @@
     		<thead>
     			<tr>
     				<th class="columnID columnQuestionID{if $sortField == 'questionID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=questionID&sortOrder={if $sortField == 'questionID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-                    <th class="columnTitle columnQuestion{if $sortField == 'question'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=question&sortOrder={if $sortField == 'question' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.faq.question.question.question{/lang}</a></th>
+                    <th class="columnTitle columnQuestion{if $sortField == 'question'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=question&sortOrder={if $sortField == 'question' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.faq.question.question{/lang}</a></th>
                     
     				{event name='columnHeads'}
     			</tr>
