@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/menuItem.xsd">
+	<import>
+		<item identifier="dev.tkirch.wsc.faq.FaqQuestionList">
+			<menu>com.woltlab.wcf.MainMenu</menu>
+			<title language="de">FAQ</title>
+			<title language="en">FAQ</title>
+			<page>dev.tkirch.wsc.faq.FaqQuestionList</page>
+		</item>
+	</import>
+</data>

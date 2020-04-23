@@ -20,14 +20,14 @@
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.faq.questions.list">
-			<controller>wcf\acp\page\FaqCategoryListPage</controller>
+			<controller>wcf\acp\page\FaqQuestionListPage</controller>
 			<parent>wcf.acp.menu.link.faq</parent>
 			<permissions>admin.faq.canViewQuestion</permissions>
-			<showorder>1</showorder>
+			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.faq.questions.add">
-			<controller>wcf\acp\form\FaqCategoryAddForm</controller>
+			<controller>wcf\acp\form\FaqQuestionAddForm</controller>
 			<parent>wcf.acp.menu.link.faq.questions.list</parent>
 			<permissions>admin.faq.canAddQuestion</permissions>
 			<icon>fa-plus</icon>

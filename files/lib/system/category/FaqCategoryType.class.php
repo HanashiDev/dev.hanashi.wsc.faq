@@ -2,12 +2,22 @@
 namespace wcf\system\category;
 use wcf\system\WCF;
 
-class FAQCategoryType extends AbstractCategoryType  {
+class FAQCategoryType extends AbstractCategoryType {
     
     /**
 	 * @inheritDoc
 	 */
-    protected $forceDescription = true;
+	protected $forceDescription = false;
+	
+    /**
+	 * @inheritDoc
+	 */
+	protected $hasDescription = false;
+
+    /**
+	 * @inheritDoc
+	 */
+	protected $maximumNestingLevel = 0;
     
     /**
 	 * @inheritDoc

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/2019/language.xsd" languagecode="de">
+
+	<category name="wcf.faq">
+		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
+		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
+	</category>
+
+</language>

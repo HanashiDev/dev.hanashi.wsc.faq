@@ -16,10 +16,9 @@
 
 		<options>
 			<option name="user.faq.canViewFAQ">
-				<categoryname>admin.faq</categoryname>
+				<categoryname>user.faq</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
 
 			<option name="admin.faq.canViewCategory">
