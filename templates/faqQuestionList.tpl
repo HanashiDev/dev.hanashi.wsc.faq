@@ -1,23 +1,27 @@
-{capture assign='pageTitle'}{lang}wcf.menu.item.dev.tkirch.wsc.faq.FaqQuestionList{/lang}{/capture}
+{capture assign='pageTitle'}{lang}wcf.faq.list{/lang}{/capture}
 
-{capture assign='contentTitle'}{lang}wcf.menu.item.dev.tkirch.wsc.faq.FaqQuestionList{/lang}{/capture}
+{capture assign='contentTitle'}{lang}wcf.faq.list{/lang}{/capture}
 
 {include file='header'}
 
-{foreach from=$faqs item=faq}
-	<div class="section faq">
-		<h1>{$faq['title']}</h1>
-		
-		{foreach from=$faq['questions'] item=question}
-			<div class="question">
-				<header>{$question->getTitle()}</header>
-				<div class="answer" id="answer-{$question->questionID}">
-					{$question->getAnswer()}
+{if $faqs|count}
+	{foreach from=$faqs item=faq}
+		<div class="section faq">
+			<h1>{$faq['title']}</h1>
+			
+			{foreach from=$faq['questions'] item=question}
+				<div class="question">
+					<header>{$question->getTitle()}</header>
+					<div class="answer" id="answer-{$question->questionID}">
+						{$question->getAnswer()}
+					</div>
 				</div>
-			</div>
-		{/foreach}
-	</div>
-{/foreach}
+			{/foreach}
+		</div>
+	{/foreach}
+{else}
+    <p class="info">{lang}wcf.global.noItems{/lang}</p>
+{/if}
 
 <footer class="contentFooter">
 	{hascontent}

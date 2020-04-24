@@ -3,7 +3,8 @@
 
 	<category name="wcf.faq">
 		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
-		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
+		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
+		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
 	</category>
 
 	<category name="wcf.acp.menu">
@@ -19,6 +20,7 @@
 		<item name="wcf.acp.faq.category"><![CDATA[Kategorie]]></item>
 		<item name="wcf.acp.faq.question.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Antwort]]></item>
+		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Wollen Sie diese Frage wirklich löschen?]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

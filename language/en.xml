@@ -4,6 +4,7 @@
 	<category name="wcf.faq">
 		<item name="wcf.faq.question.question.title"><![CDATA[Question]]></item>
 		<item name="wcf.faq.question.answer.title"><![CDATA[Answer]]></item>
+		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
 	</category>
 
 	<category name="wcf.acp.menu">
@@ -19,6 +20,7 @@
 		<item name="wcf.acp.faq.category"><![CDATA[Category]]></item>
 		<item name="wcf.acp.faq.question.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Answer]]></item>
+		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Do you really want to delete this question?]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

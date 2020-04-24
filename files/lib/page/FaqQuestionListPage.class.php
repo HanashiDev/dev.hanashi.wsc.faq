@@ -17,14 +17,15 @@ class FaqQuestionListPage extends AbstractPage {
 		$faqs = [];
 		$categoryTree = new CategoryNodeTree('dev.tkirch.wsc.faq.category');
 		foreach($categoryTree->getIterator() as $category) {
-			$faqs[$category->categoryID] = [];
-			$faqs[$category->categoryID]['title'] = $category->title;
-
 			$questionList = new QuestionList();
 			$questionList->getConditionBuilder()->add('categoryID = '.$category->categoryID);
 			$questionList->readObjects();
 
-			$faqs[$category->categoryID]['questions'] = $questionList->getObjects();
+			if($questionList->countObjects() > 0) {
+				$faqs[$category->categoryID] = [];
+				$faqs[$category->categoryID]['title'] = $category->title;
+				$faqs[$category->categoryID]['questions'] = $questionList->getObjects();
+			}
 		}
 
 		WCF::getTPL()->assign([

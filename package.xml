@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="dev.tkirch.wsc.faq" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/package.xsd">
 	<packageinformation>
-		<packagename>FAQ</packagename>
-		<packagename language="de">FAQ</packagename>
-		<packagedescription>Add a FAQ page to your WSC.</packagedescription>
-		<packagedescription language="de">Fügt eine FAQ-Seite in deinem WSC hinzu.</packagedescription>
-		<version>1.0.0 Beta 1</version>
+		<packagename>Simple FAQ</packagename>
+		<packagename language="de">Simple FAQ</packagename>
+		<packagedescription>Add a FAQ to your WSC.</packagedescription>
+		<packagedescription language="de">Fügt ein FAQ in deinem WSC hinzu.</packagedescription>
+		<version>1.0.0 Beta 3</version>
 		<date>2020-04-24</date>
 	</packageinformation>
 
@@ -37,7 +37,7 @@
 		<instruction type="menuItem"/>
 		<instruction type="script" run="standalone">acp/install_dev.tkirch.wsc.faq_1.0.0.php</instruction>
 	</instructions>
-	
+
 	<!-- alpha -->
 	<instructions type="update" fromversion="0.1.0 Alpha *">
 		<instruction type="file"/>
@@ -49,5 +49,12 @@
 		<instruction type="language"/>
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
+	</instructions>
+
+	<!-- beta -->
+	<instructions type="update" fromversion="1.0.0 Beta *">
+		<instruction type="file"/>
+		<instruction type="template"/>
+		<instruction type="language"/>
 	</instructions>
 </package>
