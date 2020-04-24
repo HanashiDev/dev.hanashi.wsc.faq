@@ -18,7 +18,7 @@ class FaqQuestionListPage extends AbstractPage {
 		$categoryTree = new CategoryNodeTree('dev.tkirch.wsc.faq.category');
 		foreach($categoryTree->getIterator() as $category) {
 			$questionList = new QuestionList();
-			$questionList->getConditionBuilder()->add('categoryID = '.$category->categoryID);
+			$questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
 			$questionList->readObjects();
 
 			if($questionList->countObjects() > 0) {

@@ -23,5 +23,5 @@ class FaqQuestionListPage extends SortablePage {
     /**
 	 * @inheritDoc
 	 */
-	public $validSortFields = ['questionID'];
+	public $validSortFields = ['questionID', 'showOrder'];
 }

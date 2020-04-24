@@ -26,7 +26,8 @@
     		<thead>
     			<tr>
     				<th class="columnID columnQuestionID{if $sortField == 'questionID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=questionID&sortOrder={if $sortField == 'questionID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-                    <th class="columnTitle columnQuestion{if $sortField == 'question'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=question&sortOrder={if $sortField == 'question' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.faq.question.question{/lang}</a></th>
+                    <th class="columnTitle columnQuestion">{lang}wcf.acp.faq.question.question{/lang}</a></th>
+                    <th class="columnTitle columnShowOrder{if $sortField == 'showOrder'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=showOrder&sortOrder={if $sortField == 'showOrder' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.showOrder{/lang}</a></th>
                     
     				{event name='columnHeads'}
     			</tr>
@@ -42,7 +43,8 @@
     						{event name='rowButtons'}
     					</td>
     					<td class="columnID">{#$question->questionID}</td>
-    					<td class="columnTitle columnquestion"><a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a></td>
+    					<td class="columnTitle columnQuestion"><a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a></td>
+                        <td class="columnTitle columnShowOrder"><a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->showOrder}</a></td>
                         
 						{event name='columns'}
     				</tr>

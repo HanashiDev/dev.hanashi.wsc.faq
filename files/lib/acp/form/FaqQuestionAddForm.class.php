@@ -5,6 +5,7 @@ use wcf\system\WCF;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\MultilineTextFormField;
+use wcf\system\form\builder\field\IntegerFormField;
 use wcf\data\faq\QuestionAction;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\category\CategoryHandler;
@@ -54,8 +55,17 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 						->label('wcf.acp.faq.question.answer')
 						->i18n()
 						->languageItemPattern('wcf.faq.question.answer\d+')
-						->required()
-				])
+						->required(),
+				]),
+			FormContainer::create('position')
+				->label('wcf.category.position')
+				->appendChildren([
+					IntegerFormField::create('showOrder')
+						->label('wcf.global.showOrder')
+						->step(1)
+						->minimum(1)
+						->value(1)
+				]),
 			]);
 	}
 }

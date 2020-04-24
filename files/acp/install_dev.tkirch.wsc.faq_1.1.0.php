@@ -15,6 +15,8 @@ $tables = [
             TextDatabaseTableColumn::create('question'),
             TextDatabaseTableColumn::create('answer'),
             NotNullInt10DatabaseTableColumn::create('categoryID'),
+            NotNullInt10DatabaseTableColumn::create('showOrder')
+                ->defaultValue(0),
         ])
         ->foreignKeys([
             DatabaseTableForeignKey::create()

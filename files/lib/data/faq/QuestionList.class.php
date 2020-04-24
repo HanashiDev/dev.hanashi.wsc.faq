@@ -2,4 +2,10 @@
 namespace wcf\data\faq;
 use wcf\data\DatabaseObjectList;
 
-class QuestionList extends DatabaseObjectList {}
+class QuestionList extends DatabaseObjectList {
+
+	/**
+	 * @inheritDoc
+	 */
+    public $sqlOrderBy = 'showOrder, questionID';
+}
