@@ -1,13 +1,13 @@
-Kommerzielle Lizenz
+Kostenfreie Lizenz
 
 §1 Geltungsbereich
 1.1 Die nachfolgenden Lizenzbestimmungen beziehen sich auf alle Produkte des Entwicklers Titus Kirch, die kostenfrei zur Verfügung gestellten werden. Diese Produkte werden auf der Seite des Entwicklers auf https://tkirch.dev oder im Plugin-Store der Woltlab GmbH vertrieben.
 1.2 Mit dem Download der Produkte verstehen Sie sich mit den nachfolgenden Lizenzbestimmungen einverstanden.
 
 §2 Nutzungsrechte
-2.1 Der Nutzer ist berechtigt das erworbene Produkt auf einer Webseite gleichzeitig zu nutzen, insofern die Webseite eindeutig dem Nutzer zuzuordnen ist (z.B. über Impressum).
-2.2 Das erworbene Produkt darf zu Testzwecken zusätzlich auf einer nicht öffentlich zugänglichen Webseite genutzt werden.
-2.3 Die Software darf für kommerzielle Zwecke genutzt werden.
+2.1 Der Nutzer ist berechtigt das Produkt auf beliebig vielen Webseiten gleichzeitig zu nutzen.
+2.2 Die Software darf für kommerzielle Zwecke genutzt werden.
+2.3 Der Nutzer ist berechtigt in seinen eigenen Plugins auf dieses Produkt zu referenzieren (requiredpackages). In diesen Fall darf dieses Produkt in das Produkt des Nutzers implementiert werden.
 
 §3 Veränderungen
 3.1 Die Software darf bis auf die package.xml (siehe 2.) uneingeschränkt für die private Nutzung verändert werden.
@@ -16,21 +16,20 @@ Kommerzielle Lizenz
 3.4 Copyrightvermerke dürfen ohne Zustimmung des Herstellers der Software nicht entfernt oder verändert werden.
 
 §4 Weitergabe
-4.1 Der Weitergabe der Software ist verboten.
+4.1 Der Weiterverkauf der Software ist verboten.
+4.2 Die Software darf ohne Nachfrage ausschließlich kostenfrei und ohne Gegenleistung weitergegeben werden.
+4.3 Die Software darf nur im originalen und nicht veränderten Zustand weitergegeben werden.
+4.4 Die Software darf nicht ohne Zustimmung des Herstellers auf anderen Plattformen (z.B. Github, eigener Paketserver, etc.) bereitgestellt werden.
 
 §5 Updates
 5.1 Der Ersteller bietet in regelmäßigen Abständen Updates für das Produkt an.
 5.2 Dem Nutzer steht es frei das Update durchzuführen. Allerdings wird darauf hingewiesen, dass der Hersteller keinerlei Support für nicht aktuelle Software gibt.
+5.3 Der Support kann jederzeit ohne Angabe von Gründen beendet werden.
 
-§6 Support
-6.1 Mit dem Erwerb der Software erhält man Zugang zu einem Bereich im Communityform des Entwicklers. Hier kann man Fragen stellen, Bugs melden oder Features anfragen
-6.2 Weiterer Support ist möglich (z.B. via Discord), wird aber nicht garantiert.
-6.3 Der Support endet spätestens mit der Einstellung des Supports der dazugehörigen Version der WoltLab Suite durch die Woltlab GmbH
+§6 Haftungausschluss
+6.1 Der Hersteller übernimmt keine Haftung für eventuelle Schäden, Fehler, Datenverluste oder Ähnliches, die durch die Benutzung des Produktes entstehen könnten.
 
-§7 Haftungausschluss
-7.1 Der Hersteller übernimmt keine Haftung für eventuelle Schäden, Fehler, Datenverluste oder Ähnliches, die durch die Benutzung des Produktes entstehen könnten.
+§7 Salvatorische Klausel
+7.1 Sollten einzelne Bestimmungen dieses Vertrages unwirksam oder undurchführbar sein oder nach Vertragsschluss unwirksam oder undurchführbar werden, bleibt davon die Wirksamkeit des Vertrages im Übrigen unberührt. An die Stelle der unwirksamen oder undurchführbaren Bestimmung soll diejenige wirksame und durchführbare Regelung treten, deren Wirkungen der wirtschaftlichen Zielsetzung am nächsten kommen, die die Vertragsparteien mit der unwirksamen bzw. undurchführbaren Bestimmung verfolgt haben. Die vorstehenden Bestimmungen gelten entsprechend für den Fall, dass sich der Vertrag als lückenhaft erweist.
 
-§8 Salvatorische Klausel
-8.1 Sollten einzelne Bestimmungen dieses Vertrages unwirksam oder undurchführbar sein oder nach Vertragsschluss unwirksam oder undurchführbar werden, bleibt davon die Wirksamkeit des Vertrages im Übrigen unberührt. An die Stelle der unwirksamen oder undurchführbaren Bestimmung soll diejenige wirksame und durchführbare Regelung treten, deren Wirkungen der wirtschaftlichen Zielsetzung am nächsten kommen, die die Vertragsparteien mit der unwirksamen bzw. undurchführbaren Bestimmung verfolgt haben. Die vorstehenden Bestimmungen gelten entsprechend für den Fall, dass sich der Vertrag als lückenhaft erweist.
-
-Stand: 04.03.2020 15:50 Uhr
+Stand: 03.03.2020 20:19 Uhr
