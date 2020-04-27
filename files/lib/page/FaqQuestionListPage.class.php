@@ -23,7 +23,7 @@ class FaqQuestionListPage extends AbstractPage {
 
 			if($questionList->countObjects() > 0) {
 				$faqs[$category->categoryID] = [];
-				$faqs[$category->categoryID]['title'] = $category->title;
+				$faqs[$category->categoryID]['title'] = WCF::getLanguage()->get($category->title);
 				$faqs[$category->categoryID]['questions'] = $questionList->getObjects();
 			}
 		}
