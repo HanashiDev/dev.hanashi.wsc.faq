@@ -24,7 +24,7 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @inheritDoc
 	 */
-	protected $requireACP = ['delete'];
+	protected $requireACP = [];
 	
  	/**
 	 * @inheritDoc

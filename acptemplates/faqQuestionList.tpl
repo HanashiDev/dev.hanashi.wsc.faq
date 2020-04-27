@@ -35,7 +35,7 @@
 
     		<tbody>
     			{foreach from=$objects item=question}
-    				<tr class="jsPersonRow">
+    				<tr class="jsQuestionRow">
     					<td class="columnIcon">
     						<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
     						<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
@@ -74,7 +74,7 @@
 
 <script data-relocate="true">
 	$(function() {
-		new WCF.Action.Delete('wcf\\data\\faq\\QuestionAction', '.jsPersonRow');
+		new WCF.Action.Delete('wcf\\data\\faq\\QuestionAction', '.jsQuestionRow');
 
 		var options = { };
 		{if $pages > 1}
@@ -86,7 +86,7 @@
 			options.emptyMessage = '{lang}wcf.global.noItems{/lang}';
 		{/if}
 
-		new WCF.Table.EmptyTableHandler($('#questionTableContainer'), 'jsPersonRow', options);
+		new WCF.Table.EmptyTableHandler($('#questionTableContainer'), 'jsQuestionRow', options);
 	});
 </script>
 
