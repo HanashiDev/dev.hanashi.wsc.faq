@@ -5,8 +5,8 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>Add a FAQ to your WSC.</packagedescription>
 		<packagedescription language="de">Fügt ein FAQ in deinem WSC hinzu.</packagedescription>
-		<version>1.1.0</version>
-		<date>2020-04-24</date>
+		<version>1.2.0 Alpha 12</version>
+		<date>2020-04-28</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -20,6 +20,8 @@
 
 	<excludedpackages>
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="*">eu.netzlife.wcf.faq</excludedpackage>
+		<excludedpackage version="*">com.kittmedia.wcf.faq</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
@@ -39,7 +41,7 @@
 	</instructions>
 
 	<!-- alpha -->
-	<instructions type="update" fromversion="1.1.0 Alpha *">
+	<instructions type="update" fromversion="1.* Alpha *">
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
@@ -49,14 +51,5 @@
 		<instruction type="language"/>
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
-	</instructions>
-
-	<!-- beta -->
-	<instructions type="update" fromversion="1.0.0 Beta *">
-		<instruction type="file"/>
-		<instruction type="template"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="language"/>
-		<instruction type="script" run="standalone">acp/update_dev.tkirch.wsc.faq_1.1.0.php</instruction>
 	</instructions>
 </package>
