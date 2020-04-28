@@ -44,7 +44,12 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
-	</instruction>
+	</instructions>
+
+	<!-- beta -->
+	<instructions type="update" fromversion="1.2.0 Beta *">
+		<instruction type="template"/>
+	</instructions>
 
 	<!-- alpha -->
 	<instructions type="update" fromversion="1.* Alpha *">

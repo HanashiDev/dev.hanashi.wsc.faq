@@ -75,8 +75,6 @@
 				$(this).parent().find(".answer").show(200);
 				$(this).parent().addClass('open');
 			}
-		}).children().click(function(e) {
-			return false;
 		});;
 	});
 </script>
