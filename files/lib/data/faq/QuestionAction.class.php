@@ -89,7 +89,7 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 					'wcf.faq.question.question'.$object->questionID,
 					'wcf.faq'
 				);
-				$updateData['question'] = 'wcf.faq.question.question'.$question->questionID;
+				$updateData['question'] = 'wcf.faq.question.question'.$object->questionID;
 			}
 			if(isset($this->parameters['answer_i18n'])) {
 				I18nHandler::getInstance()->save(
@@ -97,7 +97,7 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 					'wcf.faq.question.answer'.$object->questionID,
 					'wcf.faq'
 				);
-				$updateData['answer'] = 'wcf.faq.question.answer'.$question->questionID;
+				$updateData['answer'] = 'wcf.faq.question.answer'.$object->questionID;
 			}
 
 		   //update show order
