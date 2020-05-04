@@ -102,17 +102,32 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 
 		   //update show order
 			if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
-				$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
-					SET	showOrder = showOrder + 1
-					WHERE	showOrder >= ?
+				if($object->showOrder < $this->parameters['data']['showOrder']) {
+					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+					SET	showOrder = showOrder - 1
+					WHERE	showOrder > ?
+					AND     showOrder <= ?
 					AND     questionID <> ?";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute([
-					$this->parameters['data']['showOrder'],
-					$object->questionID
-				]);
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute([
+						$object->showOrder,
+						$this->parameters['data']['showOrder'],
+						$object->questionID
+					]);
+				} else if($object->showOrder > $this->parameters['data']['showOrder']) {
+					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+					SET	showOrder = showOrder + 1
+					WHERE	showOrder < ?
+					AND     showOrder >= ?
+					AND     questionID <> ?";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute([
+						$object->showOrder,
+						$this->parameters['data']['showOrder'],
+						$object->questionID
+					]);
+				}
 			}
-
 			
 			if (!empty($updateData)) {
 				$object->update($updateData);
