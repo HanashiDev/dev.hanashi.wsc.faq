@@ -10,6 +10,7 @@
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
 		<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Categories]]></item>
+		<item name="wcf.acp.menu.link.faq.categories.add"><![CDATA[Add category]]></item>
 		<item name="wcf.acp.menu.link.faq.questions.list"><![CDATA[Questions]]></item>
 		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Add question]]></item>
 		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Edit question]]></item>

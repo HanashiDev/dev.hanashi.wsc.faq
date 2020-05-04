@@ -89,7 +89,7 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 					'wcf.faq.question.question'.$object->questionID,
 					'wcf.faq'
 				);
-				$updateData['question'] = 'wcf.faq.question.question'.$question->questionID;
+				$updateData['question'] = 'wcf.faq.question.question'.$object->questionID;
 			}
 			if(isset($this->parameters['answer_i18n'])) {
 				I18nHandler::getInstance()->save(
@@ -97,22 +97,37 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 					'wcf.faq.question.answer'.$object->questionID,
 					'wcf.faq'
 				);
-				$updateData['answer'] = 'wcf.faq.question.answer'.$question->questionID;
+				$updateData['answer'] = 'wcf.faq.question.answer'.$object->questionID;
 			}
 
 		   //update show order
 			if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
-				$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
-					SET	showOrder = showOrder + 1
-					WHERE	showOrder >= ?
+				if($object->showOrder < $this->parameters['data']['showOrder']) {
+					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+					SET	showOrder = showOrder - 1
+					WHERE	showOrder > ?
+					AND     showOrder <= ?
 					AND     questionID <> ?";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute([
-					$this->parameters['data']['showOrder'],
-					$object->questionID
-				]);
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute([
+						$object->showOrder,
+						$this->parameters['data']['showOrder'],
+						$object->questionID
+					]);
+				} else if($object->showOrder > $this->parameters['data']['showOrder']) {
+					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+					SET	showOrder = showOrder + 1
+					WHERE	showOrder < ?
+					AND     showOrder >= ?
+					AND     questionID <> ?";
+					$statement = WCF::getDB()->prepareStatement($sql);
+					$statement->execute([
+						$object->showOrder,
+						$this->parameters['data']['showOrder'],
+						$object->questionID
+					]);
+				}
 			}
-
 			
 			if (!empty($updateData)) {
 				$object->update($updateData);
