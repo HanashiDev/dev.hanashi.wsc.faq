@@ -58,6 +58,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 				->label('wcf.acp.faq.question.answer')
 				->messageObjectType('dev.tkirch.wsc.faq.question')
 				->messageLanguageItemPattern('wcf.faq.question.answer\d+')
+				->attachmentData('dev.tkirch.wsc.faq.question')
 				->required(),
 			FormContainer::create('position')
 				->label('wcf.category.position')
