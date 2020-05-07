@@ -40,7 +40,7 @@
 						{/if}
 					</header>
 					<div class="answer" id="answer-{$question->questionID}">
-						{$question->getAnswer()}
+						{@$question->getAnswer()}
 					</div>
 				</div>
 			{/foreach}
