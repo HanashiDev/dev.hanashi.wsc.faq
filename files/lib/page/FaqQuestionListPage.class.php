@@ -25,11 +25,12 @@ class FaqQuestionListPage extends AbstractPage {
 				$faqs[$category->categoryID] = [];
 				$faqs[$category->categoryID]['title'] = WCF::getLanguage()->get($category->title);
 				$faqs[$category->categoryID]['questions'] = $questionList->getObjects();
+				$faqs[$category->categoryID]['attachments'] = $questionList->getAttachmentList();
 			}
 		}
 
 		WCF::getTPL()->assign([
-            'faqs' => $faqs
+            'faqs' => $faqs,
 		]);
 	}
 }
