@@ -30,7 +30,7 @@ class FaqQuestionListPage extends AbstractPage {
 		}
 
 		WCF::getTPL()->assign([
-            'faqs' => $faqs,
+            'faqs' => $faqs
 		]);
 	}
 }
