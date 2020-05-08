@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\faq;
 use wcf\data\DatabaseObject;
+use wcf\system\html\output\HtmlOutputProcessor;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -28,5 +29,12 @@ class Question extends DatabaseObject implements IRouteController {
 	 */
 	public function getAnswer() {
 		return WCF::getLanguage()->get($this->answer);
+	}
+
+	public function getFormattedOutput() {
+		$processor = new HtmlOutputProcessor();
+		$processor->process($this->getAnswer(), 'dev.tkirch.wsc.faq.question', $this->questionID);
+		
+		return $processor->getHtml();
 	}
 }

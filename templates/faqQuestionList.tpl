@@ -45,7 +45,7 @@
 					</header>
 					<div class="answer" id="answer-{$question->questionID}">
 						<div class="section htmlContent">
-							{@$question->getAnswer()}
+							{@$question->getFormattedOutput()}
 						</div>
 
 						{include file='attachments'}
