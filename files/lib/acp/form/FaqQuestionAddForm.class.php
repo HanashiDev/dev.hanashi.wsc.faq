@@ -32,16 +32,14 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 	 * @inheritDoc
 	 */
 	public $objectActionClass = QuestionAction::class;
-
-	protected $categories;
 		
 	/**
 	 * @inheritDoc
 	 */
 	protected function createForm() {
 		parent::createForm();
-		$this->categories = CategoryHandler::getInstance()->getCategories('dev.tkirch.wsc.faq.category');
-		if (!count($this->categories)) {
+		$categories = CategoryHandler::getInstance()->getCategories('dev.tkirch.wsc.faq.category');
+		if (!count($categories)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory'));
 		}
 
