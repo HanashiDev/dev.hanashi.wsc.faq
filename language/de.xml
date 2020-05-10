@@ -22,6 +22,7 @@
 		<item name="wcf.acp.faq.question.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Antwort]]></item>
 		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Wollen Sie diese Frage wirklich löschen?]]></item>
+		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Es muss eine <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">Kategorie im ACP</a> angelegt werden.]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

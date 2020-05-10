@@ -1,14 +1,15 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\faq\QuestionAction;
 use wcf\form\AbstractFormBuilderForm;
-use wcf\system\WCF;
+use wcf\system\category\CategoryHandler;
+use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\IntegerFormField;
-use wcf\data\faq\QuestionAction;
 use wcf\system\form\builder\field\SingleSelectionFormField;
-use wcf\system\category\CategoryHandler;
+use wcf\system\WCF;
 
 class FaqQuestionAddForm extends AbstractFormBuilderForm {
 
@@ -31,13 +32,19 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 	 * @inheritDoc
 	 */
 	public $objectActionClass = QuestionAction::class;
+
+	protected $categories;
 		
 	/**
 	 * @inheritDoc
 	 */
 	protected function createForm() {
 		parent::createForm();
-		$categories = CategoryHandler::getInstance()->getCategories('dev.tkirch.wsc.faq.category');
+		$this->categories = CategoryHandler::getInstance()->getCategories('dev.tkirch.wsc.faq.category');
+		if (!count($this->categories)) {
+			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory'));
+		}
+
         $this->form->appendChildren([
 			FormContainer::create('general')
 				->label('wcf.acp.faq.question.general')
