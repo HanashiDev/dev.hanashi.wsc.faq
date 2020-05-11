@@ -28,4 +28,9 @@ class FAQCategoryType extends AbstractCategoryType {
 	 * @inheritDoc
 	 */
 	protected $permissionPrefix = 'admin.faq';
+
+	/**
+	 * @inheritDoc
+	 */
+	protected $objectTypes = ['com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category'];
 }

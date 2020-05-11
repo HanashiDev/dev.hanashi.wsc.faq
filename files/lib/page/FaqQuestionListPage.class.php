@@ -1,9 +1,9 @@
 <?php
 namespace wcf\page;
+use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\WCF;
-use wcf\data\category\CategoryNodeTree;
 
 class FaqQuestionListPage extends AbstractPage {
 
@@ -15,8 +15,10 @@ class FaqQuestionListPage extends AbstractPage {
 
 		//get categories
 		$faqs = [];
-		$categoryTree = new CategoryNodeTree('dev.tkirch.wsc.faq.category');
+		$categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
 		foreach($categoryTree->getIterator() as $category) {
+			if (!$category->isAccessible()) continue;
+
 			$questionList = new QuestionList();
 			$questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
 			$questionList->readObjects();

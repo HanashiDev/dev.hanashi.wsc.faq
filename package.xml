@@ -35,6 +35,7 @@
 		<instruction type="acpMenu"/>
 		<instruction type="bbcode"/>
 		<instruction type="objectType"/>
+		<instruction type="aclOption"/>
 		<instruction type="language"/>
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
@@ -46,9 +47,11 @@
 		<instruction type="file"/>
 		<instruction type="template"/>
 		
+		<instruction type="objectType"/>
 		<instruction type="language"/>
 		<instruction type="bbcode"/>
 		<instruction type="templateListener"/>
+		<instruction type="aclOption"/>
 	</instructions>
 
 	<!-- alpha -->
