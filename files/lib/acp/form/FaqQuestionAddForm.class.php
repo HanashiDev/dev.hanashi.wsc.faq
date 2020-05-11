@@ -44,7 +44,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 		
 		$categories = [];
 		foreach ($categoryList as $category) {
-			$categories[] = $category;
+			$categories[$category->categoryID] = $category;
 		}
 
 		if (!count($categories)) {
