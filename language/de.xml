@@ -39,4 +39,16 @@
 		<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Kann Fragen bearbeiten]]></item>
 	</category>
 
+	<category name="wcf.editor.button">
+		<item name="wcf.editor.button.faq"><![CDATA[FAQ-Frage]]></item>
+	</category>
+
+	<category name="wcf.faq.question">
+		<item name="wcf.faq.question.search"><![CDATA[FAQ durchsuchen]]></item>
+		<item name="wcf.faq.question.search.name"><![CDATA[Fragen durchsuchen]]></item>
+		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[Der Suchbegriff ist zu kurz.]]></item>
+		<item name="wcf.faq.question.search.error.noResults"><![CDATA[Es wurden keine Ergebnisse gefunden.]]></item>
+		<item name="wcf.faq.question.search.results"><![CDATA[Suchergebnisse]]></item>
+	</category>
+
 </language>
