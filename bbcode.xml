@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/bbcode.xsd">
+	<import>
+		<bbcode name="faq">
+			<isBlockElement>1</isBlockElement>
+			<classname>wcf\system\bbcode\FaqBBCode</classname>
+			<attributes>
+				<attribute name="0">
+					<validationpattern><![CDATA[^\d+$]]></validationpattern>
+					<required>1</required>
+					<usetext>1</usetext>
+				</attribute>
+			</attributes>
+		</bbcode>
+	</import>
+</data>
