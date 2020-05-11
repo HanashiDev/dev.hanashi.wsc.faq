@@ -5,7 +5,7 @@ $.Redactor.prototype.FaqQuestion = function() {
 		init: function() {
             var button = this.button.add('faqQuestion', '');
 			
-			require(['Tkirch/Redactor/Faq/Question'], (function (RedactorFaqQuestion) {
+			require(['TKirch/Redactor/Faq/Question'], (function (RedactorFaqQuestion) {
 				new RedactorFaqQuestion(this, button[0]);
 			}).bind(this));
 		}

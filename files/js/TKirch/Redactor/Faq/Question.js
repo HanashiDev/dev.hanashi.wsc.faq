@@ -1,4 +1,4 @@
-define(['Tkirch/Ui/Faq/Search'], function(UiFaqSearch) {
+define(['TKirch/Ui/Faq/Search'], function(UiFaqSearch) {
 	"use strict";
 	
 	function RedactorFaqQuestion(editor, button) { this.init(editor, button); }
