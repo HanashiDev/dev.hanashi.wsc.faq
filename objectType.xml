@@ -7,6 +7,10 @@
 			<classname>wcf\system\category\FaqCategoryType</classname>
 		</type>
 		<type>
+			<name>dev.tkirch.wsc.faq.category</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+		<type>
 			<name>dev.tkirch.wsc.faq.question</name>
 			<definitionname>com.woltlab.wcf.message</definitionname>
 		</type>
