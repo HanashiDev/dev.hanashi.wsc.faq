@@ -134,4 +134,46 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 			} 
 		}
 	}
+
+	public function validateSearch() {
+		$this->readString('searchString');
+	}
+
+	public function search() {
+		$sql = "SELECT          faq_questions.questionID
+			FROM            wcf".WCF_N."_faq_questions faq_questions
+			LEFT JOIN		wcf".WCF_N."_language_item language_item
+						ON	language_item.languageItem = faq_questions.question
+			WHERE           faq_questions.question LIKE ?
+						OR	(
+								language_item.languageItemValue LIKE ?
+							AND	language_item.languageID = ?
+							)
+			ORDER BY        faq_questions.question";
+		$statement = WCF::getDB()->prepareStatement($sql, 5);
+		$statement->execute([
+			'%' . $this->parameters['searchString'] . '%',
+			'%' . $this->parameters['searchString'] . '%',
+			WCF::getLanguage()->languageID
+		]);
+		
+		$questionIDs = [];
+		while ($questionID = $statement->fetchColumn()) {
+			$questionIDs[] = $questionID;
+		}
+		
+		$questionList = new QuestionList();
+		$questionList->setObjectIDs($questionIDs);
+		$questionList->readObjects();
+		
+		$questions = [];
+		foreach ($questionList as $question) {
+			$questions[] = [
+				'question' => $question->getTitle(),
+				'questionID' => $question->questionID,	
+			];
+		}
+		
+		return $questions;
+	}
 }

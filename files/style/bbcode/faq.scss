@@ -1,0 +1,118 @@
+.faqBBcodeBox {
+    background-color: $wcfContentBackground;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+	border-radius: 2px;
+	clear: both;
+	display: block;
+	margin: 1em 0;
+    overflow: hidden;
+	
+	&:first-child {
+		margin-top: 0;
+    }
+    
+    .faqBBcodeBox {
+		clear: both;
+		
+		.faqBBcodeBoxIcon {
+			display: none;
+		}
+	}
+	
+	@include screen-md-up {
+		padding: 20px;
+		min-height: 104px;
+	}
+	
+	@include screen-sm-down {
+		padding: 10px;
+    }
+	
+	&.collapsed {
+		position: relative;
+		
+		> .faqBBcodeBoxContent {
+			overflow: hidden;
+			max-height: 100px;
+		}
+		
+		> .toggleButton {
+			bottom: 0;
+			box-shadow: 0 -10px 50px 10px opacify($wcfContentBackground, .9);
+			left: 0;
+			padding-bottom: 10px;
+			position: absolute;
+			right: 0;
+			z-index: 1;
+		}
+	}
+	
+	> .toggleButton {
+		background-color: opacify($wcfContentBackground, .9);
+		cursor: pointer;
+		display: block;
+		padding: 10px 20px 0 10px;
+		text-align: center;
+		
+		@include wcfFontSmall;
+	}
+	
+	.faqBBcodeBox {
+		min-height: 0;
+	}
+}
+
+.faqBBcodeBoxTitle {
+	font-style: normal;
+	margin-bottom: 20px;
+	
+	@include wcfFontHeadline;
+}
+
+.faqBBcodeBoxIcon {
+	float: right;
+	margin: 0 0 10px 10px;
+	
+	> a {
+		display: block;
+		font-size: 0;
+	}
+	
+	> .faqBBcodeBoxFaqSymbol {
+		color: $wcfContentDimmedText;
+		display: block;
+		font-family: Georgia, "Times New Roman", serif;
+		font-style: normal;
+		text-align: center;
+		
+		@include screen-md-up {
+			font-size: 60px;
+			line-height: 60px;
+			height: 64px;
+			width: 64px;
+		}
+		
+		@include screen-sm-down {
+			font-size: 30px;
+			line-height: 30px;
+			height: 32px;
+			width: 32px;
+		}
+		
+		&::before {
+			content: "\003f";
+			position: relative;
+			
+			@include screen-md-up {
+				top: -5px;
+			}
+		}
+	}
+	
+	@include screen-sm-down {
+		.userAvatarImage {
+			width: 32px !important;
+			height: 32px !important;
+		}
+	}
+}

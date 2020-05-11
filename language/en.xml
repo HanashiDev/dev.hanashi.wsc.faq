@@ -38,4 +38,16 @@
 		<item name="wcf.acp.group.option.admin.faq.canDeleteQuestion"><![CDATA[Can delete question]]></item>
 		<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Can edit question]]></item>
 	</category>
+
+	<category name="wcf.editor.button">
+		<item name="wcf.editor.button.faq"><![CDATA[FAQ Question]]></item>
+	</category>
+
+	<category name="wcf.faq.question">
+		<item name="wcf.faq.question.search"><![CDATA[Search FAQ questions]]></item>
+		<item name="wcf.faq.question.search.name"><![CDATA[Search questions]]></item>
+		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[The entered keyword is too short.]]></item>
+		<item name="wcf.faq.question.search.error.noResults"><![CDATA[The search returned no results.]]></item>
+		<item name="wcf.faq.question.search.results"><![CDATA[Search Results]]></item>
+	</category>
 </language>
