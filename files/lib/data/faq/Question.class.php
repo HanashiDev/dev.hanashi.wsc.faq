@@ -37,4 +37,12 @@ class Question extends DatabaseObject implements IRouteController {
 		
 		return $processor->getHtml();
 	}
+
+	public function getPlainOutput() {
+		$processor = new HtmlOutputProcessor();
+		$processor->setOutputType('text/plain');
+		$processor->process($this->getAnswer(), 'dev.tkirch.wsc.faq.question', $this->questionID);
+		
+		return $processor->getHtml();
+	}
 }

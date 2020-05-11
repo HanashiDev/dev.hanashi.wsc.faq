@@ -18,17 +18,21 @@ class FaqBBCode extends AbstractBBCode {
 		$question = new Question($questionID);
 		if (!$question->questionID) return;
 
-		$collapse = false;
+		if ($parser->getOutputType() == 'text/html') {
+			$collapse = false;
 
-		$doc = new \DOMDocument();
-		$doc->loadHTML($question->getFormattedOutput());
-		if ($doc->getElementsByTagName('p')->length > 5 || $doc->getElementsByTagName('br')->length > 5) {
-			$collapse = true;
+			$doc = new \DOMDocument();
+			$doc->loadHTML($question->getFormattedOutput());
+			if ($doc->getElementsByTagName('p')->length > 5 || $doc->getElementsByTagName('br')->length > 5) {
+				$collapse = true;
+			}
+
+			return WCF::getTPL()->fetch('faqBBCode', 'wcf', [
+				'question' => $question,
+				'collapseQuestion' => $collapse
+			]);
 		}
 
-		return WCF::getTPL()->fetch('faqBBCode', 'wcf', [
-			'question' => $question,
-			'collapseQuestion' => $collapse
-		]);
+		return $question->question."\n\n".$question->getPlainOutput();
 	}
 }
