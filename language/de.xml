@@ -56,7 +56,7 @@
 	</category>
 
 	<category name="wcf.faq.bbcode">
-		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[Du hast keine Rechte diese FAQ-Frage zu sehen.]]></item>
+		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Du hast{else}Sie haben{/if} keine Rechte diese FAQ-Frage zu sehen.]]></item>
 	</category>
 
 </language>

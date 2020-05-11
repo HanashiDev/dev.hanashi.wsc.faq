@@ -1,8 +1,8 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
 use wcf\form\AbstractFormBuilderForm;
-use wcf\system\category\CategoryHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
@@ -38,7 +38,15 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 	 */
 	protected function createForm() {
 		parent::createForm();
-		$categories = CategoryHandler::getInstance()->getCategories('dev.tkirch.wsc.faq.category');
+
+		$categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
+		$categoryList = $categoryTree->getIterator();
+		
+		$categories = [];
+		foreach ($categoryList as $category) {
+			$categories[] = $category;
+		}
+
 		if (!count($categories)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory'));
 		}
