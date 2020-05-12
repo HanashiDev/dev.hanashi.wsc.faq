@@ -5,8 +5,8 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>Add a FAQ to your WSC.</packagedescription>
 		<packagedescription language="de">Fügt ein FAQ in deinem WSC hinzu.</packagedescription>
-		<version>1.3.0 Alpha 28</version>
-		<date>2020-05-11</date>
+		<version>1.3.0</version>
+		<date>2020-05-12</date>
 	</packageinformation>
 
 	<authorinformation>
