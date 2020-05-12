@@ -22,10 +22,14 @@
 
 {if $faqs|count}
 	{foreach from=$faqs item=faq}
+		{assign var='attachmentList' value=$faq['attachments']}
+
 		<div class="section faq">
 			<h1>{$faq['title']}</h1>
 			
 			{foreach from=$faq['questions'] item=question}
+				{assign var='objectID' value=$question->questionID}
+
 				<div class="question jsQuestion">
 					<header>{$question->getTitle()}
 						{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
@@ -40,7 +44,11 @@
 						{/if}
 					</header>
 					<div class="answer" id="answer-{$question->questionID}">
-						{$question->getAnswer()}
+						<div class="section htmlContent">
+							{@$question->getFormattedOutput()}
+						</div>
+
+						{include file='attachments'}
 					</div>
 				</div>
 			{/foreach}

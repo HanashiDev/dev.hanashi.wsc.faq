@@ -5,6 +5,7 @@ use wcf\data\faq\QuestionAction;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
+use wcf\system\form\builder\container\wysiwyg\I18nWysiwygFormContainer;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\IntegerFormField;
@@ -64,12 +65,14 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 						->i18n()
 						->languageItemPattern('wcf.faq.question.question\d+')
 						->required(),
-                    MultilineTextFormField::create('answer')
-						->label('wcf.acp.faq.question.answer')
-						->i18n()
-						->languageItemPattern('wcf.faq.question.answer\d+')
-						->required(),
 				]),
+			
+			I18nWysiwygFormContainer::create('answer')
+				->label('wcf.acp.faq.question.answer')
+				->messageObjectType('dev.tkirch.wsc.faq.question')
+				->messageLanguageItemPattern('wcf.faq.question.answer\d+')
+				->attachmentData('dev.tkirch.wsc.faq.question')
+				->required(),
 			FormContainer::create('position')
 				->label('wcf.category.position')
 				->appendChildren([
