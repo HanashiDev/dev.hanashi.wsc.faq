@@ -41,11 +41,20 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 		parent::createForm();
 
 		$categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
+		$categoryTree->setMaxDepth(0);
 		$categoryList = $categoryTree->getIterator();
 		
 		$categories = [];
 		foreach ($categoryList as $category) {
 			$categories[$category->categoryID] = $category;
+			
+			$childCategories = $category->getAllChildCategories();
+			if (!count($childCategories)) continue;
+
+			foreach ($childCategories as $childCategory) {
+				$childCategory->setTitle('&nbsp;&nbsp;'.$childCategory->getTitle());
+				$categories[$childCategory->categoryID] = $childCategory;
+			}
 		}
 
 		if (!count($categories)) {
