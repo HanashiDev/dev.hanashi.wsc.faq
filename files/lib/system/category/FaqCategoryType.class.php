@@ -17,7 +17,7 @@ class FAQCategoryType extends AbstractCategoryType {
     /**
 	 * @inheritDoc
 	 */
-	protected $maximumNestingLevel = 0;
+	protected $maximumNestingLevel = 1;
     
     /**
 	 * @inheritDoc

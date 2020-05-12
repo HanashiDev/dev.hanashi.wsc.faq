@@ -53,6 +53,10 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
 	}
+
+	public function setTitle($title) {
+		$this->title = $title;
+	}
 	
 	/**
 	 * @inheritDoc

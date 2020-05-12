@@ -23,11 +23,18 @@ class FaqQuestionListPage extends AbstractPage {
 			$questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
 			$questionList->readObjects();
 
+			$faq = [];
+			$faq['title'] = WCF::getLanguage()->get($category->title);
+			$faq['attachments'] = $questionList->getAttachmentList();
+
 			if($questionList->countObjects() > 0) {
-				$faqs[$category->categoryID] = [];
-				$faqs[$category->categoryID]['title'] = WCF::getLanguage()->get($category->title);
-				$faqs[$category->categoryID]['questions'] = $questionList->getObjects();
-				$faqs[$category->categoryID]['attachments'] = $questionList->getAttachmentList();
+				$faq['questions'] = $questionList->getObjects();
+			}
+
+			if($category->getParentNode() && $category->getParentNode()->categoryID) {
+				$faqs[$category->getParentNode()->categoryID]['sub'][$category->categoryID] = $faq;
+			} else {
+				$faqs[$category->categoryID] = $faq;
 			}
 		}
 
