@@ -71,6 +71,10 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 
 		if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
 			$this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
+		}
+		
+		if (!empty($this->parameters['answer_htmlInputProcessor'])) {
+			$this->parameters['answer_htmlInputProcessor']->setObjectID($question->questionID);
         }
 		
 		return $question;
@@ -139,6 +143,10 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 
 			if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
 				$this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
+			}
+
+			if (!empty($this->parameters['answer_htmlInputProcessor'])) {
+				$this->parameters['answer_htmlInputProcessor']->setObjectID($object->questionID);
 			}
 		}
 	}
