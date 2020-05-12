@@ -68,6 +68,10 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 		if(!empty($updateData)) {
 			$questionEditor->update($updateData);
 		}
+
+		if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
+			$this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
+        }
 		
 		return $question;
 	}
@@ -100,7 +104,7 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 				$updateData['answer'] = 'wcf.faq.question.answer'.$object->questionID;
 			}
 
-		   //update show order
+		   	//update show order
 			if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
 				if($object->showOrder < $this->parameters['data']['showOrder']) {
 					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
@@ -132,6 +136,10 @@ class QuestionAction extends AbstractDatabaseObjectAction {
 			if (!empty($updateData)) {
 				$object->update($updateData);
 			} 
+
+			if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
+				$this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
+			}
 		}
 	}
 
