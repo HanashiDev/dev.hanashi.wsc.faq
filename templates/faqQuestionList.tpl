@@ -22,37 +22,79 @@
 
 {if $faqs|count}
 	{foreach from=$faqs item=faq}
-		{assign var='attachmentList' value=$faq['attachments']}
+		{if ($faq['questions']|isset && $faq['questions']|count) || ($faq['sub']|isset && $faq['sub']|count)}
+			{assign var='attachmentList' value=$faq['attachments']}
 
-		<div class="section faq">
-			<h1>{$faq['title']}</h1>
-			
-			{foreach from=$faq['questions'] item=question}
-				{assign var='objectID' value=$question->questionID}
+			<div class="section faq">
+				<h1>{$faq['title']}</h1>
+				
+				{if $faq['questions']|isset}
+					{foreach from=$faq['questions'] item=question}
+						{assign var='objectID' value=$question->questionID}
 
-				<div class="question jsQuestion">
-					<header>{$question->getTitle()}
-						{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-							<div class="actions">
-								{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
-									<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+						<div class="question jsQuestion">
+							<header>{$question->getTitle()}
+								{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
+									<div class="actions">
+										{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
+											<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+										{/if}
+										{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
+											<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
+										{/if}
+									</div>
 								{/if}
-								{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-									<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
-								{/if}
+							</header>
+							<div class="answer" id="answer-{$question->questionID}">
+								<div class="section htmlContent">
+									{@$question->getFormattedOutput()}
+								</div>
+
+								{include file='attachments'}
+							</div>
+						</div>
+					{/foreach}
+				{/if}
+
+				{if $faq['sub']|isset && $faq['sub']|count}
+					{foreach from=$faq['sub'] item=sub}
+						{if $sub['questions']|isset && $sub['questions']|count}
+							{assign var='attachmentList' value=$sub['attachments']}
+
+							<div class="sub">
+								<h1>{$sub['title']}</h1>
+								
+								{foreach from=$sub['questions'] item=question}
+									{assign var='objectID' value=$question->questionID}
+
+									<div class="question jsQuestion">
+										<header>{$question->getTitle()}
+											{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
+												<div class="actions">
+													{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
+														<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+													{/if}
+													{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
+														<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
+													{/if}
+												</div>
+											{/if}
+										</header>
+										<div class="answer" id="answer-{$question->questionID}">
+											<div class="section htmlContent">
+												{@$question->getFormattedOutput()}
+											</div>
+
+											{include file='attachments'}
+										</div>
+									</div>
+								{/foreach}
 							</div>
 						{/if}
-					</header>
-					<div class="answer" id="answer-{$question->questionID}">
-						<div class="section htmlContent">
-							{@$question->getFormattedOutput()}
-						</div>
-
-						{include file='attachments'}
-					</div>
-				</div>
-			{/foreach}
-		</div>
+					{/foreach}
+				{/if}
+			</div>
+		{/if}
 	{/foreach}
 {else}
     <p class="info">{lang}wcf.global.noItems{/lang}</p>
