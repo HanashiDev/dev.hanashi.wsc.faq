@@ -23,6 +23,8 @@
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Answer]]></item>
 		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Do you really want to delete this question?]]></item>
 		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[A category must be created <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">in ACP</a>.]]></item>
+		<item name="wcf.acp.faq.question.settings"><![CDATA[Settings]]></item>
+		<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Question is disabled]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

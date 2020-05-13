@@ -1,10 +1,13 @@
 <?php
 namespace wcf\data\faq;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IToggleAction;
+use wcf\data\TDatabaseObjectToggle;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
-class QuestionAction extends AbstractDatabaseObjectAction {
+class QuestionAction extends AbstractDatabaseObjectAction implements IToggleAction {
+    use TDatabaseObjectToggle;
 
 	/**
 	 * @inheritDoc

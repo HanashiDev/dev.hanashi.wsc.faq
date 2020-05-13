@@ -27,9 +27,11 @@ class FaqQuestionListPage extends AbstractPage {
 			$faq['title'] = WCF::getLanguage()->get($category->title);
 			$faq['attachments'] = $questionList->getAttachmentList();
 
-			if($questionList->countObjects() > 0) {
-				$faq['questions'] = $questionList->getObjects();
-			}
+			foreach ($questionList->getObjects() as $question) {
+			    if ($question->isAccessible()) {
+                    $faq['questions'][] = $question;
+                }
+            }
 
 			if($category->getParentNode() && $category->getParentNode()->categoryID) {
 				$faqs[$category->getParentNode()->categoryID]['sub'][$category->categoryID] = $faq;
