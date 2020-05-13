@@ -46,7 +46,7 @@
 								{/if}
 							</header>
 							<div class="answer" id="answer-{$question->questionID}">
-								<div class="section htmlContent">
+								<div class="htmlContent">
 									{@$question->getFormattedOutput()}
 								</div>
 
@@ -81,7 +81,7 @@
 											{/if}
 										</header>
 										<div class="answer" id="answer-{$question->questionID}">
-											<div class="section htmlContent">
+											<div class="htmlContent">
 												{@$question->getFormattedOutput()}
 											</div>
 
