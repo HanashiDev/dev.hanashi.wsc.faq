@@ -1,9 +1,7 @@
-{capture assign='pageTitle'}{lang}wcf.faq.list{/lang}{/capture}
-
 {capture assign='__contentHeader'}
 	<header class="contentHeader">
 		<div class="contentHeaderTitle">
-			<h1 class="contentTitle">{lang}wcf.faq.list{/lang}</h1>
+			<h1 class="contentTitle">{$__wcf->getActivePage()->getTitle()}</h1>
 		</div>
 
 		<nav class="contentHeaderNavigation">
@@ -27,7 +25,7 @@
 
 			<div class="section faq">
 				<h1>{$faq['title']}</h1>
-				
+
 				{if $faq['questions']|isset}
 					{foreach from=$faq['questions'] item=question}
 						{assign var='objectID' value=$question->questionID}
@@ -64,7 +62,7 @@
 
 							<div class="sub">
 								<h1>{$sub['title']}</h1>
-								
+
 								{foreach from=$sub['questions'] item=question}
 									{assign var='objectID' value=$question->questionID}
 
@@ -98,7 +96,7 @@
 		{/if}
 	{/foreach}
 {else}
-    <p class="info">{lang}wcf.global.noItems{/lang}</p>
+	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
 
 <footer class="contentFooter">
