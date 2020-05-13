@@ -23,6 +23,8 @@
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Antwort]]></item>
 		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Willst du{else}Wollen Sie{/if} diese Frage wirklich löschen?]]></item>
 		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Bevor {if LANGUAGE_USE_INFORMAL_VARIANT}du{else}Sie{/if} eine Frage hinzufügen {if LANGUAGE_USE_INFORMAL_VARIANT}kannst, musst du{else}können, müssen Sie{/if} eine <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">Kategorie hinzufügen</a>.]]></item>
+		<item name="wcf.acp.faq.question.settings"><![CDATA[Einstellungen]]></item>
+		<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Frage deaktivieren]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
