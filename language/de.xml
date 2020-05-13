@@ -3,7 +3,7 @@
 
 	<category name="wcf.faq">
 		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
-		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
+		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
 		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
 	</category>
 
@@ -21,8 +21,8 @@
 		<item name="wcf.acp.faq.category"><![CDATA[Kategorie]]></item>
 		<item name="wcf.acp.faq.question.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Antwort]]></item>
-		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Wollen Sie diese Frage wirklich löschen?]]></item>
-		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Es muss eine <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">Kategorie im ACP</a> angelegt werden.]]></item>
+		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Willst du{else}Wollen Sie{/if} diese Frage wirklich löschen?]]></item>
+		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Bevor {if LANGUAGE_USE_INFORMAL_VARIANT}du{else}Sie{/if} eine Frage hinzufügen {if LANGUAGE_USE_INFORMAL_VARIANT}kannst, musst du{else}können, müssen Sie{/if} eine <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">Kategorie hinzufügen</a>.]]></item>
 		<item name="wcf.acp.faq.question.settings"><![CDATA[Einstellungen]]></item>
 		<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Frage deaktivieren]]></item>
 	</category>
@@ -51,9 +51,9 @@
 
 	<category name="wcf.faq.question">
 		<item name="wcf.faq.question.search"><![CDATA[FAQ durchsuchen]]></item>
-		<item name="wcf.faq.question.search.name"><![CDATA[Fragen durchsuchen]]></item>
-		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[Der Suchbegriff ist zu kurz.]]></item>
-		<item name="wcf.faq.question.search.error.noResults"><![CDATA[Es wurden keine Ergebnisse gefunden.]]></item>
+		<item name="wcf.faq.question.search.name"><![CDATA[Fragen suchen]]></item>
+		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[Der angegebene Suchbegriff ist zu kurz.]]></item>
+		<item name="wcf.faq.question.search.error.noResults"><![CDATA[Die Suche ergab keine Treffer.]]></item>
 		<item name="wcf.faq.question.search.results"><![CDATA[Suchergebnisse]]></item>
 	</category>
 
