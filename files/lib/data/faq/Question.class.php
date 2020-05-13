@@ -59,6 +59,8 @@ class Question extends DatabaseObject implements IRouteController {
 	}
 
 	public function isAccessible(User $user = null) {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('admin.faq.canViewQuestion')) return false;
+
 		$category = $this->getCategory();
 		if (empty($category)) return false;
 

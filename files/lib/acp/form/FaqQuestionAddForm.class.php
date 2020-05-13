@@ -6,6 +6,7 @@ use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\container\wysiwyg\I18nWysiwygFormContainer;
+use wcf\system\form\builder\field\BooleanFormField;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\IntegerFormField;
@@ -91,6 +92,12 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 						->minimum(1)
 						->value(1)
 				]),
-			]);
+			FormContainer::create('settings')
+				->label('wcf.acp.faq.question.settings')
+				->appendChildren([
+					BooleanFormField::create('isDisabled')
+						->label('wcf.acp.faq.question.isDisabled')
+				])
+        ]);
 	}
 }
