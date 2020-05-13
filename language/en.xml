@@ -10,10 +10,10 @@
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
 		<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.menu.link.faq.categories.add"><![CDATA[Add category]]></item>
+		<item name="wcf.acp.menu.link.faq.categories.add"><![CDATA[Add Category]]></item>
 		<item name="wcf.acp.menu.link.faq.questions.list"><![CDATA[Questions]]></item>
-		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Add question]]></item>
-		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Edit question]]></item>
+		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Add Question]]></item>
+		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Edit Question]]></item>
 	</category>
 
 	<category name="wcf.acp.faq">
@@ -22,7 +22,7 @@
 		<item name="wcf.acp.faq.question.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.faq.question.answer"><![CDATA[Answer]]></item>
 		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Do you really want to delete this question?]]></item>
-		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[A category must be created <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">in ACP</a>.]]></item>
+		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Please <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">add a category</a> before creating questions.]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
@@ -48,14 +48,14 @@
 	</category>
 
 	<category name="wcf.faq.question">
-		<item name="wcf.faq.question.search"><![CDATA[Search FAQ questions]]></item>
-		<item name="wcf.faq.question.search.name"><![CDATA[Search questions]]></item>
+		<item name="wcf.faq.question.search"><![CDATA[Search FAQ]]></item>
+		<item name="wcf.faq.question.search.name"><![CDATA[Search Questions]]></item>
 		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[The entered keyword is too short.]]></item>
-		<item name="wcf.faq.question.search.error.noResults"><![CDATA[The search returned no results.]]></item>
+		<item name="wcf.faq.question.search.error.noResults"><![CDATA[There were no matches.]]></item>
 		<item name="wcf.faq.question.search.results"><![CDATA[Search Results]]></item>
 	</category>
 
 	<category name="wcf.faq.bbcode">
-		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You have no rights to see this FAQ question.]]></item>
+		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You are not authorized to view this FAQ question.]]></item>
 	</category>
 </language>
