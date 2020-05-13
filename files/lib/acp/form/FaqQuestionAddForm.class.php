@@ -92,12 +92,12 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 						->minimum(1)
 						->value(1)
 				]),
-            FormContainer::create('settings')
-                ->label('wcf.acp.faq.question.settings')
-                ->appendChildren([
-                    BooleanFormField::create('isDisabled')
-                        ->label('wcf.acp.faq.question.isDisabled')
-                ])
-			]);
+			FormContainer::create('settings')
+				->label('wcf.acp.faq.question.settings')
+				->appendChildren([
+					BooleanFormField::create('isDisabled')
+						->label('wcf.acp.faq.question.isDisabled')
+				])
+        ]);
 	}
 }

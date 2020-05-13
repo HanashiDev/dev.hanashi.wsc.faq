@@ -28,10 +28,10 @@ class FaqQuestionListPage extends AbstractPage {
 			$faq['attachments'] = $questionList->getAttachmentList();
 
 			foreach ($questionList->getObjects() as $question) {
-			    if ($question->isAccessible()) {
-                    $faq['questions'][] = $question;
-                }
-            }
+				if ($question->isAccessible()) {
+					$faq['questions'][] = $question;
+				}
+			}
 
 			if($category->getParentNode() && $category->getParentNode()->categoryID) {
 				$faqs[$category->getParentNode()->categoryID]['sub'][$category->categoryID] = $faq;

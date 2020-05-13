@@ -7,7 +7,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
 class QuestionAction extends AbstractDatabaseObjectAction implements IToggleAction {
-    use TDatabaseObjectToggle;
+	use TDatabaseObjectToggle;
 
 	/**
 	 * @inheritDoc
