@@ -13,10 +13,10 @@ class FaqBBCode extends AbstractBBCode {
 			$questionID = intval($openingTag['attributes'][0]);
 		}
 		
-		if ($questionID === null) return;
+		if ($questionID === null) return '';
 
 		$question = new Question($questionID);
-		if (!$question->questionID) return;
+		if (!$question->questionID || $question->isAccessible()) return '';
 
 		if ($parser->getOutputType() == 'text/html') {
 			$collapse = false;
