@@ -62,9 +62,9 @@ class Question extends DatabaseObject implements IRouteController {
 		if ($this->isDisabled && !WCF::getSession()->getPermission('admin.faq.canViewQuestion')) return false;
 
 		if ($this->getCategory()) {
-		    return $this->getCategory()->isAccessible($user);
+			return $this->getCategory()->isAccessible($user);
 		}
 
-        return WCF::getSession()->getPermission('user.faq.canViewFAQ');
+		return WCF::getSession()->getPermission('user.faq.canViewFAQ');
 	}
 }

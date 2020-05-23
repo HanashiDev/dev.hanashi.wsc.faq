@@ -6,10 +6,10 @@ use wcf\data\faq\QuestionList;
 use wcf\system\WCF;
 
 class FaqQuestionListPage extends AbstractPage {
-    /**
-     * @inheritDoc
-     */
-    public $neededPermissions = ['user.faq.canViewFAQ'];
+	/**
+	 * @inheritDoc
+	 */
+	public $neededPermissions = ['user.faq.canViewFAQ'];
 
 	/**
 	 * @inheritDoc
