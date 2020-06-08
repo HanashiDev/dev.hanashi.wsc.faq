@@ -3,6 +3,7 @@ namespace wcf\data\faq;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
+use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
@@ -43,6 +44,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 				$this->parameters['data']['showOrder']
 			]);
 		}
+
+		$processor = new HtmlInputProcessor();
+		$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+		$this->parameters['data']['answer'] = $processor->getHtml();
 
 		//get question
 		$question = parent::create();
