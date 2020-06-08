@@ -45,9 +45,17 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 			]);
 		}
 
-		$processor = new HtmlInputProcessor();
-		$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
-		$this->parameters['data']['answer'] = $processor->getHtml();
+		if (isset($this->parameters['answer_i18n'])) {
+			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
+				$processor = new HtmlInputProcessor();
+				$processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
+				$this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+			}
+		} else {
+			$processor = new HtmlInputProcessor();
+			$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+			$this->parameters['data']['answer'] = $processor->getHtml();
+		}
 
 		//get question
 		$question = parent::create();
@@ -93,6 +101,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	* https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
 	*/
    public function update() {
+		if (isset($this->parameters['answer_i18n'])) {
+			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
+				$processor = new HtmlInputProcessor();
+				$processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
+				$this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+			}
+		} else {
+			$processor = new HtmlInputProcessor();
+			$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+			$this->parameters['data']['answer'] = $processor->getHtml();
+		}
+
 	   parent::update();
 	   
 	   foreach ($this->getObjects() as $object) {
