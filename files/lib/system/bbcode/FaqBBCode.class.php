@@ -22,7 +22,7 @@ class FaqBBCode extends AbstractBBCode {
 			$collapse = false;
 
 			$doc = new \DOMDocument();
-			$doc->loadHTML($question->getFormattedOutput());
+			@$doc->loadHTML($question->getFormattedOutput());
 			if ($doc->getElementsByTagName('p')->length > 5 || $doc->getElementsByTagName('br')->length > 5) {
 				$collapse = true;
 			}

@@ -3,6 +3,7 @@ namespace wcf\data\faq;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
+use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
@@ -42,6 +43,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 			$statement->execute([
 				$this->parameters['data']['showOrder']
 			]);
+		}
+
+		if (isset($this->parameters['answer_i18n'])) {
+			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
+				$processor = new HtmlInputProcessor();
+				$processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
+				$this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+			}
+		} else {
+			$processor = new HtmlInputProcessor();
+			$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+			$this->parameters['data']['answer'] = $processor->getHtml();
 		}
 
 		//get question
@@ -88,6 +101,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	* https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
 	*/
    public function update() {
+		if (isset($this->parameters['answer_i18n'])) {
+			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
+				$processor = new HtmlInputProcessor();
+				$processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
+				$this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+			}
+		} else {
+			$processor = new HtmlInputProcessor();
+			$processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+			$this->parameters['data']['answer'] = $processor->getHtml();
+		}
+
 	   parent::update();
 	   
 	   foreach ($this->getObjects() as $object) {
