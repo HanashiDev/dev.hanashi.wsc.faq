@@ -20,7 +20,7 @@ class FaqQuestionListPage extends AbstractPage {
 		//get categories
 		$faqs = [];
 		$categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
-		foreach($categoryTree->getIterator() as $category) {
+		foreach ($categoryTree->getIterator() as $category) {
 			if (!$category->isAccessible()) continue;
 
 			$questionList = new QuestionList();
@@ -37,7 +37,7 @@ class FaqQuestionListPage extends AbstractPage {
 				}
 			}
 
-			if($category->getParentNode() && $category->getParentNode()->categoryID) {
+			if ($category->getParentNode() && $category->getParentNode()->categoryID) {
 				$faqs[$category->getParentNode()->categoryID]['sub'][$category->categoryID] = $faq;
 			} else {
 				$faqs[$category->categoryID] = $faq;
@@ -45,7 +45,7 @@ class FaqQuestionListPage extends AbstractPage {
 		}
 
 		WCF::getTPL()->assign([
-            'faqs' => $faqs
+			'faqs' => $faqs
 		]);
 	}
 }

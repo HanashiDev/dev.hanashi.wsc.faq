@@ -20,9 +20,9 @@ class FaqQuestionEditForm extends FaqQuestionAddForm {
 	public function readParameters() {
 		parent::readParameters();
 		
-		if(isset($_REQUEST['id'])) {
+		if (isset($_REQUEST['id'])) {
 			$this->formObject = new Question(intval($_REQUEST['id']));
-			if(!$this->formObject->questionID) {
+			if (!$this->formObject->questionID) {
 				throw new IllegalLinkException();
 			}
 		}

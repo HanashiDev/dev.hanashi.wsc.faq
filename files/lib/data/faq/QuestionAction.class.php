@@ -13,7 +13,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	/**
 	 * @inheritDoc
 	 */
-    protected $permissionsCreate = ['admin.faq.canAddQuestion'];
+	protected $permissionsCreate = ['admin.faq.canAddQuestion'];
 
 	/**
 	 * @inheritDoc
@@ -23,19 +23,19 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	/**
 	 * @inheritDoc
 	 */
-    protected $permissionsUpdate = ['admin.faq.canAddQuestion'];
+	protected $permissionsUpdate = ['admin.faq.canAddQuestion'];
 
 	/**
 	 * @inheritDoc
 	 */
 	protected $requireACP = [];
-	
- 	/**
+
+	/**
 	 * @inheritDoc
 	 * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
 	 */
 	public function create() {
-		if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
+		if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
 			$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
 					SET	showOrder = showOrder + 1
 					WHERE	showOrder >= ?";
@@ -63,7 +63,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 
 		//i18n
 		$updateData = [];
-		if(isset($this->parameters['question_i18n'])) {
+		if (isset($this->parameters['question_i18n'])) {
 			I18nHandler::getInstance()->save(
 				$this->parameters['question_i18n'],
 				'wcf.faq.question.question'.$question->questionID,
@@ -71,7 +71,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 			);
 			$updateData['question'] = 'wcf.faq.question.question'.$question->questionID;
 		}
-		if(isset($this->parameters['answer_i18n'])) {
+		if (isset($this->parameters['answer_i18n'])) {
 			I18nHandler::getInstance()->save(
 				$this->parameters['answer_i18n'],
 				'wcf.faq.question.answer'.$question->questionID,
@@ -81,7 +81,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 		}
 		
 		//update question
-		if(!empty($updateData)) {
+		if (!empty($updateData)) {
 			$questionEditor->update($updateData);
 		}
 
@@ -91,16 +91,16 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 		
 		if (!empty($this->parameters['answer_htmlInputProcessor'])) {
 			$this->parameters['answer_htmlInputProcessor']->setObjectID($question->questionID);
-        }
+		}
 		
 		return $question;
 	}
 
-   /**
-	* @inheritDoc
-	* https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
-	*/
-   public function update() {
+	/**
+	 * @inheritDoc
+	 * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
+	 */
+	public function update() {
 		if (isset($this->parameters['answer_i18n'])) {
 			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
 				$processor = new HtmlInputProcessor();
@@ -119,7 +119,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 			$updateData = [];
 				
 			//i18n
-			if(isset($this->parameters['question_i18n'])) {
+			if (isset($this->parameters['question_i18n'])) {
 				I18nHandler::getInstance()->save(
 					$this->parameters['question_i18n'],
 					'wcf.faq.question.question'.$object->questionID,
@@ -127,7 +127,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 				);
 				$updateData['question'] = 'wcf.faq.question.question'.$object->questionID;
 			}
-			if(isset($this->parameters['answer_i18n'])) {
+			if (isset($this->parameters['answer_i18n'])) {
 				I18nHandler::getInstance()->save(
 					$this->parameters['answer_i18n'],
 					'wcf.faq.question.answer'.$object->questionID,
@@ -136,7 +136,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 				$updateData['answer'] = 'wcf.faq.question.answer'.$object->questionID;
 			}
 
-		   	//update show order
+			//update show order
 			if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
 				if($object->showOrder < $this->parameters['data']['showOrder']) {
 					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions

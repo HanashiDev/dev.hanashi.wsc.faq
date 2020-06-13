@@ -14,7 +14,6 @@ use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\WCF;
 
 class FaqQuestionAddForm extends AbstractFormBuilderForm {
-
 	/**
 	 * @inheritDoc
 	 */
@@ -62,7 +61,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory'));
 		}
 
-        $this->form->appendChildren([
+		$this->form->appendChildren([
 			FormContainer::create('general')
 				->label('wcf.acp.faq.question.general')
 				->appendChildren([
@@ -98,6 +97,6 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 					BooleanFormField::create('isDisabled')
 						->label('wcf.acp.faq.question.isDisabled')
 				])
-        ]);
+		]);
 	}
 }
