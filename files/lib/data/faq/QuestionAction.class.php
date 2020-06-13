@@ -137,8 +137,8 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 			}
 
 			//update show order
-			if(isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
-				if($object->showOrder < $this->parameters['data']['showOrder']) {
+			if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
+				if ($object->showOrder < $this->parameters['data']['showOrder']) {
 					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
 					SET	showOrder = showOrder - 1
 					WHERE	showOrder > ?
@@ -150,7 +150,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 						$this->parameters['data']['showOrder'],
 						$object->questionID
 					]);
-				} else if($object->showOrder > $this->parameters['data']['showOrder']) {
+				} else if ($object->showOrder > $this->parameters['data']['showOrder']) {
 					$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
 					SET	showOrder = showOrder + 1
 					WHERE	showOrder < ?
