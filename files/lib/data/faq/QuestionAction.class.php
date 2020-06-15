@@ -35,16 +35,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	 * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
 	 */
 	public function create() {
-		if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
-			$sql = "UPDATE  wcf" . WCF_N . "_faq_questions
-					SET	showOrder = showOrder + 1
-					WHERE	showOrder >= ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute([
-				$this->parameters['data']['showOrder']
-			]);
-		}
-
+        //prepare answer
 		if (isset($this->parameters['answer_i18n'])) {
 			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
 				$processor = new HtmlInputProcessor();
@@ -101,6 +92,13 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
 	 * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
 	 */
 	public function update() {
+        //check if showOrder must be updated
+        if (count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
+            $objectEditor = $this->getObjects()[0];
+            $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder($this->parameters['data']['showOrder']);
+        }
+
+        //prepare answer
 		if (isset($this->parameters['answer_i18n'])) {
 			foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
 				$processor = new HtmlInputProcessor();

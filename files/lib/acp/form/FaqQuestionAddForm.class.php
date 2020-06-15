@@ -2,15 +2,16 @@
 namespace wcf\acp\form;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
+use wcf\data\faq\QuestionEditor;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\container\wysiwyg\I18nWysiwygFormContainer;
 use wcf\system\form\builder\field\BooleanFormField;
-use wcf\system\form\builder\field\TextFormField;
-use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\IntegerFormField;
+use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\SingleSelectionFormField;
+use wcf\system\form\builder\field\TextFormField;
 use wcf\system\WCF;
 
 class FaqQuestionAddForm extends AbstractFormBuilderForm {
@@ -89,7 +90,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm {
 						->label('wcf.global.showOrder')
 						->step(1)
 						->minimum(1)
-						->value(1)
+						->value(QuestionEditor::getShowOrder())
 				]),
 			FormContainer::create('settings')
 				->label('wcf.acp.faq.question.settings')
