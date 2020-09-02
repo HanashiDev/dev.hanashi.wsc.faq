@@ -7,6 +7,7 @@
             <name language="de">FAQ</name>
             <name language="en">FAQ</name>
             <permissions>user.faq.canViewFAQ</permissions>
+            <allowSpidersToIndex>1</allowSpidersToIndex>
 
             <content language="en">
                 <title>FAQ</title>
