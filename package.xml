@@ -5,8 +5,8 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>Add a FAQ to your WSC.</packagedescription>
 		<packagedescription language="de">Fügt ein FAQ in deinem WSC hinzu.</packagedescription>
-		<version>1.4.0 Alpha 1</version>
-		<date>2020-05-12</date>
+		<version>1.4.0</version>
+		<date>2020-09-12</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -53,17 +53,6 @@
 		<!-- xml-->
 		<instruction type="language"/>
 		<instruction type="script" run="standalone">acp/update_dev.tkirch.wsc.faq_1.4.0.php</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.2.1">
-		<instruction type="file"/>
-		<instruction type="template"/>
-		
-		<instruction type="objectType"/>
-		<instruction type="language"/>
-		<instruction type="bbcode"/>
-		<instruction type="templateListener"/>
-		<instruction type="aclOption"/>
 	</instructions>
 
 	<!-- alpha -->
