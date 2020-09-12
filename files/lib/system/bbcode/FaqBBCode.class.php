@@ -16,7 +16,7 @@ class FaqBBCode extends AbstractBBCode {
 		if ($questionID === null) return '';
 
 		$question = new Question($questionID);
-		if (!$question->questionID || $question->isAccessible()) return '';
+		if (!$question->questionID || !$question->isAccessible()) return '';
 
 		if ($parser->getOutputType() == 'text/html') {
 			$collapse = false;
