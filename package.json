@@ -9,8 +9,6 @@
         "typescript": "^4.1.3"
     },
     "dependencies": {
-        "@types/leaflet": "^0.7.35",
-        "@types/leaflet-label": "^0.2.36",
         "@woltlab/wcf": "https://github.com/WoltLab/WCF.git#master"
     },
     "scripts": {
