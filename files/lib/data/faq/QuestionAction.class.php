@@ -3,14 +3,16 @@
 namespace wcf\data\faq;
 
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
+use wcf\system\exception\UserInputException;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
-class QuestionAction extends AbstractDatabaseObjectAction implements IToggleAction
+class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
 {
     use TDatabaseObjectToggle;
 
@@ -258,5 +260,47 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
         }
 
         return $questions;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateUpdatePosition()
+    {
+        WCF::getSession()->checkPermissions($this->permissionsUpdate);
+
+        if (!isset($this->parameters['data']['structure']) || !\is_array($this->parameters['data']['structure'])) {
+            throw new UserInputException('structure');
+        }
+
+        $questionList = new QuestionList();
+        $questionList->setObjectIDs($this->parameters['data']['structure'][0]);
+        $questionList->readObjects();
+        if (\count($questionList) !== \count($this->parameters['data']['structure'][0])) {
+            throw new UserInputException('structure');
+        }
+
+        $this->readInteger('offset', true, 'data');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function updatePosition()
+    {
+        $sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+                SET     showOrder = ?
+                WHERE   questionID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+
+        $showOrder = $this->parameters['data']['offset'];
+        WCF::getDB()->beginTransaction();
+        foreach ($this->parameters['data']['structure'][0] as $questionID) {
+            $statement->execute([
+                $showOrder++,
+                $questionID,
+            ]);
+        }
+        WCF::getDB()->commitTransaction();
     }
 }
