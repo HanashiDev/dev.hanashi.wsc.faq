@@ -1,5 +1,15 @@
 {include file='header' pageTitle='wcf.acp.menu.link.faq.questions.list'}
 
+<script data-relocate="true">
+	require(['WoltLabSuite/Core/Ui/Sortable/List'], function (UiSortableList) {
+		new UiSortableList({
+			containerId: 'questionList',
+			className: 'wcf\\data\\faq\\QuestionAction',
+			offset: {@$startIndex}
+		});
+	});
+</script>
+
 <header class="contentHeader">
 	<div class="contentHeaderTitle">
 		<h1 class="contentTitle">{lang}wcf.acp.menu.link.faq.questions.list{/lang}</h1>
@@ -51,7 +61,7 @@
 		
 		<div class="formSubmit">
 			<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s">
-			{@SECURITY_TOKEN_INPUT_TAG}
+			{csrfToken}
 		</div>
 	</section>
 </form>
@@ -70,39 +80,30 @@
 {/hascontent}
 
 {if $objects|count}
-	<div class="section tabularBox" id="questionTableContainer">
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="columnID columnQuestionID{if $sortField == 'questionID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=questionID&sortOrder={if $sortField == 'questionID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@$linkParameters}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-					<th class="columnText columnCategory{if $sortField == 'categoryID'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=categoryID&sortOrder={if $sortField == 'categoryID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@$linkParameters}{/link}">{lang}wcf.acp.faq.category{/lang}</a></th>
-					<th class="columnTitle columnQuestion">{lang}wcf.acp.faq.question.question{/lang}</th>
-					<th class="columnDigits columnShowOrder{if $sortField == 'showOrder'} active {@$sortOrder}{/if}"><a href="{link controller='FaqQuestionList'}pageNo={@$pageNo}&sortField=showOrder&sortOrder={if $sortField == 'showOrder' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@$linkParameters}{/link}">{lang}wcf.global.showOrder{/lang}</a></th>
+	<div class="section sortableListContainer" id="questionList">
+		<ol class="sortableList jsObjectActionContainer jsReloadPageWhenEmpty" data-object-id="0" start="{@($pageNo - 1) * $itemsPerPage + 1}" data-object-action-class-name="wcf\data\faq\QuestionAction">
+			{foreach from=$objects item=question}
+				<li class="sortableNode sortableNoNesting jsQuestion jsObjectActionObject" data-object-id="{@$question->questionID}">
+					<span class="sortableNodeLabel">
+						({$question->getCategory()->getTitle()})&nbsp;
+						<a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a>
 
-					{event name='columnHeads'}
-				</tr>
-			</thead>
-
-			<tbody>
-				{foreach from=$objects item=question}
-					<tr class="jsQuestionRow">
-						<td class="columnIcon">
+						<span class="statusDisplay sortableButtonContainer">
+							<span class="icon icon16 fa-arrows sortableNodeHandle"></span>
+							{objectAction action="toggle" isDisabled=$question->isDisabled}
 							<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-							<span class="icon icon16 fa-{if !$question->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$question->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$question->questionID}"></span>
-							<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
+							{objectAction action="delete" objectTitle=$question->getTitle()}
 
-							{event name='rowButtons'}
-						</td>
-						<td class="columnID">{#$question->questionID}</td>
-						<td class="columnText columnCategory">{$question->getCategory()->getTitle()}</td>
-						<td class="columnTitle columnQuestion"><a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a></td>
-						<td class="columnDigits columnShowOrder"><a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->showOrder}</a></td>
+							{event name='itemButtons'}
+						</span>
+					</span>
+				</li>
+			{/foreach}
+		</ol>
+	</div>
 
-						{event name='columns'}
-					</tr>
-				{/foreach}
-			</tbody>
-		</table>
+	<div class="formSubmit">
+		<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
 
 	<footer class="contentFooter">
@@ -111,11 +112,11 @@
 				{content}{@$pagesLinks}{/content}
 			</div>
 		{/hascontent}
-
+		
 		<nav class="contentFooterNavigation">
 			<ul>
 				<li><a href="{link controller='FaqQuestionAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.menu.link.faq.questions.add{/lang}</span></a></li>
-
+				
 				{event name='contentFooterNavigation'}
 			</ul>
 		</nav>
@@ -123,24 +124,5 @@
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
-
-<script data-relocate="true">
-	$(function() {
-		new WCF.Action.Toggle('wcf\\data\\faq\\QuestionAction', '.jsQuestionRow');
-		new WCF.Action.Delete('wcf\\data\\faq\\QuestionAction', '.jsQuestionRow');
-
-		var options = { };
-		{if $pages > 1}
-			options.refreshPage = true;
-			{if $pages == $pageNo}
-				options.updatePageNumber = -1;
-			{/if}
-		{else}
-			options.emptyMessage = '{jslang}wcf.global.noItems{/jslang}';
-		{/if}
-
-		new WCF.Table.EmptyTableHandler($('#questionTableContainer'), 'jsQuestionRow', options);
-	});
-</script>
 
 {include file='footer'}
