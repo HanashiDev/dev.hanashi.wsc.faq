@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq;
 
+use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\faq\category\FaqCategory;
 use wcf\data\user\User;
@@ -23,6 +24,8 @@ class Question extends DatabaseObject implements IRouteController
      * @inheritDoc
      */
     protected static $databaseTableIndexName = 'questionID';
+
+    protected $attachmentList;
 
     /**
      * @inheritDoc
@@ -77,5 +80,16 @@ class Question extends DatabaseObject implements IRouteController
         }
 
         return WCF::getSession()->getPermission('user.faq.canViewFAQ');
+    }
+
+    public function getAttachments()
+    {
+        if (MODULE_ATTACHMENT && empty($this->attachmentList)) {
+            $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
+            $this->attachmentList->getConditionBuilder()->add('attachment.objectID = ?', [$this->questionID]);
+            $this->attachmentList->readObjects();
+        }
+
+        return $this->attachmentList;
     }
 }
