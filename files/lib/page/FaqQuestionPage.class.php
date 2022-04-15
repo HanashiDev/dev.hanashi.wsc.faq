@@ -30,6 +30,8 @@ class FaqQuestionPage extends AbstractPage
             if (!$this->question->questionID || !$this->question->isAccessible()) {
                 throw new IllegalLinkException();
             }
+        } else {
+            throw new IllegalLinkException();
         }
     }
 
