@@ -56,7 +56,7 @@ class FaqQuestionListPage extends SortablePage
         parent::readParameters();
 
         if (isset($_REQUEST['categoryID'])) {
-            $this->categoryID = intval($_REQUEST['categoryID']);
+            $this->categoryID = (int)$_REQUEST['categoryID'];
         }
         if (!empty($_REQUEST['question'])) {
             $this->question = StringUtil::trim($_REQUEST['question']);
@@ -74,15 +74,24 @@ class FaqQuestionListPage extends SortablePage
         parent::initObjectList();
 
         if ($this->categoryID) {
-            $this->objectList->getConditionBuilder()->add('faq_questions.categoryID = ?', [$this->categoryID]);
+            $this->objectList->getConditionBuilder()->add(
+                'faq_questions.categoryID = ?',
+                [$this->categoryID]
+            );
         }
 
         if (!empty($this->question)) {
-            $this->objectList->getConditionBuilder()->add('faq_questions.question LIKE ?', ['%' . $this->question . '%']);
+            $this->objectList->getConditionBuilder()->add(
+                'faq_questions.question LIKE ?',
+                ['%' . $this->question . '%']
+            );
         }
 
         if (!empty($this->answer)) {
-            $this->objectList->getConditionBuilder()->add('faq_questions.answer LIKE ?', ['%' . $this->answer . '%']);
+            $this->objectList->getConditionBuilder()->add(
+                'faq_questions.answer LIKE ?',
+                ['%' . $this->answer . '%']
+            );
         }
     }
 
