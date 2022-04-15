@@ -16,5 +16,20 @@
                 <title>FAQ</title>
             </content>
         </page>
+        <page identifier="dev.tkirch.wsc.faq.FaqQuestion">
+            <pageType>system</pageType>
+            <controller>wcf\page\FaqQuestionPage</controller>
+            <name language="de">FAQ Frage</name>
+            <name language="en">FAQ Question</name>
+            <permissions>user.faq.canViewFAQ</permissions>
+            <allowSpidersToIndex>1</allowSpidersToIndex>
+
+            <content language="en">
+                <title>FAQ Question</title>
+            </content>
+            <content language="de">
+                <title>FAQ Frage</title>
+            </content>
+        </page>
     </import>
 </data>
