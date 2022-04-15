@@ -23,6 +23,7 @@
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="*">eu.netzlife.wcf.faq</excludedpackage>
 		<excludedpackage version="*">com.kittmedia.wcf.faq</excludedpackage>
+		<excludedpackage version="2.0.0 Alpha 1">dev.hanashi.wsc.wysiwyg-i18n-form</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
