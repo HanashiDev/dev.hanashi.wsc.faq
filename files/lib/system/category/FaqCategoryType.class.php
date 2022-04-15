@@ -2,8 +2,6 @@
 
 namespace wcf\system\category;
 
-use wcf\system\WCF;
-
 class FaqCategoryType extends AbstractCategoryType
 {
     /**
@@ -34,5 +32,7 @@ class FaqCategoryType extends AbstractCategoryType
     /**
      * @inheritDoc
      */
-    protected $objectTypes = ['com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category'];
+    protected $objectTypes = [
+        'com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category'
+    ];
 }

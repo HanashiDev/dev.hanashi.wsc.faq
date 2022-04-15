@@ -15,11 +15,4 @@
 
     <!-- Include all rules from the Zend Coding Standard -->
     <rule ref="PSR12"/>
-
-    <rule ref="Generic.Files.LineLength">
-        <properties>
-            <property name="lineLimit" value="N"/>
-            <property name="absoluteLineLimit" value="M"/>
-        </properties>
-    </rule>
 </ruleset>

@@ -6,6 +6,7 @@ use wcf\data\category\AbstractDecoratedCategory;
 use wcf\data\user\User;
 use wcf\data\IAccessibleObject;
 use wcf\data\ITitledLinkObject;
+use wcf\data\user\UserProfile;
 use wcf\system\category\CategoryPermissionHandler;
 use wcf\system\WCF;
 
@@ -34,7 +35,10 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
         }
 
         if (!isset($this->userPermissions[$user->userID])) {
-            $this->userPermissions[$user->userID] = CategoryPermissionHandler::getInstance()->getPermissions($this->getDecoratedObject(), $user);
+            $this->userPermissions[$user->userID] = CategoryPermissionHandler::getInstance()->getPermissions(
+                $this->getDecoratedObject(),
+                $user
+            );
         }
 
         if (isset($this->userPermissions[$user->userID][$permission])) {

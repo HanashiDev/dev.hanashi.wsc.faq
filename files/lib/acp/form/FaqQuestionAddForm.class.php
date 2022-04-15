@@ -11,7 +11,6 @@ use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\container\wysiwyg\I18nWysiwygFormContainer;
 use wcf\system\form\builder\field\BooleanFormField;
 use wcf\system\form\builder\field\IntegerFormField;
-use wcf\system\form\builder\field\MultilineTextFormField;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\WCF;
@@ -65,7 +64,9 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         }
 
         if (!count($categories)) {
-            throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory'));
+            throw new NamedUserException(
+                WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory')
+            );
         }
 
         $this->form->appendChildren([

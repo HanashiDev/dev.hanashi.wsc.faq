@@ -80,7 +80,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
             $questionEditor->update($updateData);
         }
 
-        if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
+        if (
+            isset($this->parameters['answer_attachmentHandler']) &&
+            $this->parameters['answer_attachmentHandler'] !== null
+        ) {
             $this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
         }
 
@@ -100,7 +103,9 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
         //check if showOrder must be updated
         if (count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
             $objectEditor = $this->getObjects()[0];
-            $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder($this->parameters['data']['showOrder']);
+            $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder(
+                $this->parameters['data']['showOrder']
+            );
         }
 
         //prepare answer
@@ -172,7 +177,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
                 $object->update($updateData);
             }
 
-            if (isset($this->parameters['answer_attachmentHandler']) && $this->parameters['answer_attachmentHandler'] !== null) {
+            if (
+                isset($this->parameters['answer_attachmentHandler']) &&
+                $this->parameters['answer_attachmentHandler'] !== null
+            ) {
                 $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
             }
 
