@@ -127,7 +127,7 @@ export class UiFaqSearch implements AjaxCallbackObject, DialogCallbackObject {
           searchInput.addEventListener("keyup", (event: KeyboardEvent) => this.search(event));
           searchInput.nextElementSibling?.addEventListener("click", (event: MouseEvent) => this.search(event));
         },
-        onShow: function () {
+        onShow: () => {
           const searchInput = document.getElementById("wcfUiFaqSearchInput");
           if (searchInput == null) {
             return;
