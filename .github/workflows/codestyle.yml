@@ -5,9 +5,29 @@ on:
 
 jobs:
   phpcs:
-      name: PHPCS
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: PHPCS check
-          uses: chekalsky/phpcs-action@v1
+    name: PHPCS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHPCS check
+        uses: chekalsky/phpcs-action@v1
+  ts:
+    name: TS Prettier
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: "16"
+        cache: "npm"
+    - run: npm install
+    - name: Run prettier
+      run: |
+        shopt -s globstar
+        npx prettier -w ts/**/*.ts
+    - run: echo "::add-matcher::.github/diff.json"
+    - name: Show diff
+      run: |
+        git checkout -- package-lock.json
+        git diff --exit-code
