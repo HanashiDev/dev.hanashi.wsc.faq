@@ -41,18 +41,7 @@
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
-		<instruction type="script" run="standalone">acp/install_dev.tkirch.wsc.faq_1.4.0.php</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.3.0">
-		<!-- files -->
-		<instruction type="file"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="template"/>
-
-		<!-- xml-->
-		<instruction type="language"/>
-		<instruction type="script" run="standalone">acp/update_dev.tkirch.wsc.faq_1.4.0.php</instruction>
+		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="1.4.0">
