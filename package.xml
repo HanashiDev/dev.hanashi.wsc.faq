@@ -15,7 +15,7 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="5.2.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="5.4.16">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/dev.hanashi.wsc.wysiwyg-i18n-form.tar">dev.hanashi.wsc.wysiwyg-i18n-form</requiredpackage>
 	</requiredpackages>
 
