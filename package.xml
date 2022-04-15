@@ -50,6 +50,7 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
+		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_1.5.0.php</instruction>
 	</instructions>
 
 	<!-- alpha -->

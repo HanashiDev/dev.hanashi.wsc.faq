@@ -7,6 +7,7 @@ use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
 class QuestionAction extends AbstractDatabaseObjectAction implements IToggleAction
@@ -39,17 +40,22 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
      */
     public function create()
     {
+        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
+            $answers = '';
             foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
                 $processor = new HtmlInputProcessor();
                 $processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
                 $this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+                $answers .= $answer;
             }
+            $inputProcessor = new HtmlInputProcessor();
+            $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
         } else {
-            $processor = new HtmlInputProcessor();
-            $processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
-            $this->parameters['data']['answer'] = $processor->getHtml();
+            $inputProcessor = new HtmlInputProcessor();
+            $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['answer'] = $inputProcessor->getHtml();
         }
 
         //get question
@@ -75,11 +81,6 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
             $updateData['answer'] = 'wcf.faq.question.answer' . $question->questionID;
         }
 
-        //update question
-        if (!empty($updateData)) {
-            $questionEditor->update($updateData);
-        }
-
         if (
             isset($this->parameters['answer_attachmentHandler']) &&
             $this->parameters['answer_attachmentHandler'] !== null
@@ -87,8 +88,20 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
             $this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
         }
 
-        if (!empty($this->parameters['answer_htmlInputProcessor'])) {
-            $this->parameters['answer_htmlInputProcessor']->setObjectID($question->questionID);
+        if (!empty($inputProcessor)) {
+            $inputProcessor->setObjectID($question->questionID);
+            if (
+                MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                    $inputProcessor
+                )
+            ) {
+                $updateData['hasEmbeddedObjects'] = 1;
+            }
+        }
+
+        //update question
+        if (!empty($updateData)) {
+            $questionEditor->update($updateData);
         }
 
         return $question;
@@ -108,17 +121,22 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
             );
         }
 
+        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
+            $answers = '';
             foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
                 $processor = new HtmlInputProcessor();
                 $processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
                 $this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
+                $answers .= $answer;
             }
+            $inputProcessor = new HtmlInputProcessor();
+            $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
         } else {
-            $processor = new HtmlInputProcessor();
-            $processor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
-            $this->parameters['data']['answer'] = $processor->getHtml();
+            $inputProcessor = new HtmlInputProcessor();
+            $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['answer'] = $inputProcessor->getHtml();
         }
 
         parent::update();
@@ -173,10 +191,6 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
                 }
             }
 
-            if (!empty($updateData)) {
-                $object->update($updateData);
-            }
-
             if (
                 isset($this->parameters['answer_attachmentHandler']) &&
                 $this->parameters['answer_attachmentHandler'] !== null
@@ -184,8 +198,20 @@ class QuestionAction extends AbstractDatabaseObjectAction implements IToggleActi
                 $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
             }
 
-            if (!empty($this->parameters['answer_htmlInputProcessor'])) {
-                $this->parameters['answer_htmlInputProcessor']->setObjectID($object->questionID);
+            if (!empty($inputProcessor)) {
+                $inputProcessor->setObjectID($object->questionID);
+
+                if (
+                    $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                        $inputProcessor
+                    )
+                ) {
+                    $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
+                }
+            }
+
+            if (!empty($updateData)) {
+                $object->update($updateData);
             }
         }
     }

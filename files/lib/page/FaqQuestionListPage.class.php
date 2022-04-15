@@ -5,6 +5,7 @@ namespace wcf\page;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
 class FaqQuestionListPage extends AbstractPage
@@ -23,6 +24,7 @@ class FaqQuestionListPage extends AbstractPage
 
         //get categories
         $faqs = [];
+        $embedObjectIDs = [];
         $categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
         foreach ($categoryTree->getIterator() as $category) {
             if (!$category->isAccessible()) {
@@ -47,6 +49,9 @@ class FaqQuestionListPage extends AbstractPage
                 $question = $question;
                 if ($question->isAccessible()) {
                     $faq['questions'][] = $question;
+                    if ($question->hasEmbeddedObjects) {
+                        $embedObjectIDs[] = $question->questionID;
+                    }
                 }
             }
 
@@ -55,6 +60,13 @@ class FaqQuestionListPage extends AbstractPage
             } else {
                 $faqs[$category->categoryID] = $faq;
             }
+        }
+
+        if (count($embedObjectIDs)) {
+            MessageEmbeddedObjectManager::getInstance()->loadObjects(
+                'dev.tkirch.wsc.faq.question',
+                $embedObjectIDs
+            );
         }
 
         WCF::getTPL()->assign([

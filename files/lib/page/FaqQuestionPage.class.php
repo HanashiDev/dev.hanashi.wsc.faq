@@ -4,6 +4,7 @@ namespace wcf\page;
 
 use wcf\data\faq\Question;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
 class FaqQuestionPage extends AbstractPage
@@ -30,6 +31,11 @@ class FaqQuestionPage extends AbstractPage
             if (!$this->question->questionID || !$this->question->isAccessible()) {
                 throw new IllegalLinkException();
             }
+
+            MessageEmbeddedObjectManager::getInstance()->loadObjects(
+                'dev.tkirch.wsc.faq.question',
+                [$this->question->questionID]
+            );
         } else {
             throw new IllegalLinkException();
         }
