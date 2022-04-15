@@ -14,8 +14,6 @@ export class RedactorFaqQuestion {
 
     const faqSearch = new UiFaqSearch((questionID: number) => this.insertBBCode(questionID));
     faqSearch.open();
-
-    // UiFaqSearch.open(this._insert.bind(this));
   }
 
   private insertBBCode(questionID: number): void {
