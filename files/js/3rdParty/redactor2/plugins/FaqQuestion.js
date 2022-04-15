@@ -3,11 +3,11 @@ $.Redactor.prototype.FaqQuestion = function() {
 	
 	return {
 		init: function() {
-            var button = this.button.add('faqQuestion', '');
+            const button = this.button.add('faqQuestion', '');
 			
-			require(['TKirch/Redactor/Faq/Question'], (function (RedactorFaqQuestion) {
+			require(['TKirch/Redactor/Faq/Question'], ({ RedactorFaqQuestion }) => {
 				new RedactorFaqQuestion(this, button[0]);
-			}).bind(this));
+			});
 		}
 	};
 };
