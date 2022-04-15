@@ -136,7 +136,7 @@
 				options.updatePageNumber = -1;
 			{/if}
 		{else}
-			options.emptyMessage = '{lang}wcf.global.noItems{/lang}';
+			options.emptyMessage = '{jslang}wcf.global.noItems{/jslang}';
 		{/if}
 
 		new WCF.Table.EmptyTableHandler($('#questionTableContainer'), 'jsQuestionRow', options);

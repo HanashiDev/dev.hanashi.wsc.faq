@@ -5,11 +5,9 @@ use wcf\system\database\table\DatabaseTable;
 use wcf\system\database\table\column\ObjectIdDatabaseTableColumn;
 use wcf\system\database\table\column\TextDatabaseTableColumn;
 use wcf\system\database\table\index\DatabaseTableForeignKey;
-use wcf\system\database\table\DatabaseTableChangeProcessor;
 use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
-use wcf\system\WCF;
 
-$tables = [
+return [
     DatabaseTable::create('wcf1_faq_questions')
         ->columns([
             ObjectIdDatabaseTableColumn::create('questionID'),
@@ -28,10 +26,3 @@ $tables = [
                 ->onDelete('CASCADE')
         ])
 ];
-
-(new DatabaseTableChangeProcessor(
-    $this->installation->getPackage(),
-    $tables,
-    WCF::getDB()->getEditor()
-)
-)->process();
