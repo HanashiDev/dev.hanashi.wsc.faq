@@ -111,6 +111,10 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
             }
         }
 
+        if (empty($languageVariables)) {
+            return [];
+        }
+
         $list = new LanguageItemList();
         $list->getConditionBuilder()->add('languageItem IN (?)', [$languageVariables]);
         $list->readObjects();
