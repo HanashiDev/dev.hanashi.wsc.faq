@@ -1,12 +1,21 @@
 #!/bin/bash
-rm -rf dev.tkirch.wsc.faq.tar
-rm -rf files.tar
-rm -rf templates.tar
-rm -rf acptemplates.tar
-7z a -ttar -mx=9 files.tar ./files/*
-7z a -ttar -mx=9 acptemplates.tar ./acptemplates/*
-7z a -ttar -mx=9 templates.tar ./templates/*
-7z a -ttar -mx=9 dev.tkirch.wsc.faq.tar ./* -x!dev.tkirch.wsc.faq.tar -x!files -x!files_wcf -x!templates -x!acptemplates -x!make.bat -x!packages -x!README.md -x!.git -x!.gitignore -x!.travis.yml
-rm -rf files.tar
-rm -rf templates.tar
-rm -rf acptemplates.tar
+PACKAGE_NAME=dev.tkirch.wsc.faq
+PACKAGE_TYPES=(acptemplates files templates)
+
+rm -rf files/js/TKirch/*
+tsc --build
+
+for i in "${PACKAGE_TYPES[@]}"
+do
+    rm -rf ${i}.tar
+    7z a -ttar -mx=9 ${i}.tar ./${i}/*
+done
+
+rm -rf ${PACKAGE_NAME}.tar ${PACKAGE_NAME}.tar.gz
+7z a -ttar -mx=9 ${PACKAGE_NAME}.tar ./* -x!acptemplates -x!files -x!templates -x!${PACKAGE_NAME}.tar -x!${PACKAGE_NAME}.tar.gz -x!make.sh -x!make.bat -x!ts -x!node_modules -x!package-lock.json -x!package.json -x!tsconfig.json -x!README.md -x!.* -x!README.md
+
+for i in "${PACKAGE_TYPES[@]}"
+do
+    rm -rf ${i}.tar
+done
+
