@@ -1,7 +1,8 @@
-name: PHPCS check
+name: Codestyle check
 
 on:
   push:
+  pull_request:
 
 jobs:
   phpcs:
