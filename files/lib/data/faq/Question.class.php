@@ -7,6 +7,7 @@ use wcf\data\category\Category;
 use wcf\data\faq\category\FaqCategory;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
+use wcf\data\search\ICustomIconSearchResultObject;
 use wcf\data\search\ISearchResultObject;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
@@ -14,7 +15,7 @@ use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
-class Question extends DatabaseObject implements IRouteController, ISearchResultObject
+class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController, ISearchResultObject
 {
     protected $category;
 
@@ -160,5 +161,13 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
     public function getContainerLink()
     {
         return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomSearchResultIcon()
+    {
+        return 'fa-question-circle-o';
     }
 }
