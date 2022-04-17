@@ -21,6 +21,7 @@
             <controller>wcf\page\FaqQuestionPage</controller>
             <name language="de">FAQ Frage</name>
             <name language="en">FAQ Question</name>
+            <parent>dev.tkirch.wsc.faq.FaqQuestionList</parent>
             <permissions>user.faq.canViewFAQ</permissions>
             <allowSpidersToIndex>1</allowSpidersToIndex>
 
