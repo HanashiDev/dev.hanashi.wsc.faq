@@ -8,14 +8,13 @@ use wcf\data\faq\category\FaqCategory;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
 use wcf\data\search\ICustomIconSearchResultObject;
-use wcf\data\search\ISearchResultObject;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
-class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController, ISearchResultObject
+class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
 {
     protected $category;
 
