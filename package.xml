@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename>Simple FAQ</packagename>
 		<packagename language="de">Simple FAQ</packagename>
-		<packagedescription>Add a FAQ to your WSC.</packagedescription>
-		<packagedescription language="de">Fügt ein FAQ in deinem WSC hinzu.</packagedescription>
+		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
+		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
 		<version>1.5.0 Alpha 1</version>
 		<date>2022-04-22</date>
 	</packageinformation>
