@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install 7zip
+        run: |
+          sudo apt-get install -y p7zip p7zip-full
+      - name: Execute build
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}/.make.sh"
+          "${GITHUB_WORKSPACE}/.make.sh"
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: "./dev.tkirch.wsc.faq.tar"
+          asset_name: "dev.tkirch.wsc.faq.tar"
+          asset_content_type: application/x-tar
