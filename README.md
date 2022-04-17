@@ -32,7 +32,7 @@ We use [SemVer](http://semver.org/) for versioning. For available versions, see 
 
 ## Authors
 
-* **Titus Kirch** - *Main development* - [TitusKirch](https://github.com/TitusKirch)
+* **Titus Kirch** - *Development* - [TitusKirch](https://github.com/TitusKirch)
 * **Hanashi** - *Development* - [Hanashi](https://github.com/Hanashi)
 * **Niklas** - *Development* - [Krymonota](https://github.com/Krymonota)
 
