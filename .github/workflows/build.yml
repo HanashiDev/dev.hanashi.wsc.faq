@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  zip-files:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
