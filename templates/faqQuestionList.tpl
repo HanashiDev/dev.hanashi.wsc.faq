@@ -65,21 +65,25 @@
 </footer>
 
 <script data-relocate="true">
-	$(document).ready(function(){
-		$(".collapsibleQuestion").click(function(event){
-			var setOpen = true;
-			if($(this).parent().hasClass('open')) {
-				setOpen = false
-			}
-			$(".answer").each(function(){
-				$(this).hide(200);
-				$(this).parent().removeClass('open');
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelectorAll('.collapsibleQuestion').forEach(collapsibleQuestion => {
+			collapsibleQuestion.addEventListener('click', () => {
+				let currentAnswer = collapsibleQuestion.nextElementSibling;
+				let isOpen = collapsibleQuestion.parentElement.classList.contains('open');
+
+				document.querySelectorAll('.answer').forEach(answer => {
+					let questionContainer = answer.parentElement;
+
+					if (answer.isEqualNode(currentAnswer) && !isOpen) {
+						questionContainer.classList.add('open');
+						$(answer).show(200);
+					} else {
+						questionContainer.classList.remove('open');
+						$(answer).hide(200);
+					}
+				});
 			});
-			if(setOpen) {
-				$(this).parent().find(".answer").show(200);
-				$(this).parent().addClass('open');
-			}
-		});;
+		});
 	});
 </script>
 
