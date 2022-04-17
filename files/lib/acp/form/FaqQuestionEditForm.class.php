@@ -29,6 +29,8 @@ class FaqQuestionEditForm extends FaqQuestionAddForm
             if (!$this->formObject->questionID) {
                 throw new IllegalLinkException();
             }
+        } else {
+            throw new IllegalLinkException();
         }
     }
 }
