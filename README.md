@@ -21,7 +21,7 @@
 
 ## About the project
 
-Add a FAQ to your WSC.
+A simple and powerful FAQ for your WSC.
 
 ## Contributing
 There are many ways to help this open source project. Write tutorials, improve documentation, share bugs with others, make feature requests, or just write code. We look forward to every contribution.
