@@ -24,14 +24,14 @@
 			{assign var='attachmentList' value=$faq['attachments']}
 
 			<div class="section faq">
-				<h1>{$faq['title']}</h1>
+				<h2>{$faq['title']}</h2>
 
 				{if $faq['questions']|isset}
 					{foreach from=$faq['questions'] item=question}
 						{assign var='objectID' value=$question->questionID}
 
 						<div class="question jsQuestion">
-							<header>{$question->getTitle()}
+							<div class="collapsibleQuestion">{$question->getTitle()}
 								{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
 									<div class="actions">
 										{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
@@ -43,7 +43,7 @@
 										{/if}
 									</div>
 								{/if}
-							</header>
+							</div>
 							<div class="answer" id="answer-{$question->questionID}">
 								<div class="htmlContent">
 									{@$question->getFormattedOutput()}
@@ -61,13 +61,13 @@
 							{assign var='attachmentList' value=$sub['attachments']}
 
 							<div class="sub">
-								<h1>{$sub['title']}</h1>
+								<h2>{$sub['title']}</h2>
 
 								{foreach from=$sub['questions'] item=question}
 									{assign var='objectID' value=$question->questionID}
 
 									<div class="question jsQuestion">
-										<header>{$question->getTitle()}
+										<div class="collapsibleQuestion">{$question->getTitle()}
 											{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
 												<div class="actions">
 													{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
@@ -78,7 +78,7 @@
 													{/if}
 												</div>
 											{/if}
-										</header>
+										</div>
 										<div class="answer" id="answer-{$question->questionID}">
 											<div class="htmlContent">
 												{@$question->getFormattedOutput()}
@@ -111,7 +111,7 @@
 
 <script data-relocate="true">
 	$(document).ready(function(){
-		$(".question > header").click(function(event){
+		$(".collapsibleQuestion").click(function(event){
 			var setOpen = true;
 			if($(this).parent().hasClass('open')) {
 				setOpen = false

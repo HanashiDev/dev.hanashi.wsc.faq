@@ -1,18 +1,18 @@
 .faq {
-	> h1 {
+	> h2 {
     	font-size: 1.5rem;
 		margin-bottom: 8px;
 	}
 	> .sub {
 		margin-left: 16px;
 		margin-bottom: 8px;
-		> h1 {
+		> h2 {
 			font-size: 1.2rem;
 			margin-bottom: 8px;
 		}
 	}
 	.question {
-		> header {
+		> .collapsibleQuestion {
 			font-size: 1.2rem;
 			cursor: pointer;
 			margin-bottom: 8px;
@@ -33,7 +33,7 @@
 			margin-left: 10px;
 		}
 		&.open {
-			> header {
+			> .collapsibleQuestion {
 				&::before {
 					transform: rotate(90deg);
 				}
