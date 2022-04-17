@@ -71,6 +71,6 @@
 
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Suchindex für FAQ aktualisieren]]></item>
-		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Aktualisiert den Suchindex für FAQ-Einträge]]></item>
+		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Aktualisiert den Suchindex für FAQ-Fragen]]></item>
 	</category>
 </language>
