@@ -58,7 +58,7 @@
 	</category>
 
 	<category name="wcf.faq.bbcode">
-		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Du hast{else}Sie haben{/if} keine Rechte diese FAQ-Frage zu sehen.]]></item>
+		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Du verfügst{else}Sie verfügen{/if} nicht über die notwendigen Zugriffsrechte, um diese FAQ-Frage zu sehen.]]></item>
 	</category>
 
 	<category name="wcf.search.type">
@@ -71,6 +71,6 @@
 
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Suchindex für FAQ aktualisieren]]></item>
-		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Aktualisiert den Suchindex für FAQ-Einträge]]></item>
+		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Aktualisiert den Suchindex für FAQ-Fragen]]></item>
 	</category>
 </language>
