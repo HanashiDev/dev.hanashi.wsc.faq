@@ -9,15 +9,17 @@
 
 ## Table of contents
 
-* [About the project](#about-the-project)
-* [Contributing](#contributing)
-* [Versioning](#versioning)
-* [Authors](#authors)
-* [License](#license)
+- [dev.tkirch.wsc.faq](#devtkirchwscfaq)
+  - [Table of contents](#table-of-contents)
+  - [About the project](#about-the-project)
+  - [Contributing](#contributing)
+  - [Versioning](#versioning)
+  - [Authors](#authors)
+  - [License](#license)
 
 ## About the project
 
-Add a FAQ to your WSC.
+A simple and powerful FAQ for your WSC.
 
 ## Contributing
 There are many ways to help this open source project. Write tutorials, improve documentation, share bugs with others, make feature requests, or just write code. We look forward to every contribution.
