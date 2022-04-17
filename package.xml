@@ -50,6 +50,11 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
+		
+		<!-- xml-->
+		<instruction type="objectType"/>
+		<instruction type="language"/>
+		<instruction type="templateListener"/>
 		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_1.5.0.php</instruction>
 	</instructions>
 
