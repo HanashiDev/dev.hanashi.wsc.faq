@@ -60,4 +60,17 @@
 	<category name="wcf.faq.bbcode">
 		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You are not authorized to view this FAQ question.]]></item>
 	</category>
+
+	<category name="wcf.search.type">
+		<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
+	</category>
+
+	<category name="wcf.search.object">
+		<item name="wcf.search.object.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
+	</category>
+
+	<category name="wcf.acp.rebuildData">
+		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Update search index for FAQ]]></item>
+		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Updates the search index for FAQ entries]]></item>
+	</category>
 </language>

@@ -10,6 +10,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
+use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 
 class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
@@ -82,6 +83,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             );
             $updateData['answer'] = 'wcf.faq.question.answer' . $question->questionID;
         }
+        $this->updateSearchIndex($question);
 
         if (
             isset($this->parameters['answer_attachmentHandler']) &&
@@ -163,6 +165,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                 );
                 $updateData['answer'] = 'wcf.faq.question.answer' . $object->questionID;
             }
+            $this->updateSearchIndex($object);
 
             //update show order
             if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
@@ -214,6 +217,57 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
             if (!empty($updateData)) {
                 $object->update($updateData);
+            }
+        }
+    }
+
+    protected function updateSearchIndex($object)
+    {
+        if (isset($this->parameters['answer_i18n'])) {
+            foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
+                $title = '';
+                if (isset($this->parameters['question_i18n'][$languageID])) {
+                    $title = $this->parameters['question_i18n'][$languageID];
+                } elseif (isset($this->parameters['data']['question'])) {
+                    $title = $this->parameters['data']['question'];
+                }
+
+                SearchIndexManager::getInstance()->set(
+                    'dev.tkirch.wsc.faq.question',
+                    $object->questionID,
+                    $answer,
+                    $title,
+                    \TIME_NOW,
+                    0,
+                    '',
+                    $languageID ?: null
+                );
+            }
+        } else {
+            if (isset($this->parameters['question_i18n'])) {
+                foreach ($this->parameters['question_i18n'] as $languageID => $question) {
+                    SearchIndexManager::getInstance()->set(
+                        'dev.tkirch.wsc.faq.question',
+                        $object->questionID,
+                        $this->parameters['data']['answer'],
+                        $question,
+                        \TIME_NOW,
+                        0,
+                        '',
+                        $languageID ?: null
+                    );
+                }
+            } else {
+                SearchIndexManager::getInstance()->set(
+                    'dev.tkirch.wsc.faq.question',
+                    $object->questionID,
+                    $this->parameters['data']['answer'],
+                    $this->parameters['data']['question'],
+                    \TIME_NOW,
+                    0,
+                    '',
+                    null
+                );
             }
         }
     }

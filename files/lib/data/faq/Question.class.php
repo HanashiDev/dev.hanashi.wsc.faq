@@ -7,11 +7,14 @@ use wcf\data\category\Category;
 use wcf\data\faq\category\FaqCategory;
 use wcf\data\user\User;
 use wcf\data\DatabaseObject;
+use wcf\data\search\ICustomIconSearchResultObject;
+use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
 use wcf\system\request\IRouteController;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
-class Question extends DatabaseObject implements IRouteController
+class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
 {
     protected $category;
 
@@ -91,5 +94,79 @@ class Question extends DatabaseObject implements IRouteController
         }
 
         return $this->attachmentList;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUserProfile()
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSubject()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTime()
+    {
+        return 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLink($query = '')
+    {
+        return LinkHandler::getInstance()->getControllerLink(FaqQuestionPage::class, [
+            'object' => $this,
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getObjectTypeName()
+    {
+        return 'dev.tkirch.wsc.faq.question';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFormattedMessage()
+    {
+        return $this->getFormattedOutput();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getContainerTitle()
+    {
+        return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getContainerLink()
+    {
+        return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomSearchResultIcon()
+    {
+        return 'fa-question-circle-o';
     }
 }
