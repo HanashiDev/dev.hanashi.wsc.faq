@@ -67,7 +67,12 @@
 <script data-relocate="true">
 	document.addEventListener('DOMContentLoaded', () => {
 		document.querySelectorAll('.collapsibleQuestion').forEach(collapsibleQuestion => {
-			collapsibleQuestion.addEventListener('click', () => {
+			collapsibleQuestion.addEventListener('click', event => {
+				// do not collapse when clicking action buttons
+				if (!collapsibleQuestion.isEqualNode(event.target)) {
+					return;
+				}
+
 				let currentAnswer = collapsibleQuestion.nextElementSibling;
 				let isOpen = collapsibleQuestion.parentElement.classList.contains('open');
 
