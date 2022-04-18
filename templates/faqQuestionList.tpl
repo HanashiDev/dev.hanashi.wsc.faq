@@ -24,34 +24,11 @@
 			{assign var='attachmentList' value=$faq['attachments']}
 
 			<div class="section faq">
-				<h1>{$faq['title']}</h1>
+				<h2>{$faq['title']}</h2>
 
 				{if $faq['questions']|isset}
 					{foreach from=$faq['questions'] item=question}
-						{assign var='objectID' value=$question->questionID}
-
-						<div class="question jsQuestion">
-							<header>{$question->getTitle()}
-								{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-									<div class="actions">
-										{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
-											<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-											<span class="icon icon16 fa-{if !$question->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$question->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$question->questionID}"></span>
-										{/if}
-										{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-											<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
-										{/if}
-									</div>
-								{/if}
-							</header>
-							<div class="answer" id="answer-{$question->questionID}">
-								<div class="htmlContent">
-									{@$question->getFormattedOutput()}
-								</div>
-
-								{include file='attachments'}
-							</div>
-						</div>
+						{include file='__faqQuestionListEntry'}
 					{/foreach}
 				{/if}
 
@@ -61,32 +38,10 @@
 							{assign var='attachmentList' value=$sub['attachments']}
 
 							<div class="sub">
-								<h1>{$sub['title']}</h1>
+								<h2>{$sub['title']}</h2>
 
 								{foreach from=$sub['questions'] item=question}
-									{assign var='objectID' value=$question->questionID}
-
-									<div class="question jsQuestion">
-										<header>{$question->getTitle()}
-											{if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-												<div class="actions">
-													{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
-														<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-													{/if}
-													{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-														<span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$question->questionID}" data-confirm-message-html="{lang __encode=true}wcf.acp.faq.question.delete.confirmMessage{/lang}"></span>
-													{/if}
-												</div>
-											{/if}
-										</header>
-										<div class="answer" id="answer-{$question->questionID}">
-											<div class="htmlContent">
-												{@$question->getFormattedOutput()}
-											</div>
-
-											{include file='attachments'}
-										</div>
-									</div>
+									{include file='__faqQuestionListEntry'}
 								{/foreach}
 							</div>
 						{/if}
@@ -110,21 +65,25 @@
 </footer>
 
 <script data-relocate="true">
-	$(document).ready(function(){
-		$(".question > header").click(function(event){
-			var setOpen = true;
-			if($(this).parent().hasClass('open')) {
-				setOpen = false
-			}
-			$(".answer").each(function(){
-				$(this).hide(200);
-				$(this).parent().removeClass('open');
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelectorAll('.collapsibleQuestion').forEach(collapsibleQuestion => {
+			collapsibleQuestion.addEventListener('click', () => {
+				let currentAnswer = collapsibleQuestion.nextElementSibling;
+				let isOpen = collapsibleQuestion.parentElement.classList.contains('open');
+
+				document.querySelectorAll('.answer').forEach(answer => {
+					let questionContainer = answer.parentElement;
+
+					if (answer.isEqualNode(currentAnswer) && !isOpen) {
+						questionContainer.classList.add('open');
+						$(answer).show(200);
+					} else {
+						questionContainer.classList.remove('open');
+						$(answer).hide(200);
+					}
+				});
 			});
-			if(setOpen) {
-				$(this).parent().find(".answer").show(200);
-				$(this).parent().addClass('open');
-			}
-		});;
+		});
 	});
 </script>
 
