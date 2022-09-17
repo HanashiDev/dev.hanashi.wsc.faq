@@ -3,9 +3,9 @@
 namespace wcf\data\faq\category;
 
 use wcf\data\category\AbstractDecoratedCategory;
-use wcf\data\user\User;
 use wcf\data\IAccessibleObject;
 use wcf\data\ITitledLinkObject;
+use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\category\CategoryPermissionHandler;
 use wcf\system\WCF;
@@ -19,7 +19,7 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
     /**
      * @inheritDoc
      */
-    public function isAccessible(User $user = null)
+    public function isAccessible(?User $user = null)
     {
         if ($this->getObjectType()->objectType != self::OBJECT_TYPE_NAME) {
             return false;
@@ -28,7 +28,7 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
         return $this->getPermission('canViewFAQ', $user);
     }
 
-    public function getPermission($permission, User $user = null, $isMod = false)
+    public function getPermission($permission, ?User $user = null, $isMod = false)
     {
         if ($user === null) {
             $user = WCF::getUser();
@@ -53,8 +53,10 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
             return WCF::getSession()->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
         } else {
             $userProfile = new UserProfile($user);
+
             return $userProfile->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
         }
+
         return true;
     }
 

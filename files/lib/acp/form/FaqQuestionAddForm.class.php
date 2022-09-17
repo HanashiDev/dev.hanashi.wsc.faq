@@ -53,7 +53,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             $categories[$category->categoryID] = $category;
 
             $childCategories = $category->getAllChildCategories();
-            if (!count($childCategories)) {
+            if (!\count($childCategories)) {
                 continue;
             }
 
@@ -63,7 +63,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             }
         }
 
-        if (!count($categories)) {
+        if (!\count($categories)) {
             throw new NamedUserException(
                 WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory')
             );
@@ -97,14 +97,14 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
                         ->label('wcf.global.showOrder')
                         ->step(1)
                         ->minimum(1)
-                        ->value(QuestionEditor::getShowOrder())
+                        ->value(QuestionEditor::getShowOrder()),
                 ]),
             FormContainer::create('settings')
                 ->label('wcf.acp.faq.question.settings')
                 ->appendChildren([
                     BooleanFormField::create('isDisabled')
-                        ->label('wcf.acp.faq.question.isDisabled')
-                ])
+                        ->label('wcf.acp.faq.question.isDisabled'),
+                ]),
         ]);
     }
 }

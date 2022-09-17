@@ -7,7 +7,6 @@ use wcf\system\WCF;
 
 class QuestionEditor extends DatabaseObjectEditor
 {
-
     /**
      * @inheritDoc
      */
@@ -23,7 +22,7 @@ class QuestionEditor extends DatabaseObjectEditor
     public function updateShowOrder($showOrder)
     {
         if ($showOrder === null) {
-            $showOrder = PHP_INT_MAX;
+            $showOrder = \PHP_INT_MAX;
         }
 
         //check showOrder
@@ -75,6 +74,6 @@ class QuestionEditor extends DatabaseObjectEditor
         $statement->execute();
         $row = $statement->fetchArray();
 
-        return (!empty($row) ? ($row['showOrder'] + 1) : 1);
+        return !empty($row) ? ($row['showOrder'] + 1) : 1;
     }
 }

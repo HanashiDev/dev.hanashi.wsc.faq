@@ -9,5 +9,5 @@ return [
             TinyintDatabaseTableColumn::create('hasEmbeddedObjects')
                 ->notNull()
                 ->defaultValue(0),
-        ])
+        ]),
 ];

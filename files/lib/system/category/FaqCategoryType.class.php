@@ -33,6 +33,6 @@ class FaqCategoryType extends AbstractCategoryType
      * @inheritDoc
      */
     protected $objectTypes = [
-        'com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category'
+        'com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category',
     ];
 }

@@ -106,7 +106,7 @@ class FaqQuestionListPage extends SortablePage
             'categoryID' => $this->categoryID,
             'question' => $this->question,
             'answer' => $this->answer,
-            'categoryNodeList' => (new CategoryNodeTree('dev.tkirch.wsc.faq.category'))->getIterator()
+            'categoryNodeList' => (new CategoryNodeTree('dev.tkirch.wsc.faq.category'))->getIterator(),
         ]);
     }
 }

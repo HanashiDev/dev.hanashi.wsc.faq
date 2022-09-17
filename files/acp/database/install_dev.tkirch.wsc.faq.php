@@ -1,12 +1,12 @@
 <?php
 
 use wcf\system\database\table\column\DefaultFalseBooleanDatabaseTableColumn;
-use wcf\system\database\table\DatabaseTable;
+use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\ObjectIdDatabaseTableColumn;
 use wcf\system\database\table\column\TextDatabaseTableColumn;
-use wcf\system\database\table\index\DatabaseTableForeignKey;
-use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\TinyintDatabaseTableColumn;
+use wcf\system\database\table\DatabaseTable;
+use wcf\system\database\table\index\DatabaseTableForeignKey;
 
 return [
     DatabaseTable::create('wcf1_faq_questions')
@@ -27,6 +27,6 @@ return [
                 ->columns(['categoryID'])
                 ->referencedTable('wcf1_category')
                 ->referencedColumns(['categoryID'])
-                ->onDelete('CASCADE')
-        ])
+                ->onDelete('CASCADE'),
+        ]),
 ];

@@ -2,6 +2,7 @@
 
 namespace wcf\system\bbcode;
 
+use DOMDocument;
 use wcf\data\faq\Question;
 use wcf\system\WCF;
 
@@ -14,7 +15,7 @@ class FaqBBCode extends AbstractBBCode
     {
         $questionID = null;
         if (isset($openingTag['attributes'][0])) {
-            $questionID = intval($openingTag['attributes'][0]);
+            $questionID = \intval($openingTag['attributes'][0]);
         }
 
         if ($questionID === null) {
@@ -29,7 +30,7 @@ class FaqBBCode extends AbstractBBCode
         if ($parser->getOutputType() == 'text/html') {
             $collapse = false;
 
-            $doc = new \DOMDocument();
+            $doc = new DOMDocument();
             @$doc->loadHTML($question->getFormattedOutput());
             if ($doc->getElementsByTagName('p')->length > 5 || $doc->getElementsByTagName('br')->length > 5) {
                 $collapse = true;
@@ -37,7 +38,7 @@ class FaqBBCode extends AbstractBBCode
 
             return WCF::getTPL()->fetch('faqBBCode', 'wcf', [
                 'question' => $question,
-                'collapseQuestion' => $collapse
+                'collapseQuestion' => $collapse,
             ]);
         }
 
