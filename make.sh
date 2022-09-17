@@ -12,7 +12,7 @@ do
 done
 
 rm -rf ${PACKAGE_NAME}.tar ${PACKAGE_NAME}.tar.gz
-7z a -ttar -mx=9 ${PACKAGE_NAME}.tar ./* -x!acptemplates -x!files -x!templates -x!${PACKAGE_NAME}.tar -x!${PACKAGE_NAME}.tar.gz -x!make.sh -x!make.bat -x!ts -x!node_modules -x!package-lock.json -x!package.json -x!tsconfig.json -x!README.md -x!.* -x!README.md
+7z a -ttar -mx=9 ${PACKAGE_NAME}.tar ./* -x!acptemplates -x!files -x!templates -x!${PACKAGE_NAME}.tar -x!${PACKAGE_NAME}.tar.gz -x!make.sh -x!make.bat -x!ts -x!node_modules -x!package-lock.json -x!package.json -x!tsconfig.json -x!README.md -x!.*
 
 for i in "${PACKAGE_TYPES[@]}"
 do
