@@ -5,7 +5,7 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
 		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
-		<version>2.0.0 Alpha 1</version>
+		<version>2.0.0</version>
 		<date>2022-04-17</date>
 	</packageinformation>
 
@@ -31,8 +31,8 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
-		
-		<!-- xml-->
+
+		<!-- xml -->
 		<instruction type="userGroupOption"/>
 		<instruction type="acpMenu"/>
 		<instruction type="bbcode"/>
@@ -42,6 +42,8 @@
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
+
+		<!-- database -->
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
 
@@ -50,27 +52,14 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
-		
-		<!-- xml-->
-		<instruction type="objectType"/>
-		<instruction type="language"/>
-		<instruction type="templateListener"/>
-		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0.php</instruction>
-	</instructions>
 
-	<!-- alpha -->
-	<instructions type="update" fromversion="1.* Alpha *">
-		<instruction type="file"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="template"/>
-		<instruction type="userGroupOption"/>
-		<instruction type="acpMenu"/>
-		<instruction type="bbcode"/>
+		<!-- xml -->
 		<instruction type="objectType"/>
-		<instruction type="aclOption"/>
 		<instruction type="language"/>
 		<instruction type="page"/>
-		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
+
+		<!-- database -->
+		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0.php</instruction>
 	</instructions>
 </package>
