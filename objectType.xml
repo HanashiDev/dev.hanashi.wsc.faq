@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/objectType.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/objectType.xsd">
 	<import>
 		<type>
 			<name>dev.tkirch.wsc.faq.category</name>
@@ -17,7 +17,19 @@
 		<type>
 			<name>dev.tkirch.wsc.faq.question</name>
 			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
-    		<classname>wcf\system\attachment\FaqQuestionAttachmentObjectType</classname>
+			<classname>wcf\system\attachment\FaqQuestionAttachmentObjectType</classname>
+		</type>
+		<type>
+			<name>dev.tkirch.wsc.faq.question</name>
+			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
+			<classname>wcf\system\search\FaqQuestionSearch</classname>
+			<searchindex>wcf1_faq_questions_search_index</searchindex>
+		</type>
+		<type>
+			<name>dev.tkirch.wsc.faq.question.search.index</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+			<classname>wcf\system\worker\FaqQuestionSearchIndexRebuildDataWorker</classname>
+			<nicevalue>200</nicevalue>
 		</type>
 	</import>
 </data>

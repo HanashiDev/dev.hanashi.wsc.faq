@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/page.xsd">
-    <import>
-        <page identifier="dev.tkirch.wsc.faq.FaqQuestionList">
-            <pageType>system</pageType>
-            <controller>wcf\page\FaqQuestionListPage</controller>
-            <name language="de">FAQ</name>
-            <name language="en">FAQ</name>
-            <permissions>user.faq.canViewFAQ</permissions>
-            <allowSpidersToIndex>1</allowSpidersToIndex>
-
-            <content language="en">
-                <title>FAQ</title>
-            </content>
-            <content language="de">
-                <title>FAQ</title>
-            </content>
-        </page>
-    </import>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/page.xsd">
+	<import>
+		<page identifier="dev.tkirch.wsc.faq.FaqQuestionList">
+			<pageType>system</pageType>
+			<controller>wcf\page\FaqQuestionListPage</controller>
+			<name language="de">FAQ</name>
+			<name language="en">FAQ</name>
+			<permissions>user.faq.canViewFAQ</permissions>
+			<allowSpidersToIndex>1</allowSpidersToIndex>
+			<content language="en">
+				<title>FAQ</title>
+			</content>
+			<content language="de">
+				<title>FAQ</title>
+			</content>
+		</page>
+		<page identifier="dev.tkirch.wsc.faq.FaqQuestion">
+			<pageType>system</pageType>
+			<controller>wcf\page\FaqQuestionPage</controller>
+			<name language="de">FAQ-Frage</name>
+			<name language="en">FAQ Question</name>
+			<parent>dev.tkirch.wsc.faq.FaqQuestionList</parent>
+			<permissions>user.faq.canViewFAQ</permissions>
+			<allowSpidersToIndex>1</allowSpidersToIndex>
+			<content language="en">
+				<title>FAQ Question</title>
+			</content>
+			<content language="de">
+				<title>FAQ-Frage</title>
+			</content>
+		</page>
+	</import>
 </data>
