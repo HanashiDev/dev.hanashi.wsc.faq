@@ -4,6 +4,7 @@
 		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
 		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
 		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
+		<item name="wcf.faq.detail"><![CDATA[Frage anzeigen]]></item>
 	</category>
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
