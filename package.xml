@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="dev.tkirch.wsc.faq" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/package.xsd">
+<package xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/package.xsd" name="dev.tkirch.wsc.faq">
 	<packageinformation>
+		<!-- dev.tkirch.wsc.faq -->
 		<packagename>Simple FAQ</packagename>
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
 		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
 		<version>2.0.0</version>
-		<date>2022-04-17</date>
+		<date>2022-09-19</date>
 	</packageinformation>
-
 	<authorinformation>
-		<author>Titus Kirch</author>
-		<authorurl>https://tkirch.dev</authorurl>
+		<author>Hanashi Development, Titus Kirch</author>
+		<authorurl>https://hanashi.dev</authorurl>
 	</authorinformation>
-
 	<requiredpackages>
-		<requiredpackage minversion="5.4.16">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="5.4.22">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.1">dev.hanashi.wsc.wysiwyg-i18n-form</requiredpackage>
 	</requiredpackages>
-
 	<excludedpackages>
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="*">eu.netzlife.wcf.faq</excludedpackage>
 		<excludedpackage version="*">com.kittmedia.wcf.faq</excludedpackage>
 		<excludedpackage version="2.0.0 Alpha 1">dev.hanashi.wsc.wysiwyg-i18n-form</excludedpackage>
 	</excludedpackages>
-
 	<instructions type="install">
-		<!-- files -->
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
-
-		<!-- xml -->
 		<instruction type="userGroupOption"/>
 		<instruction type="acpMenu"/>
 		<instruction type="bbcode"/>
@@ -42,24 +36,16 @@
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
-
-		<!-- database -->
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
-
 	<instructions type="update" fromversion="1.4.0">
-		<!-- files -->
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
-
-		<!-- xml -->
 		<instruction type="objectType"/>
 		<instruction type="language"/>
 		<instruction type="page"/>
 		<instruction type="templateListener"/>
-
-		<!-- database -->
 		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0.php</instruction>
 	</instructions>
 </package>

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/5.4/language.xsd" languagecode="de">
-
 	<category name="wcf.faq">
 		<item name="wcf.faq.question.question.title"><![CDATA[Frage]]></item>
 		<item name="wcf.faq.question.answer.title"><![CDATA[Antwort]]></item>
 		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
 	</category>
-
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
 		<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Kategorien]]></item>
@@ -15,7 +13,6 @@
 		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Frage hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Frage bearbeiten]]></item>
 	</category>
-
 	<category name="wcf.acp.faq">
 		<item name="wcf.acp.faq.question.question"><![CDATA[Frage]]></item>
 		<item name="wcf.acp.faq.category"><![CDATA[Kategorie]]></item>
@@ -26,7 +23,6 @@
 		<item name="wcf.acp.faq.question.settings"><![CDATA[Einstellungen]]></item>
 		<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Frage deaktivieren]]></item>
 	</category>
-
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
 		<item name="wcf.acp.group.option.user.faq.canViewFAQ"><![CDATA[Kann FAQ sehen]]></item>
@@ -40,15 +36,12 @@
 		<item name="wcf.acp.group.option.admin.faq.canDeleteQuestion"><![CDATA[Kann Fragen löschen]]></item>
 		<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Kann Fragen bearbeiten]]></item>
 	</category>
-
 	<category name="wcf.acl.option">
 		<item name="wcf.acl.option.dev.tkirch.wsc.faq.category.canViewFAQ"><![CDATA[Kann FAQ sehen]]></item>
 	</category>
-
 	<category name="wcf.editor.button">
 		<item name="wcf.editor.button.faq"><![CDATA[FAQ-Frage]]></item>
 	</category>
-
 	<category name="wcf.faq.question">
 		<item name="wcf.faq.question.search"><![CDATA[FAQ durchsuchen]]></item>
 		<item name="wcf.faq.question.search.name"><![CDATA[Fragen suchen]]></item>
@@ -56,19 +49,15 @@
 		<item name="wcf.faq.question.search.error.noResults"><![CDATA[Die Suche ergab keine Treffer.]]></item>
 		<item name="wcf.faq.question.search.results"><![CDATA[Suchergebnisse]]></item>
 	</category>
-
 	<category name="wcf.faq.bbcode">
 		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Du verfügst{else}Sie verfügen{/if} nicht über die notwendigen Zugriffsrechte, um diese FAQ-Frage zu sehen.]]></item>
 	</category>
-
 	<category name="wcf.search.type">
 		<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
 	</category>
-
 	<category name="wcf.search.object">
 		<item name="wcf.search.object.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
 	</category>
-
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Suchindex für FAQ aktualisieren]]></item>
 		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Aktualisiert den Suchindex für FAQ-Fragen]]></item>
