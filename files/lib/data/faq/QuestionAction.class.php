@@ -86,8 +86,8 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
         $this->updateSearchIndex($question);
 
         if (
-            isset($this->parameters['answer_attachmentHandler']) &&
-            $this->parameters['answer_attachmentHandler'] !== null
+            isset($this->parameters['answer_attachmentHandler'])
+            && $this->parameters['answer_attachmentHandler'] !== null
         ) {
             $this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
         }
@@ -118,7 +118,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
     public function update()
     {
         //check if showOrder must be updated
-        if (count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
+        if (\count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
             $objectEditor = $this->getObjects()[0];
             $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder(
                 $this->parameters['data']['showOrder']
@@ -179,7 +179,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                     $statement->execute([
                         $object->showOrder,
                         $this->parameters['data']['showOrder'],
-                        $object->questionID
+                        $object->questionID,
                     ]);
                 } elseif ($object->showOrder > $this->parameters['data']['showOrder']) {
                     $sql = "UPDATE  wcf" . WCF_N . "_faq_questions
@@ -191,14 +191,14 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                     $statement->execute([
                         $object->showOrder,
                         $this->parameters['data']['showOrder'],
-                        $object->questionID
+                        $object->questionID,
                     ]);
                 }
             }
 
             if (
-                isset($this->parameters['answer_attachmentHandler']) &&
-                $this->parameters['answer_attachmentHandler'] !== null
+                isset($this->parameters['answer_attachmentHandler'])
+                && $this->parameters['answer_attachmentHandler'] !== null
             ) {
                 $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
             }
@@ -293,7 +293,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
         $statement->execute([
             '%' . $this->parameters['searchString'] . '%',
             '%' . $this->parameters['searchString'] . '%',
-            WCF::getLanguage()->languageID
+            WCF::getLanguage()->languageID,
         ]);
 
         $questionIDs = [];

@@ -62,7 +62,7 @@ class FaqQuestionListPage extends AbstractPage
             }
         }
 
-        if (count($embedObjectIDs)) {
+        if (\count($embedObjectIDs)) {
             MessageEmbeddedObjectManager::getInstance()->loadObjects(
                 'dev.tkirch.wsc.faq.question',
                 $embedObjectIDs
@@ -70,7 +70,7 @@ class FaqQuestionListPage extends AbstractPage
         }
 
         WCF::getTPL()->assign([
-            'faqs' => $faqs
+            'faqs' => $faqs,
         ]);
     }
 }

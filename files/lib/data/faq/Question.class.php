@@ -4,10 +4,10 @@ namespace wcf\data\faq;
 
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
-use wcf\data\faq\category\FaqCategory;
-use wcf\data\user\User;
 use wcf\data\DatabaseObject;
+use wcf\data\faq\category\FaqCategory;
 use wcf\data\search\ICustomIconSearchResultObject;
+use wcf\data\user\User;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
 use wcf\system\request\IRouteController;
@@ -69,10 +69,11 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
             $category = new Category($this->categoryID);
             $this->category = new FaqCategory($category);
         }
+
         return $this->category;
     }
 
-    public function isAccessible(User $user = null)
+    public function isAccessible(?User $user = null)
     {
         if ($this->isDisabled && !WCF::getSession()->getPermission('admin.faq.canViewQuestion')) {
             return false;

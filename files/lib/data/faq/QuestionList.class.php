@@ -7,7 +7,6 @@ use wcf\data\DatabaseObjectList;
 
 class QuestionList extends DatabaseObjectList
 {
-
     /**
      * @inheritDoc
      */
