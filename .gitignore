@@ -2,3 +2,4 @@
 .phpcs-cache
 files/js/TKirch
 node_modules/
+*.cache
