@@ -81,10 +81,10 @@
 
 					if (answer.isEqualNode(currentAnswer) && !isOpen) {
 						questionContainer.classList.add('open');
-						$(answer).show(200);
+						answer.style.display = 'block';
 					} else {
 						questionContainer.classList.remove('open');
-						$(answer).hide(200);
+						answer.style.display = 'none';
 					}
 				});
 			});
