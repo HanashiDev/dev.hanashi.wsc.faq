@@ -42,6 +42,6 @@ class FaqBBCode extends AbstractBBCode
             ]);
         }
 
-        return $question->question . "\n\n" . $question->getPlainOutput();
+        return $question->getTitle() . "\n\n" . $question->getPlainOutput();
     }
 }
