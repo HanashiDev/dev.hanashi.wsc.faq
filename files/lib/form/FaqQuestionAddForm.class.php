@@ -9,6 +9,11 @@ class FaqQuestionAddForm extends \wcf\acp\form\FaqQuestionAddForm
     /**
      * @inheritDoc
      */
+    public $objectEditLinkController = FaqQuestionEditForm::class;
+
+    /**
+     * @inheritDoc
+     */
     public function assignVariables()
     {
         parent::assignVariables();

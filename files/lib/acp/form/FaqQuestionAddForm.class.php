@@ -40,6 +40,11 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
+    public $objectEditLinkController = FaqQuestionEditForm::class;
+
+    /**
+     * @inheritDoc
+     */
     protected function createForm()
     {
         parent::createForm();
