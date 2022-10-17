@@ -14,8 +14,8 @@ jobs:
           sudo apt-get install -y p7zip p7zip-full
       - name: Execute build
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/.make.sh"
-          "${GITHUB_WORKSPACE}/.make.sh"
+          chmod +x "${GITHUB_WORKSPACE}/make.sh"
+          "${GITHUB_WORKSPACE}/make.sh"
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.3

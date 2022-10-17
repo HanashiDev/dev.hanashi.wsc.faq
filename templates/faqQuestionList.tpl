@@ -81,10 +81,10 @@
 
 					if (answer.isEqualNode(currentAnswer) && !isOpen) {
 						questionContainer.classList.add('open');
-						$(answer).show(200);
+						answer.style.display = 'block';
 					} else {
 						questionContainer.classList.remove('open');
-						$(answer).hide(200);
+						answer.style.display = 'none';
 					}
 				});
 			});
@@ -94,14 +94,14 @@
 
 {if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
 	<script data-relocate="true">
-		$(function() {
+		require([], function() {
 			new WCF.Action.Toggle('wcf\\data\\faq\\QuestionAction', '.jsQuestion');
 		});
 	</script>
 {/if}
 {if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
 	<script data-relocate="true">
-		$(function() {
+		require([], function() {
 			new WCF.Action.Delete('wcf\\data\\faq\\QuestionAction', '.jsQuestion');
 		});
 	</script>
