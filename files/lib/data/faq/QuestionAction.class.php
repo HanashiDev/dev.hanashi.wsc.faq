@@ -207,7 +207,8 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
             $inputProcessor->setObjectID($object->questionID);
 
-            if ($object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
+            if (
+                $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
                     $inputProcessor
                 )
             ) {
