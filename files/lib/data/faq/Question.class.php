@@ -14,6 +14,15 @@ use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
+/**
+ * @property-read   int $questionID         unique id of the question
+ * @property-read   string $question        content of the question
+ * @property-read   string $answer          content of the answer
+ * @property-read   int $categoryID         id of the category the question belongs to
+ * @property-read   int $showOrder          sort order of the question
+ * @property-read   int $isDisabled         is `1` if the question is disabled, otherwise `0`
+ * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
+ */
 class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
 {
     protected $category;

@@ -13,6 +13,10 @@ use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 
+/**
+ * @method  QuestionEditor[] getObjects()
+ * @method  QuestionEditor   getSingleObject()
+ */
 class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
 {
     use TDatabaseObjectToggle;
