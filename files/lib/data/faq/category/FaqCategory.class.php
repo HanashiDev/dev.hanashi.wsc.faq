@@ -10,6 +10,13 @@ use wcf\data\user\UserProfile;
 use wcf\system\category\CategoryPermissionHandler;
 use wcf\system\WCF;
 
+/**
+ * @method      FaqCategory[]    getChildCategories()
+ * @method      FaqCategory[]    getAllChildCategories()
+ * @method      FaqCategory      getParentCategory()
+ * @method      FaqCategory[]    getParentCategories()
+ * @method static FaqCategory|null getCategory($categoryID)
+ */
 class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
