@@ -25,7 +25,7 @@ use wcf\system\WCF;
  */
 class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
 {
-    protected $category;
+    protected ?FaqCategory $category = null;
 
     /**
      * @inheritDoc
@@ -37,7 +37,7 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
      */
     protected static $databaseTableIndexName = 'questionID';
 
-    protected $attachmentList;
+    protected ?GroupedAttachmentList $attachmentList = null;
 
     /**
      * @inheritDoc
