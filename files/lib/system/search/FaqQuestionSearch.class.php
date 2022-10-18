@@ -20,10 +20,6 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
         $list->setObjectIDs($objectIDs);
         $list->readObjects();
         foreach ($list->getObjects() as $question) {
-            /**
-             * @var Question
-             */
-            $question = $question;
             if (!$question->isAccessible()) {
                 continue;
             }
