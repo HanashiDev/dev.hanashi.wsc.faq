@@ -58,13 +58,9 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
 
         if ($user->userID === WCF::getSession()->getUser()->userID) {
             return WCF::getSession()->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
-        } else {
-            $userProfile = new UserProfile($user);
-
-            return $userProfile->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
         }
 
-        return true;
+        return (new UserProfile($user))->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
     }
 
     /**
