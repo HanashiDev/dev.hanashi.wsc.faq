@@ -2,7 +2,6 @@
 
 namespace wcf\system\search;
 
-use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
