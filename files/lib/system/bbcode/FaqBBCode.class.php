@@ -27,7 +27,7 @@ class FaqBBCode extends AbstractBBCode
             return '';
         }
 
-        if ($parser->getOutputType() == 'text/html') {
+        if ($parser->getOutputType() === 'text/html') {
             $collapse = false;
 
             $doc = new DOMDocument();
