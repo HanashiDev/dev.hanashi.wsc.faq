@@ -19,7 +19,7 @@ class QuestionList extends DatabaseObjectList
      */
     public $sqlOrderBy = 'showOrder, questionID';
 
-    protected $attachmentList;
+    protected ?GroupedAttachmentList $attachmentList = null;
 
     public function readAttachments()
     {
