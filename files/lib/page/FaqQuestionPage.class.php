@@ -14,10 +14,7 @@ class FaqQuestionPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
-    /**
-     * @var Question
-     */
-    protected $question;
+    protected ?Question $question = null;
 
     /**
      * @inheritDoc

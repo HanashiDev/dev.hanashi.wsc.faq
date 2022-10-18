@@ -9,7 +9,7 @@ use wcf\system\WCF;
 
 class FaqQuestionSearch extends AbstractSearchableObjectType
 {
-    protected $faqCache = [];
+    protected array $faqCache = [];
 
     /**
      * @inheritDoc
