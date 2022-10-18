@@ -17,6 +17,7 @@ class FaqCategoryNodeTree extends CategoryNodeTree
      */
     public function isIncluded(CategoryNode $categoryNode)
     {
+        /** @var FaqCategoryNode $categoryNode */
         return parent::isIncluded($categoryNode) && $categoryNode->isAccessible();
     }
 }
