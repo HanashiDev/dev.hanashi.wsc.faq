@@ -15,7 +15,7 @@ class FaqBBCode extends AbstractBBCode
     {
         $questionID = null;
         if (isset($openingTag['attributes'][0])) {
-            $questionID = \intval($openingTag['attributes'][0]);
+            $questionID = (int)$openingTag['attributes'][0];
         }
 
         if ($questionID === null) {
