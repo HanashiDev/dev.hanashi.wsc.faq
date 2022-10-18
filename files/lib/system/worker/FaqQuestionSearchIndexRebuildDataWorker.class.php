@@ -39,7 +39,7 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
         $languageCache = $this->getLanguageCache();
         /** @var Question $object */
         foreach ($this->objectList as $object) {
-            if (\strpos($object->answer, 'wcf.faq.question.answer') === 0) {
+            if (\str_starts_with($object->answer, 'wcf.faq.question.answer')) {
                 if (!isset($languageCache[$object->answer])) {
                     continue;
                 }
@@ -48,10 +48,10 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
                     $title = '';
                     if (
                         isset($languageCache[$object->question][$languageID])
-                        && \strpos($object->question, 'wcf.faq.question.question') === 0
+                        && \str_starts_with($object->question, 'wcf.faq.question.question')
                     ) {
                         $title = $languageCache[$object->question][$languageID];
-                    } elseif (\strpos($object->question, 'wcf.faq.question.question') !== 0) {
+                    } elseif (\str_starts_with($object->question, 'wcf.faq.question.question')) {
                         $title = $object->question;
                     }
 
@@ -66,7 +66,7 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
                         $languageID ?: null
                     );
                 }
-            } elseif (\strpos($object->question, 'wcf.faq.question.question') === 0) {
+            } elseif (\str_starts_with($object->question, 'wcf.faq.question.question')) {
                 if (!isset($languageCache[$object->question])) {
                     continue;
                 }
@@ -102,10 +102,10 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
         $languageVariables = [];
         /** @var Question $question */
         foreach ($this->objectList as $question) {
-            if (\strpos($question->question, 'wcf.faq.question.question') === 0) {
+            if (\str_starts_with($question->question, 'wcf.faq.question.question')) {
                 $languageVariables[] = $question->question;
             }
-            if (\strpos($question->answer, 'wcf.faq.question.answer') === 0) {
+            if (\str_starts_with($question->answer, 'wcf.faq.question.answer')) {
                 $languageVariables[] = $question->answer;
             }
         }
