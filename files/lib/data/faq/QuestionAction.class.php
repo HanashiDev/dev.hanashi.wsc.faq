@@ -43,11 +43,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
     /**
      * @inheritDoc
-     * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
+     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L49
      */
     public function create()
     {
-        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
             $answers = '';
@@ -117,19 +116,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
     /**
      * @inheritDoc
-     * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
+     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L112
      */
     public function update()
     {
         //check if showOrder must be updated
-        if (\count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
+        if (isset($this->parameters['data']['showOrder']) && \count($this->objects) === 1) {
             $objectEditor = $this->getObjects()[0];
             $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder(
                 $this->parameters['data']['showOrder']
             );
         }
 
-        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
             $answers = '';
@@ -207,16 +205,14 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                 $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
             }
 
-            if (!empty($inputProcessor)) {
-                $inputProcessor->setObjectID($object->questionID);
+            $inputProcessor->setObjectID($object->questionID);
 
-                if (
-                    $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
-                        $inputProcessor
-                    )
-                ) {
-                    $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
-                }
+            if (
+                (bool)$object->hasEmbeddedObjects !== MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                    $inputProcessor
+                )
+            ) {
+                $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
             }
 
             if (!empty($updateData)) {
@@ -247,32 +243,30 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                     $languageID ?: null
                 );
             }
-        } else {
-            if (isset($this->parameters['question_i18n'])) {
-                foreach ($this->parameters['question_i18n'] as $languageID => $question) {
-                    SearchIndexManager::getInstance()->set(
-                        'dev.tkirch.wsc.faq.question',
-                        $object->questionID,
-                        $this->parameters['data']['answer'],
-                        $question,
-                        \TIME_NOW,
-                        0,
-                        '',
-                        $languageID ?: null
-                    );
-                }
-            } else {
+        } elseif (isset($this->parameters['question_i18n'])) {
+            foreach ($this->parameters['question_i18n'] as $languageID => $question) {
                 SearchIndexManager::getInstance()->set(
                     'dev.tkirch.wsc.faq.question',
                     $object->questionID,
                     $this->parameters['data']['answer'],
-                    $this->parameters['data']['question'],
+                    $question,
                     \TIME_NOW,
                     0,
                     '',
-                    null
+                    $languageID ?: null
                 );
             }
+        } else {
+            SearchIndexManager::getInstance()->set(
+                'dev.tkirch.wsc.faq.question',
+                $object->questionID,
+                $this->parameters['data']['answer'],
+                $this->parameters['data']['question'],
+                \TIME_NOW,
+                0,
+                '',
+                null
+            );
         }
     }
 
