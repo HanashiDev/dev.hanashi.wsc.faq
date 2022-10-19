@@ -3,7 +3,6 @@
 namespace wcf\page;
 
 use wcf\data\faq\category\FaqCategoryNodeTree;
-use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
@@ -41,12 +40,6 @@ class FaqQuestionListPage extends AbstractPage
             ];
 
             foreach ($questionList->getObjects() as $question) {
-                /**
-                 * workaround for editor
-                 *
-                 * @var Question
-                 */
-                $question = $question;
                 if ($question->isAccessible()) {
                     $faq['questions'][] = $question;
                     if ($question->hasEmbeddedObjects) {

@@ -5,6 +5,13 @@ namespace wcf\data\faq;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\DatabaseObjectList;
 
+/**
+ * @method  Question        current()
+ * @method  Question[]       getObjects()
+ * @method  Question|null    getSingleObject()
+ * @method  Question|null    search($objectID)
+ * @property    Question[] $objects
+ */
 class QuestionList extends DatabaseObjectList
 {
     /**
@@ -12,7 +19,7 @@ class QuestionList extends DatabaseObjectList
      */
     public $sqlOrderBy = 'showOrder, questionID';
 
-    protected $attachmentList;
+    protected ?GroupedAttachmentList $attachmentList = null;
 
     public function readAttachments()
     {

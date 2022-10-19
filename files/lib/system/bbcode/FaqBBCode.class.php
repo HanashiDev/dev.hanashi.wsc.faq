@@ -15,7 +15,7 @@ class FaqBBCode extends AbstractBBCode
     {
         $questionID = null;
         if (isset($openingTag['attributes'][0])) {
-            $questionID = \intval($openingTag['attributes'][0]);
+            $questionID = (int)$openingTag['attributes'][0];
         }
 
         if ($questionID === null) {
@@ -27,7 +27,7 @@ class FaqBBCode extends AbstractBBCode
             return '';
         }
 
-        if ($parser->getOutputType() == 'text/html') {
+        if ($parser->getOutputType() === 'text/html') {
             $collapse = false;
 
             $doc = new DOMDocument();

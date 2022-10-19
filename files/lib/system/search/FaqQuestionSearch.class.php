@@ -2,14 +2,13 @@
 
 namespace wcf\system\search;
 
-use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
 class FaqQuestionSearch extends AbstractSearchableObjectType
 {
-    protected $faqCache = [];
+    protected array $faqCache = [];
 
     /**
      * @inheritDoc
@@ -20,10 +19,6 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
         $list->setObjectIDs($objectIDs);
         $list->readObjects();
         foreach ($list->getObjects() as $question) {
-            /**
-             * @var Question
-             */
-            $question = $question;
             if (!$question->isAccessible()) {
                 continue;
             }
