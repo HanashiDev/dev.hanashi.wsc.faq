@@ -19,7 +19,7 @@ class QuestionList extends DatabaseObjectList
      */
     public $sqlOrderBy = 'showOrder, questionID';
 
-    protected ?GroupedAttachmentList $attachmentList = null;
+    protected GroupedAttachmentList $attachmentList;
 
     public function readAttachments()
     {
@@ -32,7 +32,7 @@ class QuestionList extends DatabaseObjectList
 
     public function getAttachmentList()
     {
-        if ($this->attachmentList === null) {
+        if (!isset($this->attachmentList)) {
             $this->readAttachments();
         }
 
