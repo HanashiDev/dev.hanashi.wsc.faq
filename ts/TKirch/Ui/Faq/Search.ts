@@ -74,7 +74,7 @@ export class UiFaqSearch implements AjaxCallbackObject, DialogCallbackObject {
 
       html += "<li>";
       html += `<div class="containerHeadline pointer" data-question-id="${question.questionID}">`;
-      html += `<h3>${StringUtil.escapeHTML(question.question)}</h3>`;
+      html += `<h3>${StringUtil.escapeHTML(question.question as string)}</h3>`;
       html += "</div>";
       html += "</li>";
     }
