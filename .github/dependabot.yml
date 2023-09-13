@@ -9,13 +9,13 @@ updates:
     directory: "/"
     schedule:
      interval: "daily"
-    target-branch: "next"
+    target-branch: "main"
     reviewers:
       - "Hanashi"
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
-    target-branch: "next"
+      interval: "weekly"
+    target-branch: "main"
     reviewers:
       - "Hanashi"

@@ -1,4 +1,4 @@
-name: Codestyle check
+name: Code Style
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     name: PHP
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup PHP with tools
       uses: shivammathur/setup-php@v2
       with:
@@ -24,7 +24,7 @@ jobs:
     name: TS Prettier
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up node.js
       uses: actions/setup-node@v3
       with:

@@ -12,9 +12,9 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v2.4.2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3.5.0
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
 
