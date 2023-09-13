@@ -6,19 +6,19 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
 		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
-		<version>2.0.0</version>
-		<date>2022-09-19</date>
+		<version>2.1.0</version>
+		<date>2023-09-13</date>
 	</packageinformation>
 	<authorinformation>
 		<author>Hanashi Development, Titus Kirch</author>
 		<authorurl>https://hanashi.dev</authorurl>
 	</authorinformation>
 	<requiredpackages>
-		<requiredpackage minversion="5.5.5">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="6.0.0 Beta 4">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.1">dev.hanashi.wsc.wysiwyg-i18n-form</requiredpackage>
 	</requiredpackages>
 	<excludedpackages>
-		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="7.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="*">eu.netzlife.wcf.faq</excludedpackage>
 		<excludedpackage version="*">com.kittmedia.wcf.faq</excludedpackage>
 		<excludedpackage version="2.0.0 Alpha 1">dev.hanashi.wsc.wysiwyg-i18n-form</excludedpackage>
@@ -38,14 +38,7 @@
 		<instruction type="templateListener"/>
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
-	<instructions type="update" fromversion="1.4.0">
+	<instructions type="update" fromversion="2.0.0">
 		<instruction type="file"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="template"/>
-		<instruction type="objectType"/>
-		<instruction type="language"/>
-		<instruction type="page"/>
-		<instruction type="templateListener"/>
-		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0.php</instruction>
 	</instructions>
 </package>
