@@ -6,7 +6,6 @@ use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\DatabaseObject;
 use wcf\data\faq\category\FaqCategory;
-use wcf\data\search\ICustomIconSearchResultObject;
 use wcf\data\user\User;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
@@ -23,7 +22,7 @@ use wcf\system\WCF;
  * @property-read   int $isDisabled         is `1` if the question is disabled, otherwise `0`
  * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
  */
-class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
+class Question extends DatabaseObject implements IRouteController
 {
     protected FaqCategory $category;
 
@@ -42,7 +41,7 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
     /**
      * @inheritDoc
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return WCF::getLanguage()->get($this->question);
     }
@@ -97,7 +96,7 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
 
     public function getAttachments()
     {
-        if (MODULE_ATTACHMENT && empty($this->attachmentList)) {
+        if (empty($this->attachmentList)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
             $this->attachmentList->getConditionBuilder()->add('attachment.objectID = ?', [$this->questionID]);
             $this->attachmentList->readObjects();

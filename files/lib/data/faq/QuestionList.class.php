@@ -23,7 +23,7 @@ class QuestionList extends DatabaseObjectList
 
     public function readAttachments()
     {
-        if (MODULE_ATTACHMENT && !empty($this->objectIDs)) {
+        if (!empty($this->objectIDs)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
             $this->attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', [$this->objectIDs]);
             $this->attachmentList->readObjects();

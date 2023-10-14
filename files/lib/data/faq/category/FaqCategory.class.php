@@ -66,7 +66,7 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
     /**
      * @inheritDoc
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return WCF::getLanguage()->get($this->title);
     }
@@ -79,8 +79,8 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
     /**
      * @inheritDoc
      */
-    public function getLink()
+    public function getLink(): string
     {
-        return null;
+        return '';
     }
 }
