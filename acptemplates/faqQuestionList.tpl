@@ -89,7 +89,6 @@
 						<a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a>
 
 						<span class="statusDisplay sortableButtonContainer">
-							<span class="icon icon16 fa-arrows sortableNodeHandle"></span>
 							{objectAction action="toggle" isDisabled=$question->isDisabled}
 							<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">{icon name='pencil' size=16}</a>
 							{objectAction action="delete" objectTitle=$question->getTitle()}
