@@ -21,6 +21,9 @@ return [
             TinyintDatabaseTableColumn::create('hasEmbeddedObjects')
                 ->notNull()
                 ->defaultValue(0),
+            TinyintDatabaseTableColumn::create('isMultilingual')
+                ->notNull()
+                ->defaultValue(0),
         ])
         ->foreignKeys([
             DatabaseTableForeignKey::create()

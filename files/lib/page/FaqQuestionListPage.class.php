@@ -14,6 +14,20 @@ class FaqQuestionListPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
+    public $showFaqAddDialog = 0;
+
+    /**
+     * @inheritDoc
+     */
+    public function readParameters()
+    {
+        parent::readParameters();
+
+        if (!empty($_REQUEST['showFaqAddDialog'])) {
+            $this->showFaqAddDialog = 1;
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -34,7 +48,7 @@ class FaqQuestionListPage extends AbstractPage
             $questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
             $questionList->readObjects();
 
-            if (!count($questionList)) {
+            if (!\count($questionList)) {
                 continue;
             }
 
@@ -68,6 +82,7 @@ class FaqQuestionListPage extends AbstractPage
 
         WCF::getTPL()->assign([
             'faqs' => $faqs,
+            'showFaqAddDialog' => $this->showFaqAddDialog,
         ]);
     }
 }

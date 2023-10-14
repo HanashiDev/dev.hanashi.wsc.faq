@@ -92,4 +92,6 @@
 	});
 </script>
 
+{include file='faqQuestionAddDialog'}
+
 {include file='footer'}

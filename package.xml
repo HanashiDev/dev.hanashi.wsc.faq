@@ -39,5 +39,7 @@
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
 		<instruction type="acpMenu"/>
+		<instruction type="database" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0_step1.php</instruction>
+		<instruction type="script" run="standalone">acp/database/update_dev.tkirch.wsc.faq_2.0.0_step2.php</instruction>
 	</instructions>
 </package>

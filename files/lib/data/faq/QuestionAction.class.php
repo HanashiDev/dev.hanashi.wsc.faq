@@ -58,6 +58,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             }
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['isMultilingual'] = 1;
         } else {
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
@@ -139,6 +140,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             }
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['isMultilingual'] = 1;
         } else {
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);

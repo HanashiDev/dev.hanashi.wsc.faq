@@ -21,7 +21,9 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 
-    protected $userPermissions = [];
+    protected array $userPermissions = [];
+
+    private bool $prefix = false;
 
     /**
      * @inheritDoc
@@ -68,12 +70,12 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
      */
     public function getTitle(): string
     {
-        return WCF::getLanguage()->get($this->title);
+        return ($this->prefix ? '&nbsp;&nbsp;' : '') . WCF::getLanguage()->get($this->title);
     }
 
-    public function setTitle($title)
+    public function setPrefix($prefix = true)
     {
-        $this->title = $title;
+        $this->prefix = $prefix;
     }
 
     /**
