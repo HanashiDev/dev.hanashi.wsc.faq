@@ -28,11 +28,11 @@ class FaqSearchAction implements RequestHandlerInterface
             );
 
             $sql = "
-                SELECT		    faq_questions.questionID
-                FROM			wcf1_faq_questions faq_questions
-                LEFT JOIN		wcf1_language_item language_item
+                SELECT          faq_questions.questionID
+                FROM            wcf1_faq_questions faq_questions
+                LEFT JOIN       wcf1_language_item language_item
                             ON	language_item.languageItem = faq_questions.question
-                WHERE		    faq_questions.question LIKE ?
+                WHERE           faq_questions.question LIKE ?
                             OR	(
                                     language_item.languageItemValue LIKE ?
                                 AND	language_item.languageID = ?
