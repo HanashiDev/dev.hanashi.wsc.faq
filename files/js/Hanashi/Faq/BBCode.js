@@ -15,7 +15,7 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLa
             }
             (0, Event_1.listenToCkeditor)(element).setupConfiguration(({ configuration }) => {
                 configuration.woltlabBbcode?.push({
-                    icon: "question;false",
+                    icon: "circle-question;false",
                     name: "faq",
                     label: "FAQ-Eintrag", // TODO: lang
                 });
