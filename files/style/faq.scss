@@ -21,10 +21,8 @@
 		> .collapsibleQuestion {
 			font-size: 1.2rem;
 			cursor: pointer;
-			&::before {
-				content: "\f105";
+			.collapseIcon {
 				display: inline-block;
-				font-family: 'FontAwesome';
 				margin-right: 8px;
 				transition: transform 200ms linear 0s;
 			}
@@ -40,7 +38,7 @@
 		}
 		&.open {
 			> .collapsibleQuestion {
-				&::before {
+				.collapseIcon {
 					transform: rotate(90deg);
 				}
 			}

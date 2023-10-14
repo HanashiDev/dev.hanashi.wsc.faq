@@ -7,7 +7,7 @@
 		<nav class="contentHeaderNavigation">
 			<ul>
 				{if $__wcf->session->getPermission('admin.faq.canAddQuestion')}
-					<li><a href="{link controller='FaqQuestionAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.menu.link.faq.questions.add{/lang}</span></a></li>
+					<li><a href="{link controller='FaqQuestionAdd'}{/link}" class="button">{icon name='plus' size=16} <span>{lang}wcf.acp.menu.link.faq.questions.add{/lang}</span></a></li>
 				{/if}
 
 				{event name='contentHeaderNavigation'}
@@ -23,7 +23,7 @@
 		{if ($faq['questions']|isset && $faq['questions']|count) || ($faq['sub']|isset && $faq['sub']|count)}
 			{assign var='attachmentList' value=$faq['attachments']}
 
-			<div class="section faq">
+			<div class="section faq jsObjectActionContainer" data-object-action-class-name="wcf\data\faq\QuestionAction">
 				<h2>{$faq['title']}</h2>
 
 				{if $faq['questions']|isset}
@@ -91,20 +91,5 @@
 		});
 	});
 </script>
-
-{if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
-	<script data-relocate="true">
-		require([], function() {
-			new WCF.Action.Toggle('wcf\\data\\faq\\QuestionAction', '.jsQuestion');
-		});
-	</script>
-{/if}
-{if $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
-	<script data-relocate="true">
-		require([], function() {
-			new WCF.Action.Delete('wcf\\data\\faq\\QuestionAction', '.jsQuestion');
-		});
-	</script>
-{/if}
 
 {include file='footer'}
