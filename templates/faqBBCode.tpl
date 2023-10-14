@@ -1,12 +1,14 @@
 {if $question->isAccessible()}
 	<blockquote class="faqBBcodeBox collapsibleBbcode jsCollapsibleBbcode{if $collapseQuestion} collapsed{/if}">
 		<div class="faqBBcodeBoxIcon">
-			<span class="faqBBcodeBoxFaqSymbol"></span>
+			<span class="faqBBcodeBoxFaqSymbol">
+				{icon name='circle-question' size=32}
+			</span>
 		</div>
 		
 		<div class="faqBBcodeBoxTitle">
 			<span class="faqBBcodeBoxTitle">
-				FAQ: {$question->getTitle()}
+				FAQ: <a href="{$question->getLink()}">{$question->getTitle()}</a>
 			</span>
 		</div>
 		
