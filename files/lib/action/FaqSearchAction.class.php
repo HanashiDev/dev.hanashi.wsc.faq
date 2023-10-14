@@ -4,8 +4,8 @@ namespace wcf\action;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use LogicException;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use wcf\data\faq\QuestionList;
 use wcf\http\Helper;
@@ -17,7 +17,7 @@ class FaqSearchAction implements RequestHandlerInterface
     {
         if ($request->getMethod() === 'GET') {
             return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchDialog'));
-        } else if ($request->getMethod() === 'POST') {
+        } elseif ($request->getMethod() === 'POST') {
             $postParameters = Helper::mapQueryParameters(
                 $request->getParsedBody(),
                 <<<'EOT'
@@ -26,7 +26,7 @@ class FaqSearchAction implements RequestHandlerInterface
                     }
                     EOT
             );
-            
+
             $sql = "
                 SELECT		    faq_questions.questionID
                 FROM			wcf1_faq_questions faq_questions

@@ -6,6 +6,7 @@ use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\DatabaseObject;
 use wcf\data\faq\category\FaqCategory;
+use wcf\data\search\ISearchResultObject;
 use wcf\data\user\User;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
@@ -23,7 +24,7 @@ use wcf\system\WCF;
  * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
  * @property-read   int $isMultilingual
  */
-class Question extends DatabaseObject implements IRouteController
+class Question extends DatabaseObject implements IRouteController, ISearchResultObject
 {
     protected FaqCategory $category;
 
@@ -170,13 +171,5 @@ class Question extends DatabaseObject implements IRouteController
     public function getContainerLink()
     {
         return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCustomSearchResultIcon()
-    {
-        return 'fa-question-circle-o';
     }
 }

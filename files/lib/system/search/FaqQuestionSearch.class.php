@@ -3,17 +3,18 @@
 namespace wcf\system\search;
 
 use wcf\data\faq\QuestionList;
+use wcf\data\search\ISearchResultObject;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
-class FaqQuestionSearch extends AbstractSearchableObjectType
+class FaqQuestionSearch extends AbstractSearchProvider
 {
     protected array $faqCache = [];
 
     /**
      * @inheritDoc
      */
-    public function cacheObjects(array $objectIDs, ?array $additionalData = null)
+    public function cacheObjects(array $objectIDs, ?array $additionalData = null): void
     {
         $list = new QuestionList();
         $list->setObjectIDs($objectIDs);
@@ -29,15 +30,15 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getObject($objectID)
+    public function getObject(int $objectID): ?ISearchResultObject
     {
-        return $this->faqCache[$objectID] ?? null;
+        return $this->faqCache[$objectID];
     }
 
     /**
      * @inheritDoc
      */
-    public function getTableName()
+    public function getTableName(): string
     {
         return 'wcf' . WCF_N . '_faq_questions';
     }
@@ -45,7 +46,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getIDFieldName()
+    public function getIDFieldName(): string
     {
         return $this->getTableName() . '.questionID';
     }
@@ -53,7 +54,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getSubjectFieldName()
+    public function getSubjectFieldName(): string
     {
         return $this->getTableName() . '.question';
     }
@@ -61,7 +62,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getUsernameFieldName()
+    public function getUsernameFieldName(): string
     {
         return $this->getTableName() . '.question';
     }
@@ -69,7 +70,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getTimeFieldName()
+    public function getTimeFieldName(): string
     {
         return $this->getTableName() . '.showOrder';
     }
@@ -77,7 +78,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function getFormTemplateName()
+    public function getFormTemplateName(): string
     {
         return '';
     }
@@ -85,7 +86,7 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     /**
      * @inheritDoc
      */
-    public function isAccessible()
+    public function isAccessible(): bool
     {
         return WCF::getSession()->getPermission('user.faq.canViewFAQ');
     }
@@ -96,5 +97,13 @@ class FaqQuestionSearch extends AbstractSearchableObjectType
     public function setLocation()
     {
         PageLocationManager::getInstance()->addParentLocation('dev.tkirch.wsc.faq.FaqQuestionList');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomIconName(): ?string
+    {
+        return 'circle-question';
     }
 }
