@@ -6,6 +6,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
@@ -89,11 +90,11 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
         }
         $this->updateSearchIndex($question);
 
-        if (
-            isset($this->parameters['answer_attachmentHandler'])
-            && $this->parameters['answer_attachmentHandler'] !== null
-        ) {
-            $this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
+        foreach ($this->parameters as $parameter) {
+            if (!($parameter instanceof AttachmentHandler)) {
+                continue;
+            }
+            $parameter->updateObjectID($question->questionID);
         }
 
         if (!empty($inputProcessor)) {
@@ -200,11 +201,11 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                 }
             }
 
-            if (
-                isset($this->parameters['answer_attachmentHandler'])
-                && $this->parameters['answer_attachmentHandler'] !== null
-            ) {
-                $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
+            foreach ($this->parameters as $parameter) {
+                if (!($parameter instanceof AttachmentHandler)) {
+                    continue;
+                }
+                $parameter->updateObjectID($object->questionID);
             }
 
             $inputProcessor->setObjectID($object->questionID);
