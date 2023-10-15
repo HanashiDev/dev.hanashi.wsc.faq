@@ -5,6 +5,13 @@ namespace wcf\data\faq;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\DatabaseObjectList;
 
+/**
+ * @method  Question        current()
+ * @method  Question[]       getObjects()
+ * @method  Question|null    getSingleObject()
+ * @method  Question|null    search($objectID)
+ * @property    Question[] $objects
+ */
 class QuestionList extends DatabaseObjectList
 {
     /**
@@ -12,11 +19,11 @@ class QuestionList extends DatabaseObjectList
      */
     public $sqlOrderBy = 'showOrder, questionID';
 
-    protected $attachmentList;
+    protected GroupedAttachmentList $attachmentList;
 
     public function readAttachments()
     {
-        if (MODULE_ATTACHMENT && !empty($this->objectIDs)) {
+        if (!empty($this->objectIDs)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
             $this->attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', [$this->objectIDs]);
             $this->attachmentList->readObjects();
@@ -25,7 +32,7 @@ class QuestionList extends DatabaseObjectList
 
     public function getAttachmentList()
     {
-        if ($this->attachmentList === null) {
+        if (!isset($this->attachmentList)) {
             $this->readAttachments();
         }
 

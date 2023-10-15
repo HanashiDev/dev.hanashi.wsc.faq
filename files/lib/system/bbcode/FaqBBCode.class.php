@@ -11,11 +11,11 @@ class FaqBBCode extends AbstractBBCode
     /**
      * @inheritDoc
      */
-    public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser)
+    public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser): string
     {
         $questionID = null;
         if (isset($openingTag['attributes'][0])) {
-            $questionID = \intval($openingTag['attributes'][0]);
+            $questionID = (int)$openingTag['attributes'][0];
         }
 
         if ($questionID === null) {
@@ -27,7 +27,7 @@ class FaqBBCode extends AbstractBBCode
             return '';
         }
 
-        if ($parser->getOutputType() == 'text/html') {
+        if ($parser->getOutputType() === 'text/html') {
             $collapse = false;
 
             $doc = new DOMDocument();
@@ -42,6 +42,6 @@ class FaqBBCode extends AbstractBBCode
             ]);
         }
 
-        return $question->question . "\n\n" . $question->getPlainOutput();
+        return $question->getTitle() . "\n\n" . $question->getPlainOutput();
     }
 }

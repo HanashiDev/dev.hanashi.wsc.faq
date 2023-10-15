@@ -14,7 +14,7 @@
 			<controller>wcf\acp\form\FaqCategoryAddForm</controller>
 			<parent>wcf.acp.menu.link.faq.categories.list</parent>
 			<permissions>admin.faq.canAddCategory</permissions>
-			<icon>fa-plus</icon>
+			<icon>plus</icon>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.faq.questions.list">
 			<controller>wcf\acp\page\FaqQuestionListPage</controller>
@@ -26,7 +26,7 @@
 			<controller>wcf\acp\form\FaqQuestionAddForm</controller>
 			<parent>wcf.acp.menu.link.faq.questions.list</parent>
 			<permissions>admin.faq.canAddQuestion</permissions>
-			<icon>fa-plus</icon>
+			<icon>plus</icon>
 		</acpmenuitem>
 	</import>
 </data>

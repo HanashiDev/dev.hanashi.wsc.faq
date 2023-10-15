@@ -6,7 +6,7 @@ use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\DatabaseObject;
 use wcf\data\faq\category\FaqCategory;
-use wcf\data\search\ICustomIconSearchResultObject;
+use wcf\data\search\ISearchResultObject;
 use wcf\data\user\User;
 use wcf\page\FaqQuestionPage;
 use wcf\system\html\output\HtmlOutputProcessor;
@@ -14,9 +14,19 @@ use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
-class Question extends DatabaseObject implements ICustomIconSearchResultObject, IRouteController
+/**
+ * @property-read   int $questionID         unique id of the question
+ * @property-read   string $question        content of the question
+ * @property-read   string $answer          content of the answer
+ * @property-read   int $categoryID         id of the category the question belongs to
+ * @property-read   int $showOrder          sort order of the question
+ * @property-read   int $isDisabled         is `1` if the question is disabled, otherwise `0`
+ * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
+ * @property-read   int $isMultilingual
+ */
+class Question extends DatabaseObject implements IRouteController, ISearchResultObject
 {
-    protected $category;
+    protected FaqCategory $category;
 
     /**
      * @inheritDoc
@@ -28,12 +38,12 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
      */
     protected static $databaseTableIndexName = 'questionID';
 
-    protected $attachmentList;
+    protected GroupedAttachmentList $attachmentList;
 
     /**
      * @inheritDoc
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return WCF::getLanguage()->get($this->question);
     }
@@ -65,7 +75,7 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
 
     public function getCategory()
     {
-        if ($this->category === null) {
+        if (!isset($this->category)) {
             $category = new Category($this->categoryID);
             $this->category = new FaqCategory($category);
         }
@@ -88,7 +98,7 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
 
     public function getAttachments()
     {
-        if (MODULE_ATTACHMENT && empty($this->attachmentList)) {
+        if (empty($this->attachmentList)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
             $this->attachmentList->getConditionBuilder()->add('attachment.objectID = ?', [$this->questionID]);
             $this->attachmentList->readObjects();
@@ -161,13 +171,5 @@ class Question extends DatabaseObject implements ICustomIconSearchResultObject, 
     public function getContainerLink()
     {
         return '';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCustomSearchResultIcon()
-    {
-        return 'fa-question-circle-o';
     }
 }

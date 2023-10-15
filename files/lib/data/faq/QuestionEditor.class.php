@@ -5,6 +5,11 @@ namespace wcf\data\faq;
 use wcf\data\DatabaseObjectEditor;
 use wcf\system\WCF;
 
+/**
+ * @method static Question     create(array $parameters = [])
+ * @method      Question     getDecoratedObject()
+ * @mixin       Question
+ */
 class QuestionEditor extends DatabaseObjectEditor
 {
     /**

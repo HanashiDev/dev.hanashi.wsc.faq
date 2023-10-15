@@ -2,6 +2,7 @@
 
 namespace wcf\system\worker;
 
+use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\data\language\item\LanguageItemList;
 use wcf\system\search\SearchIndexManager;
@@ -36,8 +37,9 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
         }
 
         $languageCache = $this->getLanguageCache();
+        /** @var Question $object */
         foreach ($this->objectList as $object) {
-            if (\substr($object->answer, 0, 23) === 'wcf.faq.question.answer') {
+            if (\str_starts_with($object->answer, 'wcf.faq.question.answer')) {
                 if (!isset($languageCache[$object->answer])) {
                     continue;
                 }
@@ -45,11 +47,11 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
                 foreach ($languageCache[$object->answer] as $languageID => $answer) {
                     $title = '';
                     if (
-                        \substr($object->question, 0, 25) === 'wcf.faq.question.question'
-                        && isset($languageCache[$object->question][$languageID])
+                        isset($languageCache[$object->question][$languageID])
+                        && \str_starts_with($object->question, 'wcf.faq.question.question')
                     ) {
                         $title = $languageCache[$object->question][$languageID];
-                    } elseif (\substr($object->question, 0, 25) !== 'wcf.faq.question.question') {
+                    } elseif (\str_starts_with($object->question, 'wcf.faq.question.question')) {
                         $title = $object->question;
                     }
 
@@ -64,36 +66,33 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
                         $languageID ?: null
                     );
                 }
-            } else {
-                if (\substr($object->question, 0, 25) === 'wcf.faq.question.question') {
-                    if (!isset($languageCache[$object->question])) {
-                        continue;
-                    }
+            } elseif (\str_starts_with($object->question, 'wcf.faq.question.question')) {
+                if (!isset($languageCache[$object->question])) {
+                    continue;
+                }
 
-                    foreach ($languageCache[$object->question] as $languageID => $question) {
-                        SearchIndexManager::getInstance()->set(
-                            'dev.tkirch.wsc.faq.question',
-                            $object->questionID,
-                            $object->answer,
-                            $question,
-                            \TIME_NOW,
-                            0,
-                            '',
-                            $languageID ?: null
-                        );
-                    }
-                } else {
+                foreach ($languageCache[$object->question] as $languageID => $question) {
                     SearchIndexManager::getInstance()->set(
                         'dev.tkirch.wsc.faq.question',
                         $object->questionID,
                         $object->answer,
-                        $object->question,
+                        $question,
                         \TIME_NOW,
                         0,
                         '',
-                        null
+                        $languageID ?: null
                     );
                 }
+            } else {
+                SearchIndexManager::getInstance()->set(
+                    'dev.tkirch.wsc.faq.question',
+                    $object->questionID,
+                    $object->answer,
+                    $object->question,
+                    \TIME_NOW,
+                    0,
+                    ''
+                );
             }
         }
     }
@@ -101,11 +100,12 @@ class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
     protected function getLanguageCache()
     {
         $languageVariables = [];
+        /** @var Question $question */
         foreach ($this->objectList as $question) {
-            if (\substr($question->question, 0, 25) === 'wcf.faq.question.question') {
+            if (\str_starts_with($question->question, 'wcf.faq.question.question')) {
                 $languageVariables[] = $question->question;
             }
-            if (\substr($question->answer, 0, 23) === 'wcf.faq.question.answer') {
+            if (\str_starts_with($question->answer, 'wcf.faq.question.answer')) {
                 $languageVariables[] = $question->answer;
             }
         }

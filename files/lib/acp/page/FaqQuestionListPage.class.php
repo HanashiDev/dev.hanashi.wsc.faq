@@ -48,6 +48,8 @@ class FaqQuestionListPage extends SortablePage
      */
     public $answer = '';
 
+    public $showFaqAddDialog = 0;
+
     /**
      * @inheritDoc
      */
@@ -63,6 +65,9 @@ class FaqQuestionListPage extends SortablePage
         }
         if (!empty($_REQUEST['answer'])) {
             $this->answer = StringUtil::trim($_REQUEST['answer']);
+        }
+        if (!empty($_REQUEST['showFaqAddDialog'])) {
+            $this->showFaqAddDialog = 1;
         }
     }
 
@@ -107,6 +112,7 @@ class FaqQuestionListPage extends SortablePage
             'question' => $this->question,
             'answer' => $this->answer,
             'categoryNodeList' => (new CategoryNodeTree('dev.tkirch.wsc.faq.category'))->getIterator(),
+            'showFaqAddDialog' => $this->showFaqAddDialog,
         ]);
     }
 }

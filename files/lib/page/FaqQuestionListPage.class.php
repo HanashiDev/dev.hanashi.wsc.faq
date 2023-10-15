@@ -3,7 +3,6 @@
 namespace wcf\page;
 
 use wcf\data\faq\category\FaqCategoryNodeTree;
-use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
@@ -14,6 +13,20 @@ class FaqQuestionListPage extends AbstractPage
      * @inheritDoc
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
+
+    public $showFaqAddDialog = 0;
+
+    /**
+     * @inheritDoc
+     */
+    public function readParameters()
+    {
+        parent::readParameters();
+
+        if (!empty($_REQUEST['showFaqAddDialog'])) {
+            $this->showFaqAddDialog = 1;
+        }
+    }
 
     /**
      * @inheritDoc
@@ -35,18 +48,16 @@ class FaqQuestionListPage extends AbstractPage
             $questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
             $questionList->readObjects();
 
+            if (!\count($questionList)) {
+                continue;
+            }
+
             $faq = [
                 'title' => WCF::getLanguage()->get($category->title),
                 'attachments' => $questionList->getAttachmentList(),
             ];
 
             foreach ($questionList->getObjects() as $question) {
-                /**
-                 * workaround for editor
-                 *
-                 * @var Question
-                 */
-                $question = $question;
                 if ($question->isAccessible()) {
                     $faq['questions'][] = $question;
                     if ($question->hasEmbeddedObjects) {
@@ -71,6 +82,7 @@ class FaqQuestionListPage extends AbstractPage
 
         WCF::getTPL()->assign([
             'faqs' => $faqs,
+            'showFaqAddDialog' => $this->showFaqAddDialog,
         ]);
     }
 }

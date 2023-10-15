@@ -2,7 +2,9 @@
 
 namespace wcf\page;
 
+use CuyZ\Valinor\Mapper\MappingError;
 use wcf\data\faq\Question;
+use wcf\http\Helper;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
@@ -14,10 +16,7 @@ class FaqQuestionPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
-    /**
-     * @var Question
-     */
-    protected $question;
+    protected Question $question;
 
     /**
      * @inheritDoc
@@ -26,8 +25,17 @@ class FaqQuestionPage extends AbstractPage
     {
         parent::readParameters();
 
-        if (isset($_REQUEST['id'])) {
-            $this->question = new Question((int)$_REQUEST['id']);
+        try {
+            $queryParameters = Helper::mapQueryParameters(
+                $_GET,
+                <<<'EOT'
+                    array {
+                        id: positive-int
+                    }
+                    EOT
+            );
+
+            $this->question = new Question($queryParameters['id']);
             if (!$this->question->questionID || !$this->question->isAccessible()) {
                 throw new IllegalLinkException();
             }
@@ -36,7 +44,7 @@ class FaqQuestionPage extends AbstractPage
                 'dev.tkirch.wsc.faq.question',
                 [$this->question->questionID]
             );
-        } else {
+        } catch (MappingError) {
             throw new IllegalLinkException();
         }
     }

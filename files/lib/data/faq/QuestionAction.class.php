@@ -6,6 +6,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
 use wcf\data\TDatabaseObjectToggle;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\I18nHandler;
@@ -13,6 +14,10 @@ use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 
+/**
+ * @method  QuestionEditor[] getObjects()
+ * @method  QuestionEditor   getSingleObject()
+ */
 class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
 {
     use TDatabaseObjectToggle;
@@ -39,11 +44,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
     /**
      * @inheritDoc
-     * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
+     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L49
      */
     public function create()
     {
-        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
             $answers = '';
@@ -55,6 +59,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             }
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['isMultilingual'] = 1;
         } else {
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
@@ -85,11 +90,11 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
         }
         $this->updateSearchIndex($question);
 
-        if (
-            isset($this->parameters['answer_attachmentHandler'])
-            && $this->parameters['answer_attachmentHandler'] !== null
-        ) {
-            $this->parameters['answer_attachmentHandler']->updateObjectID($question->questionID);
+        foreach ($this->parameters as $parameter) {
+            if (!($parameter instanceof AttachmentHandler)) {
+                continue;
+            }
+            $parameter->updateObjectID($question->questionID);
         }
 
         if (!empty($inputProcessor)) {
@@ -113,19 +118,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
     /**
      * @inheritDoc
-     * https://github.com/WoltLab/WCF/blob/master/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L46
+     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L112
      */
     public function update()
     {
         //check if showOrder must be updated
-        if (\count($this->objects) == 1 && isset($this->parameters['data']['showOrder'])) {
+        if (isset($this->parameters['data']['showOrder']) && \count($this->objects) === 1) {
             $objectEditor = $this->getObjects()[0];
             $this->parameters['data']['showOrder'] = $objectEditor->updateShowOrder(
                 $this->parameters['data']['showOrder']
             );
         }
 
-        $inputProcessor = null;
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
             $answers = '';
@@ -137,6 +141,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             }
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
+            $this->parameters['data']['isMultilingual'] = 1;
         } else {
             $inputProcessor = new HtmlInputProcessor();
             $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
@@ -196,23 +201,21 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                 }
             }
 
-            if (
-                isset($this->parameters['answer_attachmentHandler'])
-                && $this->parameters['answer_attachmentHandler'] !== null
-            ) {
-                $this->parameters['answer_attachmentHandler']->updateObjectID($object->questionID);
+            foreach ($this->parameters as $parameter) {
+                if (!($parameter instanceof AttachmentHandler)) {
+                    continue;
+                }
+                $parameter->updateObjectID($object->questionID);
             }
 
-            if (!empty($inputProcessor)) {
-                $inputProcessor->setObjectID($object->questionID);
+            $inputProcessor->setObjectID($object->questionID);
 
-                if (
-                    $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
-                        $inputProcessor
-                    )
-                ) {
-                    $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
-                }
+            if (
+                $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                    $inputProcessor
+                )
+            ) {
+                $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
             }
 
             if (!empty($updateData)) {
@@ -243,77 +246,31 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
                     $languageID ?: null
                 );
             }
-        } else {
-            if (isset($this->parameters['question_i18n'])) {
-                foreach ($this->parameters['question_i18n'] as $languageID => $question) {
-                    SearchIndexManager::getInstance()->set(
-                        'dev.tkirch.wsc.faq.question',
-                        $object->questionID,
-                        $this->parameters['data']['answer'],
-                        $question,
-                        \TIME_NOW,
-                        0,
-                        '',
-                        $languageID ?: null
-                    );
-                }
-            } else {
+        } elseif (isset($this->parameters['question_i18n'])) {
+            foreach ($this->parameters['question_i18n'] as $languageID => $question) {
                 SearchIndexManager::getInstance()->set(
                     'dev.tkirch.wsc.faq.question',
                     $object->questionID,
                     $this->parameters['data']['answer'],
-                    $this->parameters['data']['question'],
+                    $question,
                     \TIME_NOW,
                     0,
                     '',
-                    null
+                    $languageID ?: null
                 );
             }
+        } else {
+            SearchIndexManager::getInstance()->set(
+                'dev.tkirch.wsc.faq.question',
+                $object->questionID,
+                $this->parameters['data']['answer'],
+                $this->parameters['data']['question'],
+                \TIME_NOW,
+                0,
+                '',
+                null
+            );
         }
-    }
-
-    public function validateSearch()
-    {
-        $this->readString('searchString');
-    }
-
-    public function search()
-    {
-        $sql = "SELECT		  faq_questions.questionID
-			FROM			wcf" . WCF_N . "_faq_questions faq_questions
-			LEFT JOIN		wcf" . WCF_N . "_language_item language_item
-						ON	language_item.languageItem = faq_questions.question
-			WHERE		   faq_questions.question LIKE ?
-						OR	(
-								language_item.languageItemValue LIKE ?
-							AND	language_item.languageID = ?
-							)
-			ORDER BY		faq_questions.question";
-        $statement = WCF::getDB()->prepareStatement($sql, 5);
-        $statement->execute([
-            '%' . $this->parameters['searchString'] . '%',
-            '%' . $this->parameters['searchString'] . '%',
-            WCF::getLanguage()->languageID,
-        ]);
-
-        $questionIDs = [];
-        while ($questionID = $statement->fetchColumn()) {
-            $questionIDs[] = $questionID;
-        }
-
-        $questionList = new QuestionList();
-        $questionList->setObjectIDs($questionIDs);
-        $questionList->readObjects();
-
-        $questions = [];
-        foreach ($questionList as $question) {
-            $questions[] = [
-                'question' => $question->getTitle(),
-                'questionID' => $question->questionID,
-            ];
-        }
-
-        return $questions;
     }
 
     /**

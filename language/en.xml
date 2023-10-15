@@ -1,66 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/5.4/language.xsd" languagecode="en">
-	<category name="wcf.faq">
-		<item name="wcf.faq.question.question.title"><![CDATA[Question]]></item>
-		<item name="wcf.faq.question.answer.title"><![CDATA[Answer]]></item>
-		<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
-		<item name="wcf.faq.detail"><![CDATA[Show question]]></item>
-	</category>
-	<category name="wcf.acp.menu">
-		<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
-		<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.menu.link.faq.categories.add"><![CDATA[Add Category]]></item>
-		<item name="wcf.acp.menu.link.faq.questions.list"><![CDATA[Questions]]></item>
-		<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Add Question]]></item>
-		<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Edit Question]]></item>
-	</category>
-	<category name="wcf.acp.faq">
-		<item name="wcf.acp.faq.question.question"><![CDATA[Question]]></item>
-		<item name="wcf.acp.faq.category"><![CDATA[Category]]></item>
-		<item name="wcf.acp.faq.question.general"><![CDATA[General]]></item>
-		<item name="wcf.acp.faq.question.answer"><![CDATA[Answer]]></item>
-		<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Do you really want to delete this question?]]></item>
-		<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Please <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">add a category</a> before creating questions.]]></item>
-		<item name="wcf.acp.faq.question.settings"><![CDATA[Settings]]></item>
-		<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Question is disabled]]></item>
-	</category>
-	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
-		<item name="wcf.acp.group.option.user.faq.canViewFAQ"><![CDATA[Can view FAQ]]></item>
-		<item name="wcf.acp.group.option.category.admin.faq"><![CDATA[FAQ]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canViewCategory"><![CDATA[Can view category]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canAddCategory"><![CDATA[Can add category]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canDeleteCategory"><![CDATA[Can delete category]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canEditCategory"><![CDATA[Can edit category]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canViewQuestion"><![CDATA[Can view question]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canAddQuestion"><![CDATA[Can add question]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canDeleteQuestion"><![CDATA[Can delete question]]></item>
-		<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Can edit question]]></item>
-	</category>
-	<category name="wcf.acl.option">
-		<item name="wcf.acl.option.dev.tkirch.wsc.faq.category.canViewFAQ"><![CDATA[Can view FAQ]]></item>
-	</category>
-	<category name="wcf.editor.button">
-		<item name="wcf.editor.button.faq"><![CDATA[FAQ Question]]></item>
-	</category>
-	<category name="wcf.faq.question">
-		<item name="wcf.faq.question.search"><![CDATA[Search FAQ]]></item>
-		<item name="wcf.faq.question.search.name"><![CDATA[Search Questions]]></item>
-		<item name="wcf.faq.question.search.error.tooShort"><![CDATA[The entered keyword is too short.]]></item>
-		<item name="wcf.faq.question.search.error.noResults"><![CDATA[There were no matches.]]></item>
-		<item name="wcf.faq.question.search.results"><![CDATA[Search Results]]></item>
-	</category>
-	<category name="wcf.faq.bbcode">
-		<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You are not authorized to view this FAQ question.]]></item>
-	</category>
-	<category name="wcf.search.type">
-		<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
-	</category>
-	<category name="wcf.search.object">
-		<item name="wcf.search.object.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
-	</category>
-	<category name="wcf.acp.rebuildData">
-		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Update search index for FAQ]]></item>
-		<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Updates the search index for FAQ questions]]></item>
-	</category>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/language.xsd" languagecode="en">
+	<import>
+		<category name="wcf.faq">
+			<item name="wcf.faq.question.question.title"><![CDATA[Question]]></item>
+			<item name="wcf.faq.question.answer.title"><![CDATA[Answer]]></item>
+			<item name="wcf.faq.list"><![CDATA[FAQ]]></item>
+			<item name="wcf.faq.detail"><![CDATA[Show question]]></item>
+		</category>
+		<category name="wcf.acp.menu">
+			<item name="wcf.acp.menu.link.faq"><![CDATA[FAQ]]></item>
+			<item name="wcf.acp.menu.link.faq.categories.list"><![CDATA[Categories]]></item>
+			<item name="wcf.acp.menu.link.faq.categories.add"><![CDATA[Add Category]]></item>
+			<item name="wcf.acp.menu.link.faq.questions.list"><![CDATA[Questions]]></item>
+			<item name="wcf.acp.menu.link.faq.questions.add"><![CDATA[Add Question]]></item>
+			<item name="wcf.acp.menu.link.faq.questions.edit"><![CDATA[Edit Question]]></item>
+		</category>
+		<category name="wcf.acp.faq">
+			<item name="wcf.acp.faq.question.question"><![CDATA[Question]]></item>
+			<item name="wcf.acp.faq.category"><![CDATA[Category]]></item>
+			<item name="wcf.acp.faq.question.general"><![CDATA[General]]></item>
+			<item name="wcf.acp.faq.question.answer"><![CDATA[Answer]]></item>
+			<item name="wcf.acp.faq.question.delete.confirmMessage"><![CDATA[Do you really want to delete this question?]]></item>
+			<item name="wcf.acp.faq.question.error.noCategory"><![CDATA[Please <a href="{link controller='FaqCategoryAdd' isACP=true}{/link}">add a category</a> before creating questions.]]></item>
+			<item name="wcf.acp.faq.question.settings"><![CDATA[Settings]]></item>
+			<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Question is disabled]]></item>
+			<item name="wcf.acp.faq.i18n.none"><![CDATA[Monolingual FAQ entry]]></item>
+			<item name="wcf.acp.faq.i18n.i18n"><![CDATA[Multilingual FAQ entry]]></item>
+		</category>
+		<category name="wcf.acp.group">
+			<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
+			<item name="wcf.acp.group.option.user.faq.canViewFAQ"><![CDATA[Can view FAQ]]></item>
+			<item name="wcf.acp.group.option.category.admin.faq"><![CDATA[FAQ]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canViewCategory"><![CDATA[Can view category]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canAddCategory"><![CDATA[Can add category]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canDeleteCategory"><![CDATA[Can delete category]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canEditCategory"><![CDATA[Can edit category]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canViewQuestion"><![CDATA[Can view question]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canAddQuestion"><![CDATA[Can add question]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canDeleteQuestion"><![CDATA[Can delete question]]></item>
+			<item name="wcf.acp.group.option.admin.faq.canEditQuestion"><![CDATA[Can edit question]]></item>
+		</category>
+		<category name="wcf.acl.option">
+			<item name="wcf.acl.option.dev.tkirch.wsc.faq.category.canViewFAQ"><![CDATA[Can view FAQ]]></item>
+		</category>
+		<category name="wcf.editor.button">
+			<item name="wcf.editor.button.faq"><![CDATA[FAQ Question]]></item>
+		</category>
+		<category name="wcf.faq.question">
+			<item name="wcf.faq.question.search"><![CDATA[Search FAQ]]></item>
+			<item name="wcf.faq.question.search.name"><![CDATA[Search Questions]]></item>
+			<item name="wcf.faq.question.search.error.tooShort"><![CDATA[The entered keyword is too short.]]></item>
+			<item name="wcf.faq.question.search.error.noResults"><![CDATA[There were no matches.]]></item>
+			<item name="wcf.faq.question.search.results"><![CDATA[Search Results]]></item>
+		</category>
+		<category name="wcf.faq.bbcode">
+			<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You are not authorized to view this FAQ question.]]></item>
+		</category>
+		<category name="wcf.search.type">
+			<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
+		</category>
+		<category name="wcf.search.object">
+			<item name="wcf.search.object.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>
+		</category>
+		<category name="wcf.acp.rebuildData">
+			<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Update search index for FAQ]]></item>
+			<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Updates the search index for FAQ questions]]></item>
+		</category>
+	</import>
 </language>

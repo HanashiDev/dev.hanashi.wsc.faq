@@ -10,18 +10,27 @@ use wcf\data\user\UserProfile;
 use wcf\system\category\CategoryPermissionHandler;
 use wcf\system\WCF;
 
+/**
+ * @method      FaqCategory[]    getChildCategories()
+ * @method      FaqCategory[]    getAllChildCategories()
+ * @method      FaqCategory      getParentCategory()
+ * @method      FaqCategory[]    getParentCategories()
+ * @method static FaqCategory|null getCategory($categoryID)
+ */
 class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 
-    protected $userPermissions = [];
+    protected array $userPermissions = [];
+
+    private bool $prefix = false;
 
     /**
      * @inheritDoc
      */
     public function isAccessible(?User $user = null)
     {
-        if ($this->getObjectType()->objectType != self::OBJECT_TYPE_NAME) {
+        if ($this->getObjectType()->objectType !== self::OBJECT_TYPE_NAME) {
             return false;
         }
 
@@ -51,33 +60,29 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
 
         if ($user->userID === WCF::getSession()->getUser()->userID) {
             return WCF::getSession()->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
-        } else {
-            $userProfile = new UserProfile($user);
-
-            return $userProfile->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
         }
 
-        return true;
+        return (new UserProfile($user))->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
     }
 
     /**
      * @inheritDoc
      */
-    public function getTitle()
+    public function getTitle(): string
     {
-        return WCF::getLanguage()->get($this->title);
+        return ($this->prefix ? '&nbsp;&nbsp;' : '') . WCF::getLanguage()->get($this->title);
     }
 
-    public function setTitle($title)
+    public function setPrefix($prefix = true)
     {
-        $this->title = $title;
+        $this->prefix = $prefix;
     }
 
     /**
      * @inheritDoc
      */
-    public function getLink()
+    public function getLink(): string
     {
-        return null;
+        return '';
     }
 }

@@ -2,17 +2,26 @@
 
 namespace wcf\acp\form;
 
+use Laminas\Diactoros\Response\RedirectResponse;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
+use wcf\data\IStorableObject;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
-use wcf\system\form\builder\container\wysiwyg\I18nWysiwygFormContainer;
+use wcf\system\form\builder\container\TabFormContainer;
+use wcf\system\form\builder\container\TabMenuFormContainer;
+use wcf\system\form\builder\container\wysiwyg\WysiwygFormContainer;
+use wcf\system\form\builder\data\processor\CustomFormDataProcessor;
 use wcf\system\form\builder\field\BooleanFormField;
 use wcf\system\form\builder\field\IntegerFormField;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TextFormField;
+use wcf\system\form\builder\IFormDocument;
+use wcf\system\language\LanguageFactory;
+use wcf\system\request\IRouteController;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 class FaqQuestionAddForm extends AbstractFormBuilderForm
@@ -40,6 +49,43 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
+    public $objectEditLinkController = FaqQuestionEditForm::class;
+
+    /**
+     * list of available languages
+     * @var Language[]
+     */
+    protected $availableLanguages = [];
+
+    protected $isMultilingual = 0;
+
+    protected $multiLingualAnswers = [];
+
+    /**
+     * @inheritDoc
+     */
+    public function readParameters()
+    {
+        parent::readParameters();
+
+        // get available languages
+        $this->availableLanguages = LanguageFactory::getInstance()->getLanguages();
+
+        if (!empty($_REQUEST['isMultilingual'])) {
+            $this->isMultilingual = 1;
+        }
+
+        // work-around to force adding faq via dialog overlay
+        if (\count($this->availableLanguages) > 1 && empty($_POST) && !isset($_REQUEST['isMultilingual'])) {
+            return new RedirectResponse(LinkHandler::getInstance()->getLink('FaqQuestionList', [
+                'showFaqAddDialog' => 1,
+            ]));
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function createForm()
     {
         parent::createForm();
@@ -58,7 +104,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             }
 
             foreach ($childCategories as $childCategory) {
-                $childCategory->setTitle('&nbsp;&nbsp;' . $childCategory->getTitle());
+                $childCategory->setPrefix();
                 $categories[$childCategory->categoryID] = $childCategory;
             }
         }
@@ -67,6 +113,21 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             throw new NamedUserException(
                 WCF::getLanguage()->getDynamicVariable('wcf.acp.faq.question.error.noCategory')
             );
+        }
+
+        $tabContent = [];
+        if ($this->isMultilingual) {
+            foreach ($this->availableLanguages as $language) {
+                $tabContent[] = TabFormContainer::create('tab_' . $language->languageID)
+                    ->label($language->languageName)
+                    ->appendChildren([
+                        WysiwygFormContainer::create('answer_i18n_' . $language->languageID)
+                            ->label('wcf.acp.faq.question.answer')
+                            ->messageObjectType('dev.tkirch.wsc.faq.question')
+                            ->attachmentData('dev.tkirch.wsc.faq.question')
+                            ->required(),
+                    ]);
+            }
         }
 
         $this->form->appendChildren([
@@ -83,13 +144,17 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
                         ->languageItemPattern('wcf.faq.question.question\d+')
                         ->required(),
                 ]),
-
-            I18nWysiwygFormContainer::create('answer')
-                ->label('wcf.acp.faq.question.answer')
-                ->messageObjectType('dev.tkirch.wsc.faq.question')
-                ->messageLanguageItemPattern('wcf.faq.question.answer\d+')
-                ->attachmentData('dev.tkirch.wsc.faq.question')
-                ->required(),
+            (
+                $this->isMultilingual
+                ? TabMenuFormContainer::create('tabsContainer')
+                    ->appendChildren($tabContent)
+                : WysiwygFormContainer::create('answer')
+                    ->label('wcf.acp.faq.question.answer')
+                    ->messageObjectType('dev.tkirch.wsc.faq.question')
+                    // ->messageLanguageItemPattern('wcf.faq.question.answer\d+')
+                    ->attachmentData('dev.tkirch.wsc.faq.question')
+                    ->required()
+            ),
             FormContainer::create('position')
                 ->label('wcf.category.position')
                 ->appendChildren([
@@ -106,5 +171,56 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
                         ->label('wcf.acp.faq.question.isDisabled'),
                 ]),
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function buildForm()
+    {
+        parent::buildForm();
+
+        $this->form->getDataHandler()->addProcessor(new CustomFormDataProcessor(
+            'answer_i18n',
+            static function (IFormDocument $document, array $parameters) {
+                foreach ($parameters['data'] as $key => $val) {
+                    if (\str_starts_with($key, 'answer_i18n_')) {
+                        $languageID = (int)\substr($key, 12);
+                        $parameters['answer_i18n'][$languageID] = $val;
+                        unset($parameters['data'][$key]);
+                    }
+                }
+
+                return $parameters;
+            },
+            function (IFormDocument $document, array $data, IStorableObject $object) {
+                foreach ($this->multiLingualAnswers as $languageID => $answer) {
+                    $data['answer_i18n_' . $languageID] = $answer;
+                }
+
+                return $data;
+            }
+        ));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setFormAction()
+    {
+        $parameters = [
+            'isMultilingual' => $this->isMultilingual,
+        ];
+        if ($this->formObject !== null) {
+            if ($this->formObject instanceof IRouteController) {
+                $parameters['object'] = $this->formObject;
+            } else {
+                $object = $this->formObject;
+
+                $parameters['id'] = $object->{$object::getDatabaseTableIndexName()};
+            }
+        }
+
+        $this->form->action(LinkHandler::getInstance()->getControllerLink(static::class, $parameters));
     }
 }
