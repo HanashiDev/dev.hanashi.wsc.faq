@@ -55,6 +55,7 @@
 		</category>
 		<category name="wcf.faq.bbcode">
 			<item name="wcf.faq.bbcode.noPermissions"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Du verfügst{else}Sie verfügen{/if} nicht über die notwendigen Zugriffsrechte, um diese FAQ-Frage zu sehen.]]></item>
+			<item name="wcf.faq.bbcode.faqEntry"><![CDATA[FAQ-Eintrag]]></item>
 		</category>
 		<category name="wcf.search.type">
 			<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>

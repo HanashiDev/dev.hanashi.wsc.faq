@@ -55,6 +55,7 @@
 		</category>
 		<category name="wcf.faq.bbcode">
 			<item name="wcf.faq.bbcode.noPermissions"><![CDATA[You are not authorized to view this FAQ question.]]></item>
+			<item name="wcf.faq.bbcode.faqEntry"><![CDATA[FAQ entry]]></item>
 		</category>
 		<category name="wcf.search.type">
 			<item name="wcf.search.type.dev.tkirch.wsc.faq.question"><![CDATA[FAQ]]></item>

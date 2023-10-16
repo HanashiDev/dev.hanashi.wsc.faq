@@ -17,7 +17,7 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLa
                 configuration.woltlabBbcode?.push({
                     icon: "circle-question;false",
                     name: "faq",
-                    label: "FAQ-Eintrag", // TODO: lang
+                    label: Language.getPhrase("wcf.faq.bbcode.faqEntry"),
                 });
             });
             (0, Event_1.listenToCkeditor)(element).ready(({ ckeditor }) => {

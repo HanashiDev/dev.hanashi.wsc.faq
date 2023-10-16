@@ -3,6 +3,7 @@
 		Language.addObject({
 			'wcf.faq.question.search': '{jslang}wcf.faq.question.search{/jslang}',
 			'wcf.faq.question.search.error.tooShort': '{jslang}wcf.faq.question.search.error.tooShort{/jslang}',
+			'wcf.faq.bbcode.faqEntry': '{jslang}wcf.faq.bbcode.faqEntry{/jslang}',
 		});
 
 		{capture assign='faqEndpoints'}{link controller='FaqSearch' application='wcf'}{/link}{/capture}

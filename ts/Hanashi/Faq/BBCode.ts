@@ -23,7 +23,7 @@ export class FaqBBCode {
       configuration.woltlabBbcode?.push({
         icon: "circle-question;false",
         name: "faq",
-        label: "FAQ-Eintrag", // TODO: lang
+        label: Language.getPhrase("wcf.faq.bbcode.faqEntry"),
       });
     });
 
