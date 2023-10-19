@@ -15,17 +15,18 @@ class FaqSearchAction implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        if ($request->getMethod() === 'GET') {
-            return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchDialog'));
-        } elseif ($request->getMethod() === 'POST') {
+        if ($request->getMethod() === 'GET' || $request->getMethod() === 'POST') {
             $postParameters = Helper::mapQueryParameters(
                 $request->getParsedBody(),
                 <<<'EOT'
                     array {
-                        searchString: string
+                        searchString?: string
                     }
                     EOT
             );
+            if (!isset($postParameters['searchString'])) {
+                return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchDialog'));
+            }
 
             $sql = "
                 SELECT          faq_questions.questionID
