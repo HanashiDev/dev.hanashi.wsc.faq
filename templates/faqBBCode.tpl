@@ -8,7 +8,7 @@
 		
 		<div class="faqBBcodeBoxTitle">
 			<span class="faqBBcodeBoxTitle">
-				FAQ: <a href="{$question->getLink()}">{$question->getTitle()}</a>
+				{lang}wcf.faq.bbcode.title{/lang} <a href="{$question->getLink()}">{$question->getTitle()}</a>
 			</span>
 		</div>
 		
