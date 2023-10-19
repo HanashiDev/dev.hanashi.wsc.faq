@@ -7,6 +7,7 @@ use wcf\system\database\table\column\TextDatabaseTableColumn;
 use wcf\system\database\table\column\TinyintDatabaseTableColumn;
 use wcf\system\database\table\DatabaseTable;
 use wcf\system\database\table\index\DatabaseTableForeignKey;
+use wcf\system\database\table\index\DatabaseTablePrimaryIndex;
 
 return [
     DatabaseTable::create('wcf1_faq_questions')
@@ -24,6 +25,10 @@ return [
             TinyintDatabaseTableColumn::create('isMultilingual')
                 ->notNull()
                 ->defaultValue(0),
+        ])
+        ->indices([
+            DatabaseTablePrimaryIndex::create()
+                ->columns(['questionID']),
         ])
         ->foreignKeys([
             DatabaseTableForeignKey::create()
