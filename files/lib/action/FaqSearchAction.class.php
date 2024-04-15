@@ -40,7 +40,7 @@ class FaqSearchAction implements RequestHandlerInterface
                                 )
                 ORDER BY		faq_questions.question
             ";
-            $statement = WCF::getDB()->prepareStatement($sql, 5);
+            $statement = WCF::getDB()->prepare($sql, 5);
             $statement->execute([
                 '%' . $postParameters['searchString'] . '%',
                 '%' . $postParameters['searchString'] . '%',

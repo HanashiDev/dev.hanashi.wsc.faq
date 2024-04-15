@@ -175,24 +175,24 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             //update show order
             if (isset($this->parameters['data']['showOrder']) && $this->parameters['data']['showOrder'] !== null) {
                 if ($object->showOrder < $this->parameters['data']['showOrder']) {
-                    $sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+                    $sql = "UPDATE  wcf1_faq_questions
 					SET	showOrder = showOrder - 1
 					WHERE	showOrder > ?
 					AND	 showOrder <= ?
 					AND	 questionID <> ?";
-                    $statement = WCF::getDB()->prepareStatement($sql);
+                    $statement = WCF::getDB()->prepare($sql);
                     $statement->execute([
                         $object->showOrder,
                         $this->parameters['data']['showOrder'],
                         $object->questionID,
                     ]);
                 } elseif ($object->showOrder > $this->parameters['data']['showOrder']) {
-                    $sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+                    $sql = "UPDATE  wcf1_faq_questions
 					SET	showOrder = showOrder + 1
 					WHERE	showOrder < ?
 					AND	 showOrder >= ?
 					AND	 questionID <> ?";
-                    $statement = WCF::getDB()->prepareStatement($sql);
+                    $statement = WCF::getDB()->prepare($sql);
                     $statement->execute([
                         $object->showOrder,
                         $this->parameters['data']['showOrder'],
@@ -299,10 +299,10 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
      */
     public function updatePosition()
     {
-        $sql = "UPDATE  wcf" . WCF_N . "_faq_questions
+        $sql = "UPDATE  wcf1_faq_questions
                 SET     showOrder = ?
                 WHERE   questionID = ?";
-        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepare($sql);
 
         $showOrder = $this->parameters['data']['offset'];
         WCF::getDB()->beginTransaction();
