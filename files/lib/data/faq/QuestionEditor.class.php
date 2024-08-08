@@ -19,12 +19,8 @@ final class QuestionEditor extends DatabaseObjectEditor
 
     /**
      * Returns the new show order for a object
-     *
-     * @param integer   $showOrder
-     *
-     * @return integer
      */
-    public function updateShowOrder($showOrder)
+    public function updateShowOrder(int $showOrder): int
     {
         if ($showOrder === null) {
             $showOrder = \PHP_INT_MAX;
@@ -68,10 +64,8 @@ final class QuestionEditor extends DatabaseObjectEditor
 
     /**
      * Returns the show order for a new object
-     *
-     * @return integer
      */
-    public static function getShowOrder()
+    public static function getShowOrder(): int
     {
         $sql = "SELECT MAX(showOrder) AS showOrder
 			FROM " . static::getDatabaseTableName();

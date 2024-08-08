@@ -47,12 +47,12 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return WCF::getLanguage()->get($this->question);
     }
 
-    public function getAnswer()
+    public function getAnswer(): string
     {
         return WCF::getLanguage()->get($this->answer);
     }
 
-    public function getFormattedOutput()
+    public function getFormattedOutput(): string
     {
         $processor = new HtmlOutputProcessor();
         $processor->process($this->getAnswer(), 'dev.tkirch.wsc.faq.question', $this->questionID);
@@ -60,7 +60,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return $processor->getHtml();
     }
 
-    public function getPlainOutput()
+    public function getPlainOutput(): string
     {
         $processor = new HtmlOutputProcessor();
         $processor->setOutputType('text/plain');
@@ -69,7 +69,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return $processor->getHtml();
     }
 
-    public function getCategory()
+    public function getCategory(): FaqCategory
     {
         if (!isset($this->category)) {
             $category = new Category($this->categoryID);
@@ -79,7 +79,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return $this->category;
     }
 
-    public function isAccessible(?User $user = null)
+    public function isAccessible(?User $user = null): bool
     {
         if ($this->isDisabled && !WCF::getSession()->getPermission('admin.faq.canViewQuestion')) {
             return false;
@@ -92,7 +92,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return WCF::getSession()->getPermission('user.faq.canViewFAQ');
     }
 
-    public function getAttachments()
+    public function getAttachments(): GroupedAttachmentList
     {
         if (empty($this->attachmentList)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');

@@ -56,9 +56,9 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
      * list of available languages
      * @var Language[]
      */
-    protected $availableLanguages = [];
+    protected array $availableLanguages = [];
 
-    protected $isMultilingual = 0;
+    protected int $isMultilingual = 0;
 
     #[Override]
     public function readParameters()

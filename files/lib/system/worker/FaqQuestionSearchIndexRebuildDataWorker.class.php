@@ -96,7 +96,7 @@ final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataW
         }
     }
 
-    private function getLanguageCache()
+    private function getLanguageCache(): array
     {
         $languageVariables = [];
         /** @var Question $question */

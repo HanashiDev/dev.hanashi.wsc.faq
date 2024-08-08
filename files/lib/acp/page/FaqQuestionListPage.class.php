@@ -33,23 +33,20 @@ class FaqQuestionListPage extends SortablePage
 
     /**
      * category id
-     * @var integer
      */
-    public $categoryID = 0;
+    public int $categoryID = 0;
 
     /**
      * question
-     * @var string
      */
-    public $question = '';
+    public string $question = '';
 
     /**
      * answer
-     * @var string
      */
-    public $answer = '';
+    public string $answer = '';
 
-    public $showFaqAddDialog = 0;
+    public int $showFaqAddDialog = 0;
 
     #[Override]
     public function readParameters()
