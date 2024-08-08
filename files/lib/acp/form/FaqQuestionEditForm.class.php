@@ -3,8 +3,8 @@
 namespace wcf\acp\form;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use Override;
 use wcf\data\faq\Question;
-use wcf\data\language\item\LanguageItemList;
 use wcf\http\Helper;
 use wcf\system\exception\IllegalLinkException;
 
@@ -20,9 +20,7 @@ class FaqQuestionEditForm extends FaqQuestionAddForm
      */
     public $formAction = 'edit';
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -43,13 +41,6 @@ class FaqQuestionEditForm extends FaqQuestionAddForm
             }
             if ($this->formObject->isMultilingual) {
                 $this->isMultilingual = 1;
-
-                $languageItemList = new LanguageItemList();
-                $languageItemList->getConditionBuilder()->add('languageItem = ?', [$this->formObject->answer]);
-                $languageItemList->readObjects();
-                foreach ($languageItemList as $languageItem) {
-                    $this->multiLingualAnswers[$languageItem->languageID] = $languageItem->languageItemValue;
-                }
             }
         } catch (MappingError) {
             throw new IllegalLinkException();

@@ -2,6 +2,7 @@
 
 namespace wcf\system\worker;
 
+use Override;
 use wcf\data\faq\Question;
 use wcf\data\faq\QuestionList;
 use wcf\data\language\item\LanguageItemList;
@@ -20,9 +21,7 @@ final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataW
      */
     protected $limit = 100;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function execute()
     {
         parent::execute();
@@ -97,7 +96,7 @@ final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataW
         }
     }
 
-    protected function getLanguageCache()
+    private function getLanguageCache()
     {
         $languageVariables = [];
         /** @var Question $question */

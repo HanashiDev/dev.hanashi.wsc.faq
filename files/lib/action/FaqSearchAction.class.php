@@ -4,6 +4,7 @@ namespace wcf\action;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use LogicException;
+use Override;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -13,6 +14,7 @@ use wcf\system\WCF;
 
 final class FaqSearchAction implements RequestHandlerInterface
 {
+    #[Override]
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if ($request->getMethod() === 'GET' || $request->getMethod() === 'POST') {

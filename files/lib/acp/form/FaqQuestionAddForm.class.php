@@ -3,6 +3,7 @@
 namespace wcf\acp\form;
 
 use Laminas\Diactoros\Response\RedirectResponse;
+use Override;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
@@ -59,9 +60,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
 
     protected $isMultilingual = 0;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -81,9 +80,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     protected function createForm()
     {
         parent::createForm();
@@ -171,9 +168,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function buildForm()
     {
         parent::buildForm();
@@ -202,9 +197,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         ));
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     protected function setFormAction()
     {
         $parameters = [

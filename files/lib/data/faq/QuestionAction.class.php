@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq;
 
+use Override;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
@@ -42,10 +43,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
      */
     protected $requireACP = [];
 
-    /**
-     * @inheritDoc
-     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L49
-     */
+    #[Override]
     public function create()
     {
         //prepare answer
@@ -100,10 +98,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
         return $question;
     }
 
-    /**
-     * @inheritDoc
-     * Adapted from: https://github.com/WoltLab/WCF/blob/9ed5bd7220ff1beec1949dc13777bf2f62acf1f5/wcfsetup/install/files/lib/data/reaction/type/ReactionTypeAction.class.php#L112
-     */
+    #[Override]
     public function update()
     {
         //check if showOrder must be updated
@@ -242,9 +237,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function validateUpdatePosition()
     {
         WCF::getSession()->checkPermissions($this->permissionsUpdate);
@@ -263,9 +256,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
         $this->readInteger('offset', true, 'data');
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function updatePosition()
     {
         $sql = "UPDATE  wcf1_faq_questions

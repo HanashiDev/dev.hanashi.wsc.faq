@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq\category;
 
+use Override;
 use wcf\data\category\AbstractDecoratedCategory;
 use wcf\data\IAccessibleObject;
 use wcf\data\ITitledLinkObject;
@@ -25,9 +26,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
 
     private bool $prefix = false;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function isAccessible(?User $user = null)
     {
         if ($this->getObjectType()->objectType !== self::OBJECT_TYPE_NAME) {
@@ -65,9 +64,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
         return (new UserProfile($user))->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTitle(): string
     {
         return ($this->prefix ? '&nbsp;&nbsp;' : '') . WCF::getLanguage()->get($this->title);
@@ -78,9 +75,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
         $this->prefix = $prefix;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getLink(): string
     {
         return '';

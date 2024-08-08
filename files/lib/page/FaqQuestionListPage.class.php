@@ -2,6 +2,7 @@
 
 namespace wcf\page;
 
+use Override;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionList;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
@@ -16,9 +17,7 @@ class FaqQuestionListPage extends AbstractPage
 
     public $showFaqAddDialog = 0;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -28,9 +27,7 @@ class FaqQuestionListPage extends AbstractPage
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();

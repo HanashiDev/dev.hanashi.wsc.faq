@@ -2,6 +2,7 @@
 
 namespace wcf\acp\page;
 
+use Override;
 use wcf\data\category\CategoryNodeTree;
 use wcf\data\faq\QuestionList;
 use wcf\page\SortablePage;
@@ -50,9 +51,7 @@ class FaqQuestionListPage extends SortablePage
 
     public $showFaqAddDialog = 0;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -71,9 +70,7 @@ class FaqQuestionListPage extends SortablePage
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     protected function initObjectList()
     {
         parent::initObjectList();
@@ -100,9 +97,7 @@ class FaqQuestionListPage extends SortablePage
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();

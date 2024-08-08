@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq;
 
+use Override;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\DatabaseObject;
@@ -40,17 +41,12 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
 
     protected GroupedAttachmentList $attachmentList;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTitle(): string
     {
         return WCF::getLanguage()->get($this->question);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getAnswer()
     {
         return WCF::getLanguage()->get($this->answer);
@@ -107,33 +103,25 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         return $this->attachmentList;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getUserProfile()
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getSubject()
     {
         return $this->getTitle();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTime()
     {
         return 0;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getLink($query = '')
     {
         return LinkHandler::getInstance()->getControllerLink(FaqQuestionPage::class, [
@@ -141,33 +129,25 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getObjectTypeName()
     {
         return 'dev.tkirch.wsc.faq.question';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getFormattedMessage()
     {
         return $this->getFormattedOutput();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getContainerTitle()
     {
         return '';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getContainerLink()
     {
         return '';

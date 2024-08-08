@@ -2,18 +2,16 @@
 
 namespace wcf\system\search;
 
+use Override;
 use wcf\data\faq\QuestionList;
 use wcf\data\search\ISearchResultObject;
-use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
 final class FaqQuestionSearch extends AbstractSearchProvider
 {
     protected array $faqCache = [];
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function cacheObjects(array $objectIDs, ?array $additionalData = null): void
     {
         $list = new QuestionList();
@@ -27,81 +25,55 @@ final class FaqQuestionSearch extends AbstractSearchProvider
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getObject(int $objectID): ?ISearchResultObject
     {
         return $this->faqCache[$objectID];
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTableName(): string
     {
         return 'wcf' . WCF_N . '_faq_questions';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getIDFieldName(): string
     {
         return $this->getTableName() . '.questionID';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getSubjectFieldName(): string
     {
         return $this->getTableName() . '.question';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getUsernameFieldName(): string
     {
         return $this->getTableName() . '.question';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTimeFieldName(): string
     {
         return $this->getTableName() . '.showOrder';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getFormTemplateName(): string
     {
         return '';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function isAccessible(): bool
     {
         return WCF::getSession()->getPermission('user.faq.canViewFAQ');
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function setLocation()
-    {
-        PageLocationManager::getInstance()->addParentLocation('dev.tkirch.wsc.faq.FaqQuestionList');
-    }
-
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getCustomIconName(): ?string
     {
         return 'circle-question';

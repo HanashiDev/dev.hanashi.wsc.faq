@@ -3,14 +3,13 @@
 namespace wcf\system\bbcode;
 
 use DOMDocument;
+use Override;
 use wcf\data\faq\Question;
 use wcf\system\WCF;
 
 final class FaqBBCode extends AbstractBBCode
 {
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser): string
     {
         $questionID = null;

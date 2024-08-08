@@ -2,6 +2,7 @@
 
 namespace wcf\form;
 
+use Override;
 use wcf\system\WCF;
 
 class FaqQuestionAddForm extends \wcf\acp\form\FaqQuestionAddForm
@@ -11,9 +12,7 @@ class FaqQuestionAddForm extends \wcf\acp\form\FaqQuestionAddForm
      */
     public $objectEditLinkController = FaqQuestionEditForm::class;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();

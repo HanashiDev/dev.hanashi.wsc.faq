@@ -3,6 +3,7 @@
 namespace wcf\page;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use Override;
 use wcf\data\faq\Question;
 use wcf\http\Helper;
 use wcf\system\exception\IllegalLinkException;
@@ -18,9 +19,7 @@ class FaqQuestionPage extends AbstractPage
 
     protected Question $question;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -49,9 +48,7 @@ class FaqQuestionPage extends AbstractPage
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();
