@@ -19,6 +19,7 @@ use wcf\system\form\builder\field\IntegerFormField;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\IFormDocument;
+use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\language\LanguageFactory;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
@@ -58,8 +59,6 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     protected $availableLanguages = [];
 
     protected $isMultilingual = 0;
-
-    protected $multiLingualAnswers = [];
 
     /**
      * @inheritDoc
@@ -185,20 +184,21 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             static function (IFormDocument $document, array $parameters) {
                 foreach ($parameters['data'] as $key => $val) {
                     if (\str_starts_with($key, 'answer_i18n_')) {
-                        $languageID = (int)\substr($key, 12);
-                        $parameters['answer_i18n'][$languageID] = $val;
                         unset($parameters['data'][$key]);
+                    }
+                }
+                foreach ($parameters as $key => $val) {
+                    if (
+                        \str_starts_with($key, 'answer_i18n')
+                        && \str_ends_with($key, 'htmlInputProcessor')
+                        && $val instanceof HtmlInputProcessor
+                    ) {
+                        $parts = \explode('_', $key);
+                        $parameters['answer_i18n'][(int)$parts[2]] = $val->getHtml();
                     }
                 }
 
                 return $parameters;
-            },
-            function (IFormDocument $document, array $data, IStorableObject $object) {
-                foreach ($this->multiLingualAnswers as $languageID => $answer) {
-                    $data['answer_i18n_' . $languageID] = $answer;
-                }
-
-                return $data;
             }
         ));
     }

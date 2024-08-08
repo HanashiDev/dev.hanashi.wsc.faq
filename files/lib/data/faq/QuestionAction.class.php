@@ -50,20 +50,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
     {
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
-            $answers = '';
-            foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
-                $processor = new HtmlInputProcessor();
-                $processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
-                $this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
-                $answers .= $answer;
-            }
-            $inputProcessor = new HtmlInputProcessor();
-            $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
             $this->parameters['data']['isMultilingual'] = 1;
-        } else {
-            $inputProcessor = new HtmlInputProcessor();
-            $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
-            $this->parameters['data']['answer'] = $inputProcessor->getHtml();
         }
 
         //get question
@@ -91,20 +78,17 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
         $this->updateSearchIndex($question);
 
         foreach ($this->parameters as $parameter) {
-            if (!($parameter instanceof AttachmentHandler)) {
-                continue;
-            }
-            $parameter->updateObjectID($question->questionID);
-        }
-
-        if (!empty($inputProcessor)) {
-            $inputProcessor->setObjectID($question->questionID);
-            if (
-                MessageEmbeddedObjectManager::getInstance()->registerObjects(
-                    $inputProcessor
-                )
-            ) {
-                $updateData['hasEmbeddedObjects'] = 1;
+            if ($parameter instanceof AttachmentHandler) {
+                $parameter->updateObjectID($question->questionID);
+            } elseif ($parameter instanceof HtmlInputProcessor) {
+                $parameter->setObjectID($question->questionID);
+                if (
+                    MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                        $parameter
+                    )
+                ) {
+                    $updateData['hasEmbeddedObjects'] = 1;
+                }
             }
         }
 
@@ -132,20 +116,7 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
 
         //prepare answer
         if (isset($this->parameters['answer_i18n'])) {
-            $answers = '';
-            foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {
-                $processor = new HtmlInputProcessor();
-                $processor->process($answer, 'dev.tkirch.wsc.faq.question', 0);
-                $this->parameters['answer_i18n'][$languageID] = $processor->getHtml();
-                $answers .= $answer;
-            }
-            $inputProcessor = new HtmlInputProcessor();
-            $inputProcessor->process($answers, 'dev.tkirch.wsc.faq.question', 0);
             $this->parameters['data']['isMultilingual'] = 1;
-        } else {
-            $inputProcessor = new HtmlInputProcessor();
-            $inputProcessor->process($this->parameters['data']['answer'], 'dev.tkirch.wsc.faq.question', 0);
-            $this->parameters['data']['answer'] = $inputProcessor->getHtml();
         }
 
         parent::update();
@@ -202,20 +173,18 @@ class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAc
             }
 
             foreach ($this->parameters as $parameter) {
-                if (!($parameter instanceof AttachmentHandler)) {
-                    continue;
+                if ($parameter instanceof AttachmentHandler) {
+                    $parameter->updateObjectID($object->questionID);
+                } elseif ($parameter instanceof HtmlInputProcessor) {
+                    $parameter->setObjectID($object->questionID);
+                    if (
+                        $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
+                            $parameter
+                        )
+                    ) {
+                        $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
+                    }
                 }
-                $parameter->updateObjectID($object->questionID);
-            }
-
-            $inputProcessor->setObjectID($object->questionID);
-
-            if (
-                $object->hasEmbeddedObjects != MessageEmbeddedObjectManager::getInstance()->registerObjects(
-                    $inputProcessor
-                )
-            ) {
-                $updateData['hasEmbeddedObjects'] = $object->hasEmbeddedObjects ? 0 : 1;
             }
 
             if (!empty($updateData)) {
