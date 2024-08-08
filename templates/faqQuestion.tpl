@@ -12,7 +12,7 @@
 
 <div class="section">
 	<div class="htmlContent">
-		{@$question->getFormattedOutput()}
+		{unsafe:$question->getFormattedOutput()}
 	</div>
 
 	{include file='attachments'}

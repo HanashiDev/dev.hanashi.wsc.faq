@@ -1,6 +1,6 @@
 {assign var='objectID' value=$question->questionID}
 
-<div class="question jsQuestion jsObjectActionObject" data-object-id="{@$question->questionID}">
+<div class="question jsQuestion jsObjectActionObject" data-object-id="{$question->questionID}">
     <div class="collapsibleQuestion">
         <span class="collapseIcon">{icon name='angle-right' size=16}</span>
         {$question->getTitle()}
@@ -19,7 +19,7 @@
     </div>
     <div class="answer" id="answer-{$question->questionID}">
         <div class="htmlContent">
-            {@$question->getFormattedOutput()}
+            {unsafe:$question->getFormattedOutput()}
         </div>
 
         {include file='attachments'}
