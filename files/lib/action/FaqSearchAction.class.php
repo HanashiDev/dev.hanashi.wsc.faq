@@ -25,7 +25,7 @@ class FaqSearchAction implements RequestHandlerInterface
                     EOT
             );
             if (!isset($postParameters['searchString'])) {
-                return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchDialog'));
+                return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchDialog', 'wcf', [], true));
             }
 
             $sql = "
@@ -58,7 +58,7 @@ class FaqSearchAction implements RequestHandlerInterface
 
             return new HtmlResponse(WCF::getTPL()->fetch('faqQuestionSearchResult', 'wcf', [
                 'questions' => $questionList->getObjects(),
-            ]));
+            ], true));
         } else {
             throw new LogicException('Unreachable');
         }
