@@ -6,7 +6,6 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
-use wcf\data\IStorableObject;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
