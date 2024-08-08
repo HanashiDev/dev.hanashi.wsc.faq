@@ -25,11 +25,10 @@
 			<classname>wcf\system\search\FaqQuestionSearch</classname>
 			<searchindex>wcf1_faq_questions_search_index</searchindex>
 		</type>
-		<type>
-			<name>dev.tkirch.wsc.faq.question.search.index</name>
-			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
-			<classname>wcf\system\worker\FaqQuestionSearchIndexRebuildDataWorker</classname>
-			<nicevalue>200</nicevalue>
-		</type>
 	</import>
+	<delete>
+		<type name="dev.tkirch.wsc.faq.question.search.index">
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+		</type>
+	</delete>
 </data>

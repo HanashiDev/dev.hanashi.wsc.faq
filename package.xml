@@ -39,5 +39,6 @@
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
 		<instruction type="acpMenu"/>
+		<instruction type="objectType"/>
 	</instructions>
 </package>

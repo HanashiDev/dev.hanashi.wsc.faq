@@ -5,11 +5,13 @@ use wcf\acp\form\FaqQuestionAddForm;
 use wcf\acp\page\FaqCategoryListPage;
 use wcf\acp\page\FaqQuestionListPage;
 use wcf\event\acp\menu\item\ItemCollecting;
+use wcf\event\worker\RebuildWorkerCollecting;
 use wcf\system\event\EventHandler;
 use wcf\system\menu\acp\AcpMenuItem;
 use wcf\system\request\LinkHandler;
 use wcf\system\style\FontAwesomeIcon;
 use wcf\system\WCF;
+use wcf\system\worker\FaqQuestionSearchIndexRebuildDataWorker;
 
 return static function (): void {
     EventHandler::getInstance()->register(ItemCollecting::class, static function (ItemCollecting $event) {
@@ -67,4 +69,11 @@ return static function (): void {
             }
         }
     });
+
+    EventHandler::getInstance()->register(
+        RebuildWorkerCollecting::class,
+        static function (RebuildWorkerCollecting $event) {
+            $event->register(FaqQuestionSearchIndexRebuildDataWorker::class, 200);
+        }
+    );
 };
