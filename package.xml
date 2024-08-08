@@ -37,14 +37,4 @@
 	<instructions type="update" fromversion="2.1.1">
 		<instruction type="file"/>
 	</instructions>
-	<instructions type="update" fromversion="2.0.*">
-		<instruction type="file"/>
-		<instruction type="acpTemplate"/>
-		<instruction type="template"/>
-		<instruction type="acpMenu"/>
-		<instruction type="language"/>
-		<instruction type="templateListener"/>
-		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
-		<instruction type="script" run="standalone">acp/update_dev.tkirch.wsc.faq_2.0.0.php</instruction>
-	</instructions>
 </package>
