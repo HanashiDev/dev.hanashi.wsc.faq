@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/package.xsd" name="dev.tkirch.wsc.faq">
+<package xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/package.xsd" name="dev.tkirch.wsc.faq">
 	<packageinformation>
 		<!-- dev.tkirch.wsc.faq -->
 		<packagename>Simple FAQ</packagename>
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
 		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
-		<version>2.1.2</version>
+		<version>2.2.0</version>
 		<date>2024-08-09</date>
 	</packageinformation>
 	<authorinformation>
@@ -14,10 +14,10 @@
 		<authorurl>https://hanashi.dev</authorurl>
 	</authorinformation>
 	<requiredpackages>
-		<requiredpackage minversion="6.0.16">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="6.1.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
 	<excludedpackages>
-		<excludedpackage version="6.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="6.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 	<instructions type="install">
 		<instruction type="file"/>
@@ -34,7 +34,10 @@
 		<instruction type="templateListener"/>
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
-	<instructions type="update" fromversion="2.1.1">
+	<instructions type="update" fromversion="2.1.*">
 		<instruction type="file"/>
+		<instruction type="acpTemplate"/>
+		<instruction type="template"/>
+		<instruction type="acpMenu"/>
 	</instructions>
 </package>
