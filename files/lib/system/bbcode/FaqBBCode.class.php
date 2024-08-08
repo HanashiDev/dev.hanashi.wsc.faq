@@ -6,7 +6,7 @@ use DOMDocument;
 use wcf\data\faq\Question;
 use wcf\system\WCF;
 
-class FaqBBCode extends AbstractBBCode
+final class FaqBBCode extends AbstractBBCode
 {
     /**
      * @inheritDoc

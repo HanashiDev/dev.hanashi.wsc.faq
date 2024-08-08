@@ -24,7 +24,7 @@ use wcf\system\WCF;
  * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
  * @property-read   int $isMultilingual
  */
-class Question extends DatabaseObject implements IRouteController, ISearchResultObject
+final class Question extends DatabaseObject implements IRouteController, ISearchResultObject
 {
     protected FaqCategory $category;
 

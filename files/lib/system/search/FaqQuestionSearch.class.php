@@ -7,7 +7,7 @@ use wcf\data\search\ISearchResultObject;
 use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
-class FaqQuestionSearch extends AbstractSearchProvider
+final class FaqQuestionSearch extends AbstractSearchProvider
 {
     protected array $faqCache = [];
 

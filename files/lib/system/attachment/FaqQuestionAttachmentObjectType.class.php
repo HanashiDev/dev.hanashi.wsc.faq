@@ -4,7 +4,7 @@ namespace wcf\system\attachment;
 
 use wcf\system\WCF;
 
-class FaqQuestionAttachmentObjectType extends AbstractAttachmentObjectType
+final class FaqQuestionAttachmentObjectType extends AbstractAttachmentObjectType
 {
     /**
      * @inheritDoc

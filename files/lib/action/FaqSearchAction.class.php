@@ -11,7 +11,7 @@ use wcf\data\faq\QuestionList;
 use wcf\http\Helper;
 use wcf\system\WCF;
 
-class FaqSearchAction implements RequestHandlerInterface
+final class FaqSearchAction implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

@@ -7,7 +7,7 @@ use wcf\data\faq\QuestionList;
 use wcf\data\language\item\LanguageItemList;
 use wcf\system\search\SearchIndexManager;
 
-class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
+final class FaqQuestionSearchIndexRebuildDataWorker extends AbstractRebuildDataWorker
 {
     /**
      * class name for DatabaseObjectList

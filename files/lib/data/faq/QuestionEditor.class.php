@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * @method      Question     getDecoratedObject()
  * @mixin       Question
  */
-class QuestionEditor extends DatabaseObjectEditor
+final class QuestionEditor extends DatabaseObjectEditor
 {
     /**
      * @inheritDoc

@@ -2,7 +2,7 @@
 
 namespace wcf\system\category;
 
-class FaqCategoryType extends AbstractCategoryType
+final class FaqCategoryType extends AbstractCategoryType
 {
     /**
      * @inheritDoc

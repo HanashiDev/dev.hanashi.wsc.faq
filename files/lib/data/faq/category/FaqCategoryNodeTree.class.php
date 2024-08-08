@@ -5,7 +5,7 @@ namespace wcf\data\faq\category;
 use wcf\data\category\CategoryNode;
 use wcf\data\category\CategoryNodeTree;
 
-class FaqCategoryNodeTree extends CategoryNodeTree
+final class FaqCategoryNodeTree extends CategoryNodeTree
 {
     /**
      * @inheritDoc

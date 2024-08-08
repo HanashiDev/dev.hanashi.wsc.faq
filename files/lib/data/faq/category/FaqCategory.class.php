@@ -17,7 +17,7 @@ use wcf\system\WCF;
  * @method      FaqCategory[]    getParentCategories()
  * @method static FaqCategory|null getCategory($categoryID)
  */
-class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
+final class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 

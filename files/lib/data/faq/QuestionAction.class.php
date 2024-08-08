@@ -18,7 +18,7 @@ use wcf\system\WCF;
  * @method  QuestionEditor[] getObjects()
  * @method  QuestionEditor   getSingleObject()
  */
-class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
+final class QuestionAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction
 {
     use TDatabaseObjectToggle;
 

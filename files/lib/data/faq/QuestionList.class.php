@@ -12,7 +12,7 @@ use wcf\data\DatabaseObjectList;
  * @method  Question|null    search($objectID)
  * @property    Question[] $objects
  */
-class QuestionList extends DatabaseObjectList
+final class QuestionList extends DatabaseObjectList
 {
     /**
      * @inheritDoc
