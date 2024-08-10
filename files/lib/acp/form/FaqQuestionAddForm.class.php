@@ -6,6 +6,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
+use wcf\data\IStorableObject;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
@@ -58,6 +59,8 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     protected $availableLanguages = [];
 
     protected $isMultilingual = 0;
+
+    protected $multiLingualAnswers = [];
 
     /**
      * @inheritDoc
@@ -198,6 +201,13 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
                 }
 
                 return $parameters;
+            },
+            function (IFormDocument $document, array $data, IStorableObject $object) {
+                foreach ($this->multiLingualAnswers as $languageID => $answer) {
+                    $data['answer_i18n_' . $languageID] = $answer;
+                }
+
+                return $data;
             }
         ));
     }
