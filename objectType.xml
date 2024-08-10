@@ -25,6 +25,11 @@
 			<classname>wcf\system\search\FaqQuestionSearch</classname>
 			<searchindex>wcf1_faq_questions_search_index</searchindex>
 		</type>
+		<type>
+			<name>dev.tkirch.wsc.faq.faqCategories</name>
+			<definitionname>com.woltlab.wcf.boxController</definitionname>
+			<classname>wcf\system\box\FaqCategoriesBoxController</classname>
+		</type>
 	</import>
 	<delete>
 		<type name="dev.tkirch.wsc.faq.question.search.index">

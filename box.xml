@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/box.xsd">
+	<import>
+		<box identifier="dev.tkirch.wsc.faq.FaqCategories">
+			<name language="de">Kategorien (FAQ)</name>
+			<name language="en">Categories (FAQ)</name>
+			<boxType>system</boxType>
+			<position>sidebarRight</position>
+			<objectType>dev.tkirch.wsc.faq.faqCategories</objectType>
+			<showHeader>1</showHeader>
+			<visibleEverywhere>0</visibleEverywhere>
+			<visibilityExceptions>
+				<page>dev.tkirch.wsc.faq.FaqQuestionList</page>
+				<page>dev.tkirch.wsc.faq.FaqQuestion</page>
+			</visibilityExceptions>
+			<content language="de">
+				<title>Kategorien</title>
+			</content>
+			<content language="en">
+				<title>Categories</title>
+			</content>
+		</box>
+	</import>
+</data>

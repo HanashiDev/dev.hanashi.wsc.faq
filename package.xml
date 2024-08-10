@@ -24,13 +24,14 @@
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
 		<instruction type="userGroupOption"/>
+		<instruction type="objectType"/>
 		<instruction type="acpMenu"/>
 		<instruction type="bbcode"/>
-		<instruction type="objectType"/>
 		<instruction type="aclOption"/>
 		<instruction type="language"/>
 		<instruction type="option"/>
 		<instruction type="page"/>
+		<instruction type="box"/>
 		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
@@ -40,8 +41,9 @@
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
 		<instruction type="language"/>
+		<instruction type="objectType"/>
 		<instruction type="acpMenu"/>
 		<instruction type="option"/>
-		<instruction type="objectType"/>
+		<instruction type="box"/>
 	</instructions>
 </package>

@@ -8,7 +8,9 @@ use wcf\data\IAccessibleObject;
 use wcf\data\ITitledLinkObject;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
+use wcf\page\FaqQuestionListPage;
 use wcf\system\category\CategoryPermissionHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\style\FontAwesomeIcon;
 use wcf\system\WCF;
 
@@ -79,7 +81,9 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
     #[Override]
     public function getLink(): string
     {
-        return '';
+        return LinkHandler::getInstance()->getControllerLink(FaqQuestionListPage::class, [
+            'object' => $this->getDecoratedObject(),
+        ]);
     }
 
     public function getIcon(int $size = 24): string

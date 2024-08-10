@@ -4,6 +4,7 @@ namespace wcf\page;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use Override;
+use wcf\data\faq\category\FaqCategory;
 use wcf\data\faq\Question;
 use wcf\http\Helper;
 use wcf\system\exception\IllegalLinkException;
@@ -18,6 +19,8 @@ class FaqQuestionPage extends AbstractPage
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
     protected Question $question;
+
+    public ?FaqCategory $category;
 
     #[Override]
     public function readParameters()
@@ -43,6 +46,8 @@ class FaqQuestionPage extends AbstractPage
                 'dev.tkirch.wsc.faq.question',
                 [$this->question->questionID]
             );
+
+            $this->category = FaqCategory::getCategory($this->question->categoryID);
         } catch (MappingError) {
             throw new IllegalLinkException();
         }

@@ -2,9 +2,13 @@
 
 namespace wcf\page;
 
+use CuyZ\Valinor\Mapper\MappingError;
 use Override;
+use wcf\data\faq\category\FaqCategory;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionList;
+use wcf\http\Helper;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
@@ -17,6 +21,8 @@ class FaqQuestionListPage extends AbstractPage
 
     public int $showFaqAddDialog = 0;
 
+    public ?FaqCategory $category;
+
     #[Override]
     public function readParameters()
     {
@@ -24,6 +30,21 @@ class FaqQuestionListPage extends AbstractPage
 
         if (!empty($_REQUEST['showFaqAddDialog'])) {
             $this->showFaqAddDialog = 1;
+        }
+
+        try {
+            $queryParameters = Helper::mapQueryParameters(
+                $_GET,
+                <<<'EOT'
+                    array {
+                        id: positive-int|null
+                    }
+                    EOT
+            );
+
+            $this->category = FaqCategory::getCategory($queryParameters['id']);
+        } catch (MappingError) {
+            throw new IllegalLinkException();
         }
     }
 
@@ -38,6 +59,13 @@ class FaqQuestionListPage extends AbstractPage
         $categoryTree = new FaqCategoryNodeTree('dev.tkirch.wsc.faq.category');
         foreach ($categoryTree->getIterator() as $category) {
             if (!$category->isAccessible()) {
+                continue;
+            }
+            if (
+                isset($this->category)
+                && $this->category !== null
+                && $this->category->categoryID != $category->categoryID
+            ) {
                 continue;
             }
 
