@@ -65,30 +65,8 @@
 </footer>
 
 <script data-relocate="true">
-	document.addEventListener('DOMContentLoaded', () => {
-		document.querySelectorAll('.collapsibleQuestion').forEach(collapsibleQuestion => {
-			collapsibleQuestion.addEventListener('click', event => {
-				// do not collapse when clicking action buttons
-				if (!collapsibleQuestion.isEqualNode(event.target)) {
-					return;
-				}
-
-				let currentAnswer = collapsibleQuestion.nextElementSibling;
-				let isOpen = collapsibleQuestion.parentElement.classList.contains('open');
-
-				document.querySelectorAll('.answer').forEach(answer => {
-					let questionContainer = answer.parentElement;
-
-					if (answer.isEqualNode(currentAnswer) && !isOpen) {
-						questionContainer.classList.add('open');
-						answer.style.display = 'block';
-					} else {
-						questionContainer.classList.remove('open');
-						answer.style.display = 'none';
-					}
-				});
-			});
-		});
+	require(["Hanashi/Faq/Question"], function (Question) {
+		Question.init();
 	});
 </script>
 
