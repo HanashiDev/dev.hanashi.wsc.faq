@@ -3,6 +3,7 @@
 namespace wcf\acp\form;
 
 use Override;
+use wcf\data\IStorableObject;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\data\processor\CustomFormDataProcessor;
 use wcf\system\form\builder\field\IconFormField;
@@ -20,8 +21,6 @@ class FaqCategoryAddForm extends CategoryAddFormBuilderForm
      */
     public string $objectTypeName = 'dev.tkirch.wsc.faq.category';
 
-    protected string $icon = '';
-
     #[Override]
     protected function createForm()
     {
@@ -32,8 +31,7 @@ class FaqCategoryAddForm extends CategoryAddFormBuilderForm
                 ->label('Eigenschaften')
                 ->appendChildren([
                     IconFormField::create('faqIcon')
-                        ->label('Icon')
-                        ->value($this->icon),
+                        ->label('Icon'),
                 ]),
         ]);
     }
@@ -49,6 +47,13 @@ class FaqCategoryAddForm extends CategoryAddFormBuilderForm
                     unset($parameters['data']['faqIcon']);
 
                     return $parameters;
+                },
+                function (IFormDocument $document, array $data, IStorableObject $object) {
+                    if (isset($this->formObject->additionalData['faqIcon'])) {
+                        $data['faqIcon'] = $this->formObject->additionalData['faqIcon'];
+                    }
+
+                    return $data;
                 }
             )
         );
