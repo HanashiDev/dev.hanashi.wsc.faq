@@ -4,7 +4,7 @@
     <div class="collapsibleQuestion">
         <span class="collapseIcon">{icon name='angle-right' size=16}</span>
         {$question->getTitle()}
-        <div class="actions jsQuestionActions">
+        <div class="actions">
             {if $__wcf->session->getPermission('admin.faq.canEditQuestion') || $__wcf->session->getPermission('admin.faq.canDeleteQuestion')}
                 {if $__wcf->session->getPermission('admin.faq.canEditQuestion')}
                     {objectAction action="toggle" isDisabled=$question->isDisabled}
