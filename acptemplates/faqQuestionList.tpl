@@ -90,6 +90,7 @@
 
 						<span class="statusDisplay sortableButtonContainer">
 							{objectAction action="toggle" isDisabled=$question->isDisabled}
+							<a href="{link controller='FaqQuestionAdd' duplicateID=$question->questionID isMultilingual=$question->isMultilingual}{/link}" title="{lang}wcf.acp.faqQuestion.copy{/lang}" class="jsTooltip">{icon name='copy' size=16}</a>
 							<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">{icon name='pencil' size=16}</a>
 							{objectAction action="delete" objectTitle=$question->getTitle()}
 

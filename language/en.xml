@@ -75,5 +75,8 @@
 			<item name="wcf.acp.option.category.cms.faq"><![CDATA[FAQ]]></item>
 			<item name="wcf.acp.option.simple_faq_view"><![CDATA[View]]></item>
 		</category>
+		<category name="wcf.acp.faqQuestion">
+			<item name="wcf.acp.faqQuestion.copy"><![CDATA[Copy answer]]></item>
+		</category>
 	</import>
 </language>

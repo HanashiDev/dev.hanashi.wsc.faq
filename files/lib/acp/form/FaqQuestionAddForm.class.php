@@ -5,8 +5,11 @@ namespace wcf\acp\form;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Override;
 use wcf\data\faq\category\FaqCategoryNodeTree;
+use wcf\data\faq\Question;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
+use wcf\data\IStorableObject;
+use wcf\data\language\item\LanguageItemList;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
@@ -60,6 +63,8 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
 
     protected int $isMultilingual = 0;
 
+    protected array $multiLingualAnswers = [];
+
     #[Override]
     public function readParameters()
     {
@@ -70,6 +75,23 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
 
         if (!empty($_REQUEST['isMultilingual'])) {
             $this->isMultilingual = 1;
+        }
+
+        if (isset($_GET['duplicateID'])) {
+            $question = new Question($_GET['duplicateID']);
+            if ($question->questionID) {
+                $this->formObject = $question;
+                if ($this->formObject->isMultilingual) {
+                    $this->isMultilingual = 1;
+
+                    $languageItemList = new LanguageItemList();
+                    $languageItemList->getConditionBuilder()->add('languageItem = ?', [$this->formObject->answer]);
+                    $languageItemList->readObjects();
+                    foreach ($languageItemList as $languageItem) {
+                        $this->multiLingualAnswers[$languageItem->languageID] = $languageItem->languageItemValue;
+                    }
+                }
+            }
         }
 
         // work-around to force adding faq via dialog overlay
@@ -193,6 +215,13 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
                 }
 
                 return $parameters;
+            },
+            function (IFormDocument $document, array $data, IStorableObject $object) {
+                foreach ($this->multiLingualAnswers as $languageID => $answer) {
+                    $data['answer_i18n_' . $languageID] = $answer;
+                }
+
+                return $data;
             }
         ));
     }
