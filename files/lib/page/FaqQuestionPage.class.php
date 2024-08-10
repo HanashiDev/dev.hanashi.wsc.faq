@@ -60,6 +60,7 @@ class FaqQuestionPage extends AbstractPage
 
         WCF::getTPL()->assign([
             'question' => $this->question,
+            'faqCategory' => $this->category,
         ]);
     }
 }
