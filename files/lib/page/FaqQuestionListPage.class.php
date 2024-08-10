@@ -50,9 +50,11 @@ class FaqQuestionListPage extends AbstractPage
             }
 
             $faq = [
+                'id' => $category->categoryID,
                 'title' => WCF::getLanguage()->get($category->title),
                 'attachments' => $questionList->getAttachmentList(),
-                'icon' => $category->getIcon(),
+                'icon24' => $category->getIcon(24),
+                'icon64' => $category->getIcon(64),
             ];
 
             foreach ($questionList->getObjects() as $question) {

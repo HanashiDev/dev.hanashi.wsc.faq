@@ -28,6 +28,7 @@
 			<item name="wcf.acp.faq.i18n.i18n"><![CDATA[Multilingual FAQ entry]]></item>
 			<item name="wcf.acp.faq.default"><![CDATA[Default view]]></item>
 			<item name="wcf.acp.faq.cleave"><![CDATA[Cleave view]]></item>
+			<item name="wcf.acp.faq.gallery"><![CDATA[Gallery view]]></item>
 		</category>
 		<category name="wcf.acp.group">
 			<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>

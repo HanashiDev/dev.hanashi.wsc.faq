@@ -12,7 +12,8 @@
 				<optiontype>select</optiontype>
 				<defaultvalue>default</defaultvalue>
 				<selectoptions>default:wcf.acp.faq.default
-cleave:wcf.acp.faq.cleave</selectoptions>
+cleave:wcf.acp.faq.cleave
+gallery:wcf.acp.faq.gallery</selectoptions>
 			</option>
 		</options>
 	</import>

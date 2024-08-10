@@ -1,3 +1,5 @@
+import DomUtil from "WoltLabSuite/Core/Dom/Util";
+
 export function init() {
   document.querySelectorAll(".collapsibleQuestion").forEach((question: HTMLDivElement) => {
     question.addEventListener("click", (event: MouseEvent) => {
@@ -20,6 +22,36 @@ export function init() {
           answer.style.display = "none";
         }
       });
+    });
+  });
+}
+
+export function initGallery() {
+  document.querySelectorAll(".galleryButton").forEach((button: HTMLButtonElement) => {
+    const id = button.dataset.id;
+    if (id === undefined) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      document
+        .querySelectorAll(".faqGallerySection:not(#faqSection" + id + ")")
+        .forEach((faqSection: HTMLDivElement) => {
+          DomUtil.hide(faqSection);
+        });
+      document.querySelectorAll('.buttonActive:not([data-id="15"])').forEach((buttonActive: HTMLDivElement) => {
+        buttonActive.classList.remove("buttonActive");
+      });
+
+      button.classList.add("buttonActive");
+
+      const faqSection = document.getElementById("faqSection" + id) as HTMLDivElement | null;
+      if (faqSection === null) {
+        return;
+      }
+
+      DomUtil.show(faqSection);
+      faqSection.scrollIntoView();
     });
   });
 }

@@ -1,7 +1,8 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "tslib", "WoltLabSuite/Core/Dom/Util"], function (require, exports, tslib_1, Util_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.init = void 0;
+    exports.initGallery = exports.init = void 0;
+    Util_1 = tslib_1.__importDefault(Util_1);
     function init() {
         document.querySelectorAll(".collapsibleQuestion").forEach((question) => {
             question.addEventListener("click", (event) => {
@@ -26,4 +27,30 @@ define(["require", "exports"], function (require, exports) {
         });
     }
     exports.init = init;
+    function initGallery() {
+        document.querySelectorAll(".galleryButton").forEach((button) => {
+            const id = button.dataset.id;
+            if (id === undefined) {
+                return;
+            }
+            button.addEventListener("click", () => {
+                document
+                    .querySelectorAll(".faqGallerySection:not(#faqSection" + id + ")")
+                    .forEach((faqSection) => {
+                    Util_1.default.hide(faqSection);
+                });
+                document.querySelectorAll('.buttonActive:not([data-id="15"])').forEach((buttonActive) => {
+                    buttonActive.classList.remove("buttonActive");
+                });
+                button.classList.add("buttonActive");
+                const faqSection = document.getElementById("faqSection" + id);
+                if (faqSection === null) {
+                    return;
+                }
+                Util_1.default.show(faqSection);
+                faqSection.scrollIntoView();
+            });
+        });
+    }
+    exports.initGallery = initGallery;
 });
