@@ -9,6 +9,7 @@ use wcf\data\ITitledLinkObject;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\category\CategoryPermissionHandler;
+use wcf\system\style\FontAwesomeIcon;
 use wcf\system\WCF;
 
 /**
@@ -78,6 +79,18 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
     #[Override]
     public function getLink(): string
     {
+        return '';
+    }
+
+    public function getIcon(int $size = 24): string
+    {
+        if (
+            isset($this->additionalData['faqIcon'])
+            && FontAwesomeIcon::isValidString($this->additionalData['faqIcon'])
+        ) {
+            return FontAwesomeIcon::fromString($this->additionalData['faqIcon'])->toHtml($size);
+        }
+
         return '';
     }
 }

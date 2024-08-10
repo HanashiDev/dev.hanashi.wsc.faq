@@ -24,7 +24,7 @@
 			{assign var='attachmentList' value=$faq['attachments']}
 
 			<div class="section faq jsObjectActionContainer" data-object-action-class-name="wcf\data\faq\QuestionAction">
-				<h2>{$faq['title']}</h2>
+				<h2>{unsafe:$faq['icon']} {$faq['title']}</h2>
 
 				{if $faq['questions']|isset}
 					{foreach from=$faq['questions'] item=question}
