@@ -28,10 +28,10 @@ class FaqCategoryAddForm extends CategoryAddFormBuilderForm
 
         $this->form->appendChildren([
             FormContainer::create('properties')
-                ->label('Eigenschaften')
+                ->label('wcf.acp.faq.properties')
                 ->appendChildren([
                     IconFormField::create('faqIcon')
-                        ->label('Icon'),
+                        ->label('wcf.acp.faq.faqIcon'),
                 ]),
         ]);
     }

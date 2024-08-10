@@ -29,6 +29,8 @@
 			<item name="wcf.acp.faq.default"><![CDATA[Standardansicht]]></item>
 			<item name="wcf.acp.faq.cleave"><![CDATA[Spaltenansicht]]></item>
 			<item name="wcf.acp.faq.gallery"><![CDATA[Galerieansicht]]></item>
+			<item name="wcf.acp.faq.properties"><![CDATA[Eigenschaften]]></item>
+			<item name="wcf.acp.faq.faqIcon"><![CDATA[Icon]]></item>
 		</category>
 		<category name="wcf.acp.group">
 			<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
