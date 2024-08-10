@@ -26,6 +26,8 @@
 			<item name="wcf.acp.faq.question.isDisabled"><![CDATA[Question is disabled]]></item>
 			<item name="wcf.acp.faq.i18n.none"><![CDATA[Monolingual FAQ entry]]></item>
 			<item name="wcf.acp.faq.i18n.i18n"><![CDATA[Multilingual FAQ entry]]></item>
+			<item name="wcf.acp.faq.default"><![CDATA[Default view]]></item>
+			<item name="wcf.acp.faq.cleave"><![CDATA[Cleave view]]></item>
 		</category>
 		<category name="wcf.acp.group">
 			<item name="wcf.acp.group.option.category.user.faq"><![CDATA[FAQ]]></item>
@@ -67,6 +69,10 @@
 		<category name="wcf.acp.rebuildData">
 			<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index"><![CDATA[Update search index for FAQ]]></item>
 			<item name="wcf.acp.rebuildData.dev.tkirch.wsc.faq.question.search.index.description"><![CDATA[Updates the search index for FAQ questions]]></item>
+		</category>
+		<category name="wcf.acp.option">
+			<item name="wcf.acp.option.category.cms.faq"><![CDATA[FAQ]]></item>
+			<item name="wcf.acp.option.simple_faq_view"><![CDATA[View]]></item>
 		</category>
 	</import>
 </language>

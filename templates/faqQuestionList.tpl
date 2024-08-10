@@ -19,11 +19,12 @@
 {include file='header' contentHeader=$__contentHeader}
 
 {if $faqs|count}
+	<div class="section jsObjectActionContainer{if SIMPLE_FAQ_VIEW === 'cleave'} faqCleave{/if}" data-object-action-class-name="wcf\data\faq\QuestionAction">
 	{foreach from=$faqs item=faq}
 		{if ($faq['questions']|isset && $faq['questions']|count) || ($faq['sub']|isset && $faq['sub']|count)}
 			{assign var='attachmentList' value=$faq['attachments']}
 
-			<div class="section faq jsObjectActionContainer" data-object-action-class-name="wcf\data\faq\QuestionAction">
+			<div class="section faq{if SIMPLE_FAQ_VIEW === 'cleave'} cleaveCategory{/if}">
 				<h2>{unsafe:$faq['icon']} {$faq['title']}</h2>
 
 				{if $faq['questions']|isset}
@@ -50,6 +51,7 @@
 			</div>
 		{/if}
 	{/foreach}
+	</div>
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}

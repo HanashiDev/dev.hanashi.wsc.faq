@@ -1,3 +1,19 @@
+@media screen and (min-width: 1024px) {
+	.faqCleave {
+		display: flex;
+		flex-wrap: wrap;
+
+		.cleaveCategory {
+			flex: 1 auto;
+			flex-direction: column;
+			flex-basis: calc(50% - 10px);
+			flex-grow: 0;
+			flex-shrink: 0;
+			margin: 5px !important;
+		}
+	}
+}
+
 .faq {
 	> h2 {
     	font-size: 1.5rem;

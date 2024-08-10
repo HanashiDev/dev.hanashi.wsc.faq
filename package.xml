@@ -29,6 +29,7 @@
 		<instruction type="objectType"/>
 		<instruction type="aclOption"/>
 		<instruction type="language"/>
+		<instruction type="option"/>
 		<instruction type="page"/>
 		<instruction type="menuItem"/>
 		<instruction type="templateListener"/>
@@ -38,7 +39,9 @@
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
 		<instruction type="template"/>
+		<instruction type="language"/>
 		<instruction type="acpMenu"/>
+		<instruction type="option"/>
 		<instruction type="objectType"/>
 	</instructions>
 </package>

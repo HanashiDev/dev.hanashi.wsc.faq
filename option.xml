@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/option.xsd">
+	<import>
+		<categories>
+			<category name="cms.faq">
+				<parent>cms</parent>
+			</category>
+		</categories>
+		<options>
+			<option name="simple_faq_view">
+				<categoryname>cms.faq</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue>default</defaultvalue>
+				<selectoptions>default:wcf.acp.faq.default
+cleave:wcf.acp.faq.cleave</selectoptions>
+			</option>
+		</options>
+	</import>
+</data>
