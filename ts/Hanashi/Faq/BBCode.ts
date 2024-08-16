@@ -4,7 +4,8 @@ import { listenToCkeditor } from "WoltLabSuite/Core/Component/Ckeditor/Event";
 import { dialogFactory } from "WoltLabSuite/Core/Component/Dialog";
 import DomUtil from "WoltLabSuite/Core/Dom/Util";
 import * as Language from "WoltLabSuite/Core/Language";
-import { renderSearch, searchQuestions } from "./Api/Questions/Search";
+import { searchQuestions } from "./Api/Questions/GetSearch";
+import { renderSearch } from "./Api/Questions/RenderSearch";
 
 export class FaqBBCode {
   private dialog: WoltlabCoreDialogElement;

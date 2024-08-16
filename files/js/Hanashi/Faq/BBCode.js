@@ -1,4 +1,4 @@
-define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language", "./Api/Questions/Search"], function (require, exports, tslib_1, Event_1, Dialog_1, Util_1, Language, Search_1) {
+define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language", "./Api/Questions/GetSearch", "./Api/Questions/RenderSearch"], function (require, exports, tslib_1, Event_1, Dialog_1, Util_1, Language, GetSearch_1, RenderSearch_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FaqBBCode = void 0;
@@ -29,7 +29,7 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Eve
             });
         }
         async openDialog(ckeditor) {
-            const inputResponse = await (0, Search_1.renderSearch)();
+            const inputResponse = await (0, RenderSearch_1.renderSearch)();
             if (!inputResponse.ok) {
                 return;
             }
@@ -67,7 +67,7 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Eve
                     Util_1.default.innerError(inputContainer, false);
                 }
             }
-            const inputResponse = await (0, Search_1.searchQuestions)(value);
+            const inputResponse = await (0, GetSearch_1.searchQuestions)(value);
             if (!inputResponse.ok) {
                 return;
             }
