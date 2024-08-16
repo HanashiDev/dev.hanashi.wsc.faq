@@ -1,6 +1,6 @@
 <?php
 
-namespace wcf\system\endpoint\controller\faq\questions\search;
+namespace wcf\system\endpoint\controller\hanashi\questions\search;
 
 use Laminas\Diactoros\Response\JsonResponse;
 use Override;
@@ -15,7 +15,7 @@ use wcf\system\endpoint\IController;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
-#[GetRequest('/faq/questions/search')]
+#[GetRequest('/hanashi/questions/search')]
 final class GetSearch implements IController
 {
     #[Override]

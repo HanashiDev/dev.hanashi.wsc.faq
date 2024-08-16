@@ -1,6 +1,6 @@
 <?php
 
-namespace wcf\system\endpoint\controller\faq\questions\search;
+namespace wcf\system\endpoint\controller\hanashi\questions\search;
 
 use Laminas\Diactoros\Response\JsonResponse;
 use Override;
@@ -10,7 +10,7 @@ use wcf\system\endpoint\GetRequest;
 use wcf\system\endpoint\IController;
 use wcf\system\WCF;
 
-#[GetRequest('/faq/questions/search/render')]
+#[GetRequest('/hanashi/questions/search/render')]
 final class RenderSearch implements IController
 {
     #[Override]

@@ -1,4 +1,4 @@
-define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language", "./Api/Questions/GetSearch", "./Api/Questions/RenderSearch"], function (require, exports, tslib_1, Event_1, Dialog_1, Util_1, Language, GetSearch_1, RenderSearch_1) {
+define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language", "../Api/Questions/RenderSearch", "../Api/Questions/GetSearch"], function (require, exports, tslib_1, Event_1, Dialog_1, Util_1, Language, RenderSearch_1, GetSearch_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FaqBBCode = void 0;

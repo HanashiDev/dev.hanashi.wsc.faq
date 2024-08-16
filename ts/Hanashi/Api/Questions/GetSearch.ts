@@ -5,8 +5,9 @@ type Response = {
   template: string;
 };
 
-export async function renderSearch(): Promise<ApiResult<Response>> {
-  const url = new URL(`${window.WSC_API_URL}index.php?api/rpc/faq/questions/search/render`);
+export async function searchQuestions(query: string): Promise<ApiResult<Response>> {
+  const url = new URL(`${window.WSC_API_URL}index.php?api/rpc/hanashi/questions/search`);
+  url.searchParams.set("query", query);
 
   let response: Response;
   try {
