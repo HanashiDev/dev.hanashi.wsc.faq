@@ -1,7 +1,8 @@
 define(["require", "exports", "tslib", "WoltLabSuite/Core/Dom/Util"], function (require, exports, tslib_1, Util_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.initGallery = exports.init = void 0;
+    exports.init = init;
+    exports.initGallery = initGallery;
     Util_1 = tslib_1.__importDefault(Util_1);
     function init() {
         document.querySelectorAll(".collapsibleQuestion").forEach((question) => {
@@ -26,7 +27,6 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Dom/Util"], function (
             });
         });
     }
-    exports.init = init;
     function initGallery() {
         document.querySelectorAll(".galleryButton").forEach((button) => {
             const id = button.dataset.id;
@@ -52,5 +52,4 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Dom/Util"], function (
             });
         });
     }
-    exports.initGallery = initGallery;
 });

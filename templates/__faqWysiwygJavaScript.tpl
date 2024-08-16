@@ -4,7 +4,6 @@
 		{jsphrase name='wcf.faq.question.search.error.tooShort'}
 		{jsphrase name='wcf.faq.bbcode.faqEntry'}
 
-		{capture assign='faqEndpoints'}{link controller='FaqSearch' application='wcf'}{/link}{/capture}
-		new FaqBBCode('{$wysiwygSelector|encodeJS}', '{$faqEndpoints|encodeJS}');
+		new FaqBBCode('{unsafe:$wysiwygSelector|encodeJS}');
 	})
 </script>

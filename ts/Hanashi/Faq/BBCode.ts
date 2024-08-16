@@ -1,19 +1,15 @@
 import WoltlabCoreDialogElement from "WoltLabSuite/Core/Element/woltlab-core-dialog";
-import { prepareRequest } from "WoltLabSuite/Core/Ajax/Backend";
 import { CKEditor } from "WoltLabSuite/Core/Component/Ckeditor";
 import { listenToCkeditor } from "WoltLabSuite/Core/Component/Ckeditor/Event";
 import { dialogFactory } from "WoltLabSuite/Core/Component/Dialog";
 import DomUtil from "WoltLabSuite/Core/Dom/Util";
 import * as Language from "WoltLabSuite/Core/Language";
+import { renderSearch, searchQuestions } from "./Api/Questions/Search";
 
 export class FaqBBCode {
-  private endpoint: string;
-
   private dialog: WoltlabCoreDialogElement;
 
-  constructor(selector: string, endpoint: string) {
-    this.endpoint = endpoint;
-
+  constructor(selector: string) {
     const element = document.getElementById(selector);
     if (element === null) {
       return;
@@ -41,15 +37,12 @@ export class FaqBBCode {
   }
 
   private async openDialog(ckeditor: CKEditor) {
-    const request = prepareRequest(this.endpoint).get();
-    const response = await request.fetchAsResponse();
-    const template = await response?.text();
-
-    if (template === undefined) {
+    const inputResponse = await renderSearch();
+    if (!inputResponse.ok) {
       return;
     }
 
-    this.dialog = dialogFactory().fromHtml(template).withoutControls();
+    this.dialog = dialogFactory().fromHtml(inputResponse.value.template).withoutControls();
     this.dialog.show(Language.getPhrase("wcf.faq.question.search"));
 
     const searchInput = document.getElementById("wcfUiFaqSearchInput");
@@ -87,13 +80,8 @@ export class FaqBBCode {
       }
     }
 
-    const request = prepareRequest(this.endpoint).post({
-      searchString: value,
-    });
-    const response = await request.fetchAsResponse();
-    const template = await response?.text();
-
-    if (template === undefined) {
+    const inputResponse = await searchQuestions(value);
+    if (!inputResponse.ok) {
       return;
     }
 
@@ -103,7 +91,7 @@ export class FaqBBCode {
       return;
     }
 
-    resultList.innerHTML = template;
+    resultList.innerHTML = inputResponse.value.template;
     DomUtil.show(resultContainer);
 
     resultList.querySelectorAll(".faqQuestionResultEntry").forEach((resultEntry: HTMLElement) => {

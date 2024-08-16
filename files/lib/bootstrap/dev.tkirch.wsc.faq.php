@@ -5,7 +5,10 @@ use wcf\acp\form\FaqQuestionAddForm;
 use wcf\acp\page\FaqCategoryListPage;
 use wcf\acp\page\FaqQuestionListPage;
 use wcf\event\acp\menu\item\ItemCollecting;
+use wcf\event\endpoint\ControllerCollecting;
 use wcf\event\worker\RebuildWorkerCollecting;
+use wcf\system\endpoint\controller\faq\questions\search\GetSearch;
+use wcf\system\endpoint\controller\faq\questions\search\RenderSearch;
 use wcf\system\event\EventHandler;
 use wcf\system\menu\acp\AcpMenuItem;
 use wcf\system\request\LinkHandler;
@@ -74,6 +77,14 @@ return static function (): void {
         RebuildWorkerCollecting::class,
         static function (RebuildWorkerCollecting $event) {
             $event->register(FaqQuestionSearchIndexRebuildDataWorker::class, 200);
+        }
+    );
+
+    EventHandler::getInstance()->register(
+        ControllerCollecting::class,
+        static function (ControllerCollecting $event) {
+            $event->register(new RenderSearch());
+            $event->register(new GetSearch());
         }
     );
 };

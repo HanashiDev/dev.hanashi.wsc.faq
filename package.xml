@@ -45,5 +45,6 @@
 		<instruction type="acpMenu"/>
 		<instruction type="option"/>
 		<instruction type="box"/>
+		<instruction type="fileDelete"/>
 	</instructions>
 </package>
