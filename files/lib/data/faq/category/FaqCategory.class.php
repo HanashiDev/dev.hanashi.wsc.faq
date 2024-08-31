@@ -2,12 +2,16 @@
 
 namespace wcf\data\faq\category;
 
+use Override;
 use wcf\data\category\AbstractDecoratedCategory;
 use wcf\data\IAccessibleObject;
 use wcf\data\ITitledLinkObject;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
+use wcf\page\FaqQuestionListPage;
 use wcf\system\category\CategoryPermissionHandler;
+use wcf\system\request\LinkHandler;
+use wcf\system\style\FontAwesomeIcon;
 use wcf\system\WCF;
 
 /**
@@ -17,7 +21,7 @@ use wcf\system\WCF;
  * @method      FaqCategory[]    getParentCategories()
  * @method static FaqCategory|null getCategory($categoryID)
  */
-class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
+final class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject, ITitledLinkObject
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 
@@ -25,9 +29,7 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
 
     private bool $prefix = false;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function isAccessible(?User $user = null)
     {
         if ($this->getObjectType()->objectType !== self::OBJECT_TYPE_NAME) {
@@ -65,9 +67,7 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
         return (new UserProfile($user))->getPermission((($isMod) ? 'mod' : 'user') . '.faq.' . $permission);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTitle(): string
     {
         return ($this->prefix ? '&nbsp;&nbsp;' : '') . WCF::getLanguage()->get($this->title);
@@ -78,11 +78,23 @@ class FaqCategory extends AbstractDecoratedCategory implements IAccessibleObject
         $this->prefix = $prefix;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getLink(): string
     {
+        return LinkHandler::getInstance()->getControllerLink(FaqQuestionListPage::class, [
+            'object' => $this->getDecoratedObject(),
+        ]);
+    }
+
+    public function getIcon(int $size = 24): string
+    {
+        if (
+            isset($this->additionalData['faqIcon'])
+            && FontAwesomeIcon::isValidString($this->additionalData['faqIcon'])
+        ) {
+            return FontAwesomeIcon::fromString($this->additionalData['faqIcon'])->toHtml($size);
+        }
+
         return '';
     }
 }

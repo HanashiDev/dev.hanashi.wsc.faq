@@ -2,8 +2,13 @@
 
 namespace wcf\page;
 
+use CuyZ\Valinor\Mapper\MappingError;
+use Override;
+use wcf\data\faq\category\FaqCategory;
 use wcf\data\faq\category\FaqCategoryNodeTree;
 use wcf\data\faq\QuestionList;
+use wcf\http\Helper;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
@@ -14,11 +19,11 @@ class FaqQuestionListPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
-    public $showFaqAddDialog = 0;
+    public int $showFaqAddDialog = 0;
 
-    /**
-     * @inheritDoc
-     */
+    public ?FaqCategory $category;
+
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -26,11 +31,24 @@ class FaqQuestionListPage extends AbstractPage
         if (!empty($_REQUEST['showFaqAddDialog'])) {
             $this->showFaqAddDialog = 1;
         }
+
+        try {
+            $queryParameters = Helper::mapQueryParameters(
+                $_GET,
+                <<<'EOT'
+                    array {
+                        id: positive-int|null
+                    }
+                    EOT
+            );
+
+            $this->category = FaqCategory::getCategory($queryParameters['id']);
+        } catch (MappingError) {
+            throw new IllegalLinkException();
+        }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();
@@ -43,6 +61,13 @@ class FaqQuestionListPage extends AbstractPage
             if (!$category->isAccessible()) {
                 continue;
             }
+            if (
+                isset($this->category)
+                && $this->category !== null
+                && $this->category->categoryID != $category->categoryID
+            ) {
+                continue;
+            }
 
             $questionList = new QuestionList();
             $questionList->getConditionBuilder()->add('categoryID = ?', [$category->categoryID]);
@@ -53,8 +78,11 @@ class FaqQuestionListPage extends AbstractPage
             }
 
             $faq = [
+                'id' => $category->categoryID,
                 'title' => WCF::getLanguage()->get($category->title),
                 'attachments' => $questionList->getAttachmentList(),
+                'icon24' => $category->getIcon(24),
+                'icon64' => $category->getIcon(64),
             ];
 
             foreach ($questionList->getObjects() as $question) {

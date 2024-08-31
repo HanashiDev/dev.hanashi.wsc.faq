@@ -19,37 +19,79 @@
 {include file='header' contentHeader=$__contentHeader}
 
 {if $faqs|count}
-	{foreach from=$faqs item=faq}
-		{if ($faq['questions']|isset && $faq['questions']|count) || ($faq['sub']|isset && $faq['sub']|count)}
-			{assign var='attachmentList' value=$faq['attachments']}
-
-			<div class="section faq jsObjectActionContainer" data-object-action-class-name="wcf\data\faq\QuestionAction">
-				<h2>{$faq['title']}</h2>
-
-				{if $faq['questions']|isset}
-					{foreach from=$faq['questions'] item=question}
-						{include file='__faqQuestionListEntry'}
-					{/foreach}
-				{/if}
-
-				{if $faq['sub']|isset && $faq['sub']|count}
-					{foreach from=$faq['sub'] item=sub}
-						{if $sub['questions']|isset && $sub['questions']|count}
-							{assign var='attachmentList' value=$sub['attachments']}
-
-							<div class="sub">
-								<h2>{$sub['title']}</h2>
-
-								{foreach from=$sub['questions'] item=question}
-									{include file='__faqQuestionListEntry'}
-								{/foreach}
-							</div>
+	{if SIMPLE_FAQ_VIEW === 'gallery'}
+		<div class="faqGallery">
+			{foreach from=$faqs item=faq}
+				{if ($faq['questions']|isset && $faq['questions']|count)}
+					<button type="button" class="button galleryButton" data-id="{$faq['id']}">
+						{if $faq['icon64'] === ''}
+							{icon name='circle-question' size=64}
+						{else}
+							{unsafe:$faq['icon64']}
 						{/if}
-					{/foreach}
+						{$faq['title']}
+					</button>
 				{/if}
-			</div>
-		{/if}
-	{/foreach}
+			{/foreach}
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+			<div class="gallerySpacer"></div>
+		</div>
+		{foreach from=$faqs item=faq}
+			{if ($faq['questions']|isset && $faq['questions']|count)}
+				{assign var='attachmentList' value=$faq['attachments']}
+
+				<div id="faqSection{$faq['id']}" class="section faqGallerySection jsObjectActionContainer faq" data-object-action-class-name="wcf\data\faq\QuestionAction" style="display: none;">
+					<h2>{unsafe:$faq['icon24']} {$faq['title']}</h2>
+
+					{if $faq['questions']|isset}
+						{foreach from=$faq['questions'] item=question}
+							{include file='__faqQuestionListEntry'}
+						{/foreach}
+					{/if}
+				</div>
+			{/if}
+		{/foreach}
+	{else}
+		<div class="section jsObjectActionContainer{if SIMPLE_FAQ_VIEW === 'cleave'} faqCleave{/if}" data-object-action-class-name="wcf\data\faq\QuestionAction">
+			{foreach from=$faqs item=faq}
+				{if ($faq['questions']|isset && $faq['questions']|count) || ($faq['sub']|isset && $faq['sub']|count)}
+					{assign var='attachmentList' value=$faq['attachments']}
+
+					<div class="section faq{if SIMPLE_FAQ_VIEW === 'cleave'} cleaveCategory{/if}">
+						<h2>{unsafe:$faq['icon24']} {$faq['title']}</h2>
+
+						{if $faq['questions']|isset}
+							{foreach from=$faq['questions'] item=question}
+								{include file='__faqQuestionListEntry'}
+							{/foreach}
+						{/if}
+
+						{if $faq['sub']|isset && $faq['sub']|count}
+							{foreach from=$faq['sub'] item=sub}
+								{if $sub['questions']|isset && $sub['questions']|count}
+									{assign var='attachmentList' value=$sub['attachments']}
+
+									<div class="sub">
+										<h2>{$sub['title']}</h2>
+
+										{foreach from=$sub['questions'] item=question}
+											{include file='__faqQuestionListEntry'}
+										{/foreach}
+									</div>
+								{/if}
+							{/foreach}
+						{/if}
+					</div>
+				{/if}
+			{/foreach}
+		</div>
+	{/if}
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
@@ -65,30 +107,11 @@
 </footer>
 
 <script data-relocate="true">
-	document.addEventListener('DOMContentLoaded', () => {
-		document.querySelectorAll('.collapsibleQuestion').forEach(collapsibleQuestion => {
-			collapsibleQuestion.addEventListener('click', event => {
-				// do not collapse when clicking action buttons
-				if (!collapsibleQuestion.isEqualNode(event.target)) {
-					return;
-				}
-
-				let currentAnswer = collapsibleQuestion.nextElementSibling;
-				let isOpen = collapsibleQuestion.parentElement.classList.contains('open');
-
-				document.querySelectorAll('.answer').forEach(answer => {
-					let questionContainer = answer.parentElement;
-
-					if (answer.isEqualNode(currentAnswer) && !isOpen) {
-						questionContainer.classList.add('open');
-						answer.style.display = 'block';
-					} else {
-						questionContainer.classList.remove('open');
-						answer.style.display = 'none';
-					}
-				});
-			});
-		});
+	require(["Hanashi/Faq/Question"], function (Question) {
+		Question.init();
+		{if SIMPLE_FAQ_VIEW === 'gallery'}
+			Question.initGallery();
+		{/if}
 	});
 </script>
 

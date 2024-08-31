@@ -2,6 +2,7 @@
 
 namespace wcf\data\faq;
 
+use Override;
 use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\category\Category;
 use wcf\data\DatabaseObject;
@@ -24,7 +25,7 @@ use wcf\system\WCF;
  * @property-read   int $hasEmbeddedObjects is `1` if the question has embedded objects, otherwise `0`
  * @property-read   int $isMultilingual
  */
-class Question extends DatabaseObject implements IRouteController, ISearchResultObject
+final class Question extends DatabaseObject implements IRouteController, ISearchResultObject
 {
     protected FaqCategory $category;
 
@@ -40,23 +41,18 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
 
     protected GroupedAttachmentList $attachmentList;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTitle(): string
     {
         return WCF::getLanguage()->get($this->question);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getAnswer()
+    public function getAnswer(): string
     {
         return WCF::getLanguage()->get($this->answer);
     }
 
-    public function getFormattedOutput()
+    public function getFormattedOutput(): string
     {
         $processor = new HtmlOutputProcessor();
         $processor->process($this->getAnswer(), 'dev.tkirch.wsc.faq.question', $this->questionID);
@@ -64,7 +60,7 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         return $processor->getHtml();
     }
 
-    public function getPlainOutput()
+    public function getPlainOutput(): string
     {
         $processor = new HtmlOutputProcessor();
         $processor->setOutputType('text/plain');
@@ -73,7 +69,7 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         return $processor->getHtml();
     }
 
-    public function getCategory()
+    public function getCategory(): FaqCategory
     {
         if (!isset($this->category)) {
             $category = new Category($this->categoryID);
@@ -83,7 +79,7 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         return $this->category;
     }
 
-    public function isAccessible(?User $user = null)
+    public function isAccessible(?User $user = null): bool
     {
         if ($this->isDisabled && !WCF::getSession()->getPermission('admin.faq.canViewQuestion')) {
             return false;
@@ -96,7 +92,7 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         return WCF::getSession()->getPermission('user.faq.canViewFAQ');
     }
 
-    public function getAttachments()
+    public function getAttachments(): GroupedAttachmentList
     {
         if (empty($this->attachmentList)) {
             $this->attachmentList = new GroupedAttachmentList('dev.tkirch.wsc.faq.question');
@@ -107,33 +103,25 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         return $this->attachmentList;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getUserProfile()
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getSubject()
     {
         return $this->getTitle();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getTime()
     {
         return 0;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getLink($query = '')
     {
         return LinkHandler::getInstance()->getControllerLink(FaqQuestionPage::class, [
@@ -141,33 +129,25 @@ class Question extends DatabaseObject implements IRouteController, ISearchResult
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getObjectTypeName()
     {
         return 'dev.tkirch.wsc.faq.question';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getFormattedMessage()
     {
         return $this->getFormattedOutput();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getContainerTitle()
     {
         return '';
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getContainerLink()
     {
         return '';

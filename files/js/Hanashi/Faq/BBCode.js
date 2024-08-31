@@ -1,14 +1,12 @@
-define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language"], function (require, exports, tslib_1, Backend_1, Event_1, Dialog_1, Util_1, Language) {
+define(["require", "exports", "tslib", "WoltLabSuite/Core/Component/Ckeditor/Event", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Dom/Util", "WoltLabSuite/Core/Language", "../Api/Questions/RenderSearch", "../Api/Questions/GetSearch"], function (require, exports, tslib_1, Event_1, Dialog_1, Util_1, Language, RenderSearch_1, GetSearch_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.FaqBBCode = void 0;
     Util_1 = tslib_1.__importDefault(Util_1);
     Language = tslib_1.__importStar(Language);
     class FaqBBCode {
-        endpoint;
         dialog;
-        constructor(selector, endpoint) {
-            this.endpoint = endpoint;
+        constructor(selector) {
             const element = document.getElementById(selector);
             if (element === null) {
                 return;
@@ -31,13 +29,11 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLa
             });
         }
         async openDialog(ckeditor) {
-            const request = (0, Backend_1.prepareRequest)(this.endpoint).get();
-            const response = await request.fetchAsResponse();
-            const template = await response?.text();
-            if (template === undefined) {
+            const inputResponse = await (0, RenderSearch_1.renderSearch)();
+            if (!inputResponse.ok) {
                 return;
             }
-            this.dialog = (0, Dialog_1.dialogFactory)().fromHtml(template).withoutControls();
+            this.dialog = (0, Dialog_1.dialogFactory)().fromHtml(inputResponse.value.template).withoutControls();
             this.dialog.show(Language.getPhrase("wcf.faq.question.search"));
             const searchInput = document.getElementById("wcfUiFaqSearchInput");
             if (searchInput == null) {
@@ -71,12 +67,8 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLa
                     Util_1.default.innerError(inputContainer, false);
                 }
             }
-            const request = (0, Backend_1.prepareRequest)(this.endpoint).post({
-                searchString: value,
-            });
-            const response = await request.fetchAsResponse();
-            const template = await response?.text();
-            if (template === undefined) {
+            const inputResponse = await (0, GetSearch_1.searchQuestions)(value);
+            if (!inputResponse.ok) {
                 return;
             }
             const resultContainer = document.getElementById("wcfUiFaqSearchResultContainer");
@@ -84,7 +76,7 @@ define(["require", "exports", "tslib", "WoltLabSuite/Core/Ajax/Backend", "WoltLa
             if (resultContainer === null || resultList === null) {
                 return;
             }
-            resultList.innerHTML = template;
+            resultList.innerHTML = inputResponse.value.template;
             Util_1.default.show(resultContainer);
             resultList.querySelectorAll(".faqQuestionResultEntry").forEach((resultEntry) => {
                 resultEntry.addEventListener("click", (event) => {

@@ -13,7 +13,7 @@
 		</div>
 		
 		<div class="faqBBcodeBoxContent">
-			{@$question->getFormattedOutput()}
+			{unsafe:$question->getFormattedOutput()}
 		</div>
 		
 		{if $collapseQuestion}

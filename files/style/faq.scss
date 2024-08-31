@@ -1,3 +1,47 @@
+@media screen and (min-width: 1024px) {
+	.faqCleave {
+		display: flex;
+		flex-wrap: wrap;
+
+		.cleaveCategory {
+			flex: 1 auto;
+			flex-direction: column;
+			flex-basis: calc(50% - 10px);
+			flex-grow: 0;
+			flex-shrink: 0;
+			margin: 5px !important;
+		}
+	}
+}
+
+.faqGallery {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	.galleryButton, .gallerySpacer {
+		display: flex;
+		flex-direction: column !important;
+		margin: 5px;
+		margin-top: 10px;;
+		width: 180px;
+	}
+
+	.galleryButton {
+		height: 120px;
+
+		&.buttonActive {
+			background-color: var(--wcfButtonBackgroundActive);
+		}
+	}
+}
+
+.faqGallerySection {
+	margin-top: 20px;
+}
+
 .faq {
 	> h2 {
     	font-size: 1.5rem;

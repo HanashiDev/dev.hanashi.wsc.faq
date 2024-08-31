@@ -3,10 +3,13 @@
 namespace wcf\acp\form;
 
 use Laminas\Diactoros\Response\RedirectResponse;
+use Override;
 use wcf\data\faq\category\FaqCategoryNodeTree;
+use wcf\data\faq\Question;
 use wcf\data\faq\QuestionAction;
 use wcf\data\faq\QuestionEditor;
 use wcf\data\IStorableObject;
+use wcf\data\language\item\LanguageItemList;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\NamedUserException;
 use wcf\system\form\builder\container\FormContainer;
@@ -56,15 +59,13 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
      * list of available languages
      * @var Language[]
      */
-    protected $availableLanguages = [];
+    protected array $availableLanguages = [];
 
-    protected $isMultilingual = 0;
+    protected int $isMultilingual = 0;
 
-    protected $multiLingualAnswers = [];
+    protected array $multiLingualAnswers = [];
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
@@ -76,6 +77,23 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
             $this->isMultilingual = 1;
         }
 
+        if (isset($_GET['duplicateID'])) {
+            $question = new Question($_GET['duplicateID']);
+            if ($question->questionID) {
+                $this->formObject = $question;
+                if ($this->formObject->isMultilingual) {
+                    $this->isMultilingual = 1;
+
+                    $languageItemList = new LanguageItemList();
+                    $languageItemList->getConditionBuilder()->add('languageItem = ?', [$this->formObject->answer]);
+                    $languageItemList->readObjects();
+                    foreach ($languageItemList as $languageItem) {
+                        $this->multiLingualAnswers[$languageItem->languageID] = $languageItem->languageItemValue;
+                    }
+                }
+            }
+        }
+
         // work-around to force adding faq via dialog overlay
         if (\count($this->availableLanguages) > 1 && empty($_POST) && !isset($_REQUEST['isMultilingual'])) {
             return new RedirectResponse(LinkHandler::getInstance()->getLink('FaqQuestionList', [
@@ -84,9 +102,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     protected function createForm()
     {
         parent::createForm();
@@ -174,9 +190,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function buildForm()
     {
         parent::buildForm();
@@ -212,9 +226,7 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
         ));
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     protected function setFormAction()
     {
         $parameters = [

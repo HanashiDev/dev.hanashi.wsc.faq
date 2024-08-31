@@ -2,19 +2,18 @@
 
 namespace wcf\data\faq\category;
 
+use Override;
 use wcf\data\category\CategoryNode;
 use wcf\data\category\CategoryNodeTree;
 
-class FaqCategoryNodeTree extends CategoryNodeTree
+final class FaqCategoryNodeTree extends CategoryNodeTree
 {
     /**
      * @inheritDoc
      */
     protected $nodeClassName = FaqCategoryNode::class;
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function isIncluded(CategoryNode $categoryNode): bool
     {
         /** @var FaqCategoryNode $categoryNode */

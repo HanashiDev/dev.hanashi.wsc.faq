@@ -2,10 +2,14 @@
 
 namespace wcf\acp\form;
 
-use wcf\system\request\LinkHandler;
-use wcf\system\WCF;
+use Override;
+use wcf\data\IStorableObject;
+use wcf\system\form\builder\container\FormContainer;
+use wcf\system\form\builder\data\processor\CustomFormDataProcessor;
+use wcf\system\form\builder\field\IconFormField;
+use wcf\system\form\builder\IFormDocument;
 
-class FaqCategoryAddForm extends AbstractCategoryAddForm
+class FaqCategoryAddForm extends CategoryAddFormBuilderForm
 {
     /**
      * @inheritDoc
@@ -15,20 +19,45 @@ class FaqCategoryAddForm extends AbstractCategoryAddForm
     /**
      * @inheritDoc
      */
-    public $objectTypeName = 'dev.tkirch.wsc.faq.category';
+    public string $objectTypeName = 'dev.tkirch.wsc.faq.category';
 
-    /**
-     * @inheritDoc
-     */
-    public function save()
+    #[Override]
+    protected function createForm()
     {
-        parent::save();
+        parent::createForm();
 
-        WCF::getTPL()->assign([
-            'objectEditLink' => LinkHandler::getInstance()->getControllerLink(
-                FaqCategoryEditForm::class,
-                ['id' => $this->objectAction->getReturnValues()['returnValues']->categoryID]
-            ),
+        $this->form->appendChildren([
+            FormContainer::create('properties')
+                ->label('wcf.acp.faq.properties')
+                ->appendChildren([
+                    IconFormField::create('faqIcon')
+                        ->label('wcf.acp.faq.faqIcon'),
+                ]),
         ]);
+    }
+
+    #[Override]
+    protected function finalizeForm()
+    {
+        $this->form->getDataHandler()->addProcessor(
+            new CustomFormDataProcessor(
+                'icon',
+                static function (IFormDocument $document, array $parameters) {
+                    $parameters['additionalData']['faqIcon'] = $parameters['data']['faqIcon'];
+                    unset($parameters['data']['faqIcon']);
+
+                    return $parameters;
+                },
+                function (IFormDocument $document, array $data, IStorableObject $object) {
+                    if (isset($this->formObject->additionalData['faqIcon'])) {
+                        $data['faqIcon'] = $this->formObject->additionalData['faqIcon'];
+                    }
+
+                    return $data;
+                }
+            )
+        );
+
+        parent::finalizeForm();
     }
 }

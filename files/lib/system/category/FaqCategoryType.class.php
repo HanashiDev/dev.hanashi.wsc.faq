@@ -2,7 +2,9 @@
 
 namespace wcf\system\category;
 
-class FaqCategoryType extends AbstractCategoryType
+use Override;
+
+final class FaqCategoryType extends AbstractCategoryType
 {
     /**
      * @inheritDoc
@@ -35,4 +37,12 @@ class FaqCategoryType extends AbstractCategoryType
     protected $objectTypes = [
         'com.woltlab.wcf.acl' => 'dev.tkirch.wsc.faq.category',
     ];
+
+    #[Override]
+    protected function init()
+    {
+        $this->maximumNestingLevel = SIMPLE_FAQ_VIEW === 'gallery' ? 0 : 1;
+
+        parent::init();
+    }
 }

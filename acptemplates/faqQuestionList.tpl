@@ -5,7 +5,7 @@
 		new UiSortableList({
 			containerId: 'questionList',
 			className: 'wcf\\data\\faq\\QuestionAction',
-			offset: {@$startIndex}
+			offset: {$startIndex}
 		});
 	});
 </script>
@@ -36,7 +36,7 @@
 						<option value="0">{lang}wcf.acp.faq.category{/lang}</option>
 						
 						{foreach from=$categoryNodeList item=category}
-							<option value="{@$category->categoryID}"{if $category->categoryID == $categoryID} selected{/if}>{if $category->getDepth() > 1}{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:($category->getDepth() - 1)}{/if}{$category->getTitle()}</option>
+							<option value="{$category->categoryID}"{if $category->categoryID == $categoryID} selected{/if}>{if $category->getDepth() > 1}{unsafe:"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:($category->getDepth() - 1)}{/if}{$category->getTitle()}</option>
 						{/foreach}
 					</select>
 				</dd>
@@ -70,9 +70,9 @@
 	<div class="paginationTop">
 		{content}
 			{assign var='linkParameters' value=''}
-			{if $categoryID}{capture append=linkParameters}&categoryID={@$categoryID}{/capture}{/if}
-			{if $question}{capture append=linkParameters}&question={@$question|rawurlencode}{/capture}{/if}
-			{if $answer}{capture append=linkParameters}&answer={@$answer|rawurlencode}{/capture}{/if}
+			{if $categoryID}{capture append=linkParameters}&categoryID={$categoryID}{/capture}{/if}
+			{if $question}{capture append=linkParameters}&question={unsafe:$question|rawurlencode}{/capture}{/if}
+			{if $answer}{capture append=linkParameters}&answer={unsafe:$answer|rawurlencode}{/capture}{/if}
 	
 			{pages print=true assign=pagesLinks controller="FaqQuestionList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder$linkParameters"}
 		{/content}
@@ -81,15 +81,16 @@
 
 {if $objects|count}
 	<div class="section sortableListContainer" id="questionList">
-		<ol class="sortableList jsObjectActionContainer jsReloadPageWhenEmpty" data-object-id="0" start="{@($pageNo - 1) * $itemsPerPage + 1}" data-object-action-class-name="wcf\data\faq\QuestionAction">
+		<ol class="sortableList jsObjectActionContainer jsReloadPageWhenEmpty" data-object-id="0" start="{($pageNo - 1) * $itemsPerPage + 1}" data-object-action-class-name="wcf\data\faq\QuestionAction">
 			{foreach from=$objects item=question}
-				<li class="sortableNode sortableNoNesting jsQuestion jsObjectActionObject" data-object-id="{@$question->questionID}">
+				<li class="sortableNode sortableNoNesting jsQuestion jsObjectActionObject" data-object-id="{$question->questionID}">
 					<span class="sortableNodeLabel">
 						({$question->getCategory()->getTitle()})&nbsp;
 						<a href="{link controller='FaqQuestionEdit' object=$question}{/link}">{$question->getTitle()}</a>
 
 						<span class="statusDisplay sortableButtonContainer">
 							{objectAction action="toggle" isDisabled=$question->isDisabled}
+							<a href="{link controller='FaqQuestionAdd' duplicateID=$question->questionID isMultilingual=$question->isMultilingual}{/link}" title="{lang}wcf.acp.faqQuestion.copy{/lang}" class="jsTooltip">{icon name='copy' size=16}</a>
 							<a href="{link controller='FaqQuestionEdit' object=$question}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">{icon name='pencil' size=16}</a>
 							{objectAction action="delete" objectTitle=$question->getTitle()}
 
@@ -108,7 +109,7 @@
 	<footer class="contentFooter">
 		{hascontent}
 			<div class="paginationBottom">
-				{content}{@$pagesLinks}{/content}
+				{content}{unsafe:$pagesLinks}{/content}
 			</div>
 		{/hascontent}
 		

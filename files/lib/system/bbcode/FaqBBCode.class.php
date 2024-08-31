@@ -3,14 +3,13 @@
 namespace wcf\system\bbcode;
 
 use DOMDocument;
+use Override;
 use wcf\data\faq\Question;
 use wcf\system\WCF;
 
-class FaqBBCode extends AbstractBBCode
+final class FaqBBCode extends AbstractBBCode
 {
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser): string
     {
         $questionID = null;
@@ -39,7 +38,7 @@ class FaqBBCode extends AbstractBBCode
             return WCF::getTPL()->fetch('faqBBCode', 'wcf', [
                 'question' => $question,
                 'collapseQuestion' => $collapse,
-            ]);
+            ], true);
         }
 
         return $question->getTitle() . "\n\n" . $question->getPlainOutput();

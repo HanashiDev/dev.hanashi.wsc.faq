@@ -2,13 +2,12 @@
 
 namespace wcf\form;
 
+use Override;
 use wcf\system\WCF;
 
 class FaqQuestionEditForm extends \wcf\acp\form\FaqQuestionEditForm
 {
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function assignVariables()
     {
         parent::assignVariables();

@@ -3,6 +3,7 @@
 namespace wcf\acp\form;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use Override;
 use wcf\data\faq\Question;
 use wcf\data\language\item\LanguageItemList;
 use wcf\http\Helper;
@@ -20,9 +21,7 @@ class FaqQuestionEditForm extends FaqQuestionAddForm
      */
     public $formAction = 'edit';
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function readParameters()
     {
         parent::readParameters();
