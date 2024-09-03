@@ -6,7 +6,7 @@
 		<packagename language="de">Simple FAQ</packagename>
 		<packagedescription>A simple and powerful FAQ for your WSC.</packagedescription>
 		<packagedescription language="de">Ein simples und leistungsstarkes FAQ für Ihr WSC.</packagedescription>
-		<version>2.2.0</version>
+		<version>2.2.1</version>
 		<date>2024-08-31</date>
 	</packageinformation>
 	<authorinformation>
@@ -36,6 +36,9 @@
 		<instruction type="templateListener"/>
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
+	<instructions type="update" fromversion="2.2.0">
+		<instruction type="templateListener"/>
+	</instructions>
 	<instructions type="update" fromversion="2.1.*">
 		<instruction type="file"/>
 		<instruction type="acpTemplate"/>
@@ -45,6 +48,7 @@
 		<instruction type="acpMenu"/>
 		<instruction type="option"/>
 		<instruction type="box"/>
+		<instruction type="templateListener"/>
 		<instruction type="fileDelete"/>
 	</instructions>
 </package>

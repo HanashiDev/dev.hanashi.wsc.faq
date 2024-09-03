@@ -3,7 +3,7 @@
 	<import>
 		<templatelistener name="faqWysiwygBeforeEditorJavaScript">
 			<environment>user</environment>
-			<templatename>wysiwyg</templatename>
+			<templatename>shared_wysiwyg</templatename>
 			<eventname>wysiwyg</eventname>
 			<templatecode><![CDATA[{include file='__faqWysiwygJavaScript'}]]></templatecode>
 		</templatelistener>
