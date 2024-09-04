@@ -17,7 +17,7 @@ final class RenderSearch implements IController
     public function __invoke(ServerRequestInterface $request, array $variables): ResponseInterface
     {
         return new JsonResponse([
-            'template' => WCF::getTPL()->fetch('faqQuestionSearchDialog', 'wcf'),
+            'template' => WCF::getTPL()->fetch('shared_faqQuestionSearchDialog', 'wcf'),
         ]);
     }
 }

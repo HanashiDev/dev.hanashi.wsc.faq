@@ -29,7 +29,7 @@ final class GetSearch implements IController
         $questionIDs = $this->getQuestionsIDs($parameters->query);
 
         return new JsonResponse([
-            'template' => WCF::getTPL()->fetch('faqQuestionSearchResult', 'wcf', [
+            'template' => WCF::getTPL()->fetch('shared_faqQuestionSearchResult', 'wcf', [
                 'questions' => $this->getQuestions($questionIDs),
             ]),
         ]);
