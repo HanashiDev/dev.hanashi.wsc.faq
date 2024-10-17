@@ -40,18 +40,25 @@ class FaqQuestionEditForm extends FaqQuestionAddForm
             if (!$this->formObject->questionID) {
                 throw new IllegalLinkException();
             }
-            if ($this->formObject->isMultilingual) {
-                $this->isMultilingual = 1;
-
-                $languageItemList = new LanguageItemList();
-                $languageItemList->getConditionBuilder()->add('languageItem = ?', [$this->formObject->answer]);
-                $languageItemList->readObjects();
-                foreach ($languageItemList as $languageItem) {
-                    $this->multiLingualAnswers[$languageItem->languageID] = $languageItem->languageItemValue;
-                }
-            }
         } catch (MappingError) {
             throw new IllegalLinkException();
+        }
+    }
+
+    #[Override]
+    public function readData()
+    {
+        parent::readData();
+
+        if ($this->formObject->isMultilingual) {
+            $this->isMultilingual = 1;
+
+            $languageItemList = new LanguageItemList();
+            $languageItemList->getConditionBuilder()->add('languageItem = ?', [$this->formObject->answer]);
+            $languageItemList->readObjects();
+            foreach ($languageItemList as $languageItem) {
+                $this->multiLingualAnswers[$languageItem->languageID] = $languageItem->languageItemValue;
+            }
         }
     }
 }

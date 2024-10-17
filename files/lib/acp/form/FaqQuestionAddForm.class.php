@@ -38,11 +38,6 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public $formAction = 'create';
-
-    /**
-     * @inheritDoc
-     */
     public $neededPermissions = ['admin.faq.canAddQuestion'];
 
     /**
@@ -191,9 +186,9 @@ class FaqQuestionAddForm extends AbstractFormBuilderForm
     }
 
     #[Override]
-    public function buildForm()
+    public function finalizeForm()
     {
-        parent::buildForm();
+        parent::finalizeForm();
 
         $this->form->getDataHandler()->addProcessor(new CustomFormDataProcessor(
             'answer_i18n',
