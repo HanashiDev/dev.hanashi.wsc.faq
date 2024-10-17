@@ -19,9 +19,9 @@ class FaqQuestionListPage extends AbstractPage
      */
     public $neededPermissions = ['user.faq.canViewFAQ'];
 
-    public int $showFaqAddDialog = 0;
+    protected int $showFaqAddDialog = 0;
 
-    public ?FaqCategory $category;
+    protected ?FaqCategory $category;
 
     #[Override]
     public function readParameters()

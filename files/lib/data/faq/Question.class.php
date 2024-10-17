@@ -39,7 +39,7 @@ final class Question extends DatabaseObject implements IRouteController, ISearch
      */
     protected static $databaseTableIndexName = 'questionID';
 
-    protected GroupedAttachmentList $attachmentList;
+    private GroupedAttachmentList $attachmentList;
 
     #[Override]
     public function getTitle(): string

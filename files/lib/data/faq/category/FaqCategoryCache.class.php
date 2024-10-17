@@ -12,9 +12,9 @@ final class FaqCategoryCache extends SingletonFactory
      * number of total questions
      * @var int[]
      */
-    protected array $questions;
+    private array $questions;
 
-    protected function initQuestions()
+    private function initQuestions()
     {
         $this->questions = [];
 
@@ -38,7 +38,7 @@ final class FaqCategoryCache extends SingletonFactory
         $this->countQuestions($categoryToParent, $contacts, 0);
     }
 
-    protected function countQuestions(array $categoryToParent, array &$contacts, $categoryID)
+    private function countQuestions(array $categoryToParent, array &$contacts, $categoryID)
     {
         $count = (isset($contacts[$categoryID])) ? $contacts[$categoryID] : 0;
         if (isset($categoryToParent[$categoryID])) {

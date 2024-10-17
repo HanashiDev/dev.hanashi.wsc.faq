@@ -188,7 +188,7 @@ final class QuestionAction extends AbstractDatabaseObjectAction implements ISort
         }
     }
 
-    protected function updateSearchIndex($object)
+    private function updateSearchIndex($object)
     {
         if (isset($this->parameters['answer_i18n'])) {
             foreach ($this->parameters['answer_i18n'] as $languageID => $answer) {

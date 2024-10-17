@@ -16,7 +16,7 @@ final class FaqCategoryNode extends CategoryNode
      */
     protected static $baseClass = FaqCategory::class;
 
-    protected int $questions;
+    private int $questions;
 
     #[Override]
     public function getItems(): int

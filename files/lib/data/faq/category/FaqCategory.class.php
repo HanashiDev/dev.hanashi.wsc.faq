@@ -25,7 +25,7 @@ final class FaqCategory extends AbstractDecoratedCategory implements IAccessible
 {
     public const OBJECT_TYPE_NAME = 'dev.tkirch.wsc.faq.category';
 
-    protected array $userPermissions = [];
+    private array $userPermissions = [];
 
     private bool $prefix = false;
 

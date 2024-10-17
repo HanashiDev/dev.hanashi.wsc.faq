@@ -9,7 +9,7 @@ use wcf\system\WCF;
 
 final class FaqQuestionSearch extends AbstractSearchProvider
 {
-    protected array $faqCache = [];
+    private array $faqCache = [];
 
     #[Override]
     public function cacheObjects(array $objectIDs, ?array $additionalData = null): void

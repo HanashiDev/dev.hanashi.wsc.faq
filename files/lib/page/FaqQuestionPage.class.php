@@ -20,7 +20,7 @@ class FaqQuestionPage extends AbstractPage
 
     protected Question $question;
 
-    public ?FaqCategory $category;
+    protected ?FaqCategory $category;
 
     #[Override]
     public function readParameters()
