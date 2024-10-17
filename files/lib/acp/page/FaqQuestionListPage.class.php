@@ -82,14 +82,14 @@ class FaqQuestionListPage extends SortablePage
         if (!empty($this->question)) {
             $this->objectList->getConditionBuilder()->add(
                 'faq_questions.question LIKE ?',
-                ['%' . $this->question . '%']
+                ['%' . WCF::getDB()->escapeLikeValue($this->question) . '%']
             );
         }
 
         if (!empty($this->answer)) {
             $this->objectList->getConditionBuilder()->add(
                 'faq_questions.answer LIKE ?',
-                ['%' . $this->answer . '%']
+                ['%' . WCF::getDB()->escapeLikeValue($this->answer) . '%']
             );
         }
     }
