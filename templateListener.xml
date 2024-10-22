@@ -5,7 +5,7 @@
 			<environment>user</environment>
 			<templatename>shared_wysiwyg</templatename>
 			<eventname>wysiwyg</eventname>
-			<templatecode><![CDATA[{include file='__faqWysiwygJavaScript'}]]></templatecode>
+			<templatecode><![CDATA[{include file='shared_faqWysiwygJavaScript'}]]></templatecode>
 		</templatelistener>
 		<templatelistener name="faqWysiwygBeforeEditorJavaScriptAdmin">
 			<environment>admin</environment>
