@@ -37,6 +37,7 @@
 		<instruction type="database" run="standalone">acp/database/install_dev.tkirch.wsc.faq.php</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.2.1">
+		<instruction type="file"/>
 		<instruction type="templateListener"/>
 	</instructions>
 	<instructions type="update" fromversion="2.1.*">
